@@ -4,6 +4,7 @@ import { BrowserRouter, Routes, Route, Navigate } from "react-router-dom";
 import UserAuthCheck from "../../components/AuthCheck/UserAuthCheck";
 // import AdminAuthCheck from "../../components/AuthCheck/AdminAuthCheck";
 import ClientLayout from "../../components/ClientLayout";
+import Homepage from "../../views/homepage";
 import Signin from "../../views/signin";
 import ForgotPassword from "../../views/forget-password-1"
 import ForgotPassword2 from "../../views/forget-password-2";
@@ -79,7 +80,7 @@ const MyRouter = () => {
               head={{ title: "Dashboard", description: "Some Description." }}
               headerStyle={{ height: { base: "40px", md: 14 } }}
             >
-              <h1>Dashboard</h1>
+             <Homepage/>
             </ClientLayout>
           }
         />

@@ -35,6 +35,12 @@ code {
   background-size: cover;
   background-position: center;
 }
+
+.whiteBackground{
+  background: url('/public/images/frame.png');
+  background-size: cover;
+  background-position: center;
+}
 .fontFamily1{
   font-family: 'Poppins', sans-serif!important;
   font-weight: auto;
@@ -102,7 +108,13 @@ code {
   border-radius: 41px 0px 0px 41px;
 background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.00) 100%);
 }
-
+.heroSection{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
 .ant-input-number-handler-wrap{
   display: none!important;
 }
@@ -120,7 +132,7 @@ background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255,
 .loginForm .ant-form-item-label *{
   font-family: 'Visby', sans-serif!important;
   color:white!important;
-  font-weight: 550!important;
+  font-weight: 450!important;
   font-size: 14px!important;
 }
 
@@ -144,7 +156,15 @@ font-family: 'Visby', sans-serif!important;
 color:white!important;
 font-weight: 550!important;
 }
-
+.heroButton{
+  width: 150px;
+  height: 60px;
+  border-radius: 10px!important;
+  background: #86d6e0!important;
+  font-family: 'Visby', sans-serif!important;
+  color:black!important;
+  font-weight: 550!important;
+}
 .AuthFormInput .ant-input { 
 font-size: 14px!important;
 background: transparent!important;
@@ -155,8 +175,18 @@ color:white!important;
   color:white!important;
 }
 
-.ant-input::placeholder{
+.AuthFormInput .ant-input::placeholder{
   color : white!important;
+}
+.heroSerch .ant-input::placeholder{
+  color : grey!important;
+  font-weight: 400!important;
+}
+.heroSerch  .ant-input-affix-wrapper-lg{
+    padding: 5px 5px 5px 10px!important;
+}
+.heroSerch {
+  border-radius: 10px;
 }
 
 input:-webkit-autofill,
@@ -175,6 +205,7 @@ input:-webkit-autofill{
   height:65vh;
   border-radius: 53px;
 background: url(/public/images/Rectangle_1.png);
+background-position: center;
 background-size: cover;
 }
 .authImage2{
@@ -183,6 +214,7 @@ background-size: cover;
   border-radius: 53px;
 background: url(/public/images/Rectangle_2.png);
 background-size: cover;
+background-position: center;
 }
 .authImage3{
   width:100%;
@@ -190,11 +222,31 @@ background-size: cover;
   border-radius: 53px;
 background: url(/public/images/Rectangle_3.png);
 background-size: cover;
+background-position: center;
 }
+
 
 .hover:hover{
   color:#7CC059!important
 }
+
+.codeInput{
+  width: 50px;
+  z-index: 5;
+  border: none!important;
+  border-radius: 10px;
+  background-color: rgba(255, 255, 255, 0.15);
+  padding: 5px;
+  height:50px;
+  line-height: 20px;
+  text-align: center;
+  font-size: 20px;
+  color:white;
+}
+.codeInput:focus{
+ outline:none;
+}
+
 
 @media only screen and (max-width: 600px) {
   .hide-on-phone {

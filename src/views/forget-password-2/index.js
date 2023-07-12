@@ -1,4 +1,4 @@
-import React from "react";
+import React,{useRef} from "react";
 // import AuthLayout from "../../components/";
 import {
   Col,
@@ -37,9 +37,25 @@ const onFinishFailed = (errorInfo) => {
 function ForgetPassword2() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+    let input_1 = useRef();
+  let input_2 = useRef();
+  let input_3 = useRef();
+  let input_4 = useRef();
   const user = useSelector((state) => state.user.userData);
   const token = useSelector((state) => state.user.userToken);
   const [loading, setLoading] = React.useState(false);
+   let [codeData, setCodeData] = React.useState({
+    input1: "",
+    input2: "",
+    input3: "",
+    input4: "",
+  });
+
+    function handleInputChange(name, value) {
+    setCodeData({ ...codeData, [name]: value });
+  }
+
+
   return (
      
     <Layout className="AuthBackground" style={{ minHeight: "100vh" }}>
@@ -87,74 +103,63 @@ function ForgetPassword2() {
                 >
                  An email has been sent to you with a verification code. Please enter it here.
                 </Typography.Text>
-                <br /> <br /><br />
-                <Form
-                  layout="vertical"
-                  name="basic"
-                  className="loginForm"
-                  labelCol={{
-                    span: 0,
-                  }}
-                  wrapperCol={{
-                    span: 24,
-                  }}
-                  initialValues={{
-                    remember: true,
-                  }}
-                  onFinish={onFinish}
-                  onFinishFailed={onFinishFailed}
-                  autoComplete="off"
-                >
-                  <Form.Item
-                    label="Verification Code*"
-                    name="email"
-                    rules={[
-                      {
-                        required: true,
-                        message: "Please enter verification code",
-                      },
-                    ]}
-                  >
-                    <InputNumber
-                      size="large"
-                      className="AuthFormInput"
-                      style={{width:'50px'}}
-                      placeholder="."
-                    />
-                    &emsp;
-                     <InputNumber
-                      size="large"
-                      className="AuthFormInput"
-                      style={{width:'50px'}}
-                    />
-                      &emsp;
-                     <InputNumber
-                      size="large"
-                      className="AuthFormInput"
-                      style={{width:'50px'}}
-                    />
-                      &emsp;
-                     <InputNumber
-                      size="large"
-                      className="AuthFormInput"
-                      style={{width:'50px'}}
-                    />
-                  </Form.Item>
+                <br /> <br />
+              
+                 
+                  <div>
+                    <Row gutter={10}>
+                      <Col>
+                      <input autoFocus type="text" pattern="\d*" maxlength="1" className="codeInput" onChange={(text) => {
+                    input_1.focus();
+                    handleInputChange("input1", text.target.value.toLowerCase());
+                  }} />
+                      </Col>
+                      <Col>
+                      <input type="text" maxlength="1" className="codeInput" ref={(val) => (input_1 = val)} onChange={(text) => {
+                    input_2.focus();
+                    handleInputChange("input2", text.target.value.toLowerCase());
+                  }} />
+                      </Col>
+                      <Col>
+                      <input type="text" maxlength="1" className="codeInput" ref={(val) => (input_2 = val)} onChange={(text) => {
+                    input_3.focus();
+                    handleInputChange("input3", text.target.value.toLowerCase());
+                  }} />
+                      </Col>
+                      <Col>
+                      <input type="text" maxlength="1" className="codeInput" ref={(val) => (input_3 = val)} onChange={(text) => {
+                    handleInputChange("input4", text.target.value.toLowerCase());
+                  }} />
+                      </Col>
+                    </Row>
+                
+
+                
+                   
+
+
+                  </div>
+<br />
+
+                    
+
+
+                  
 
                   
                   
 
-                  <Form.Item>
+                
                     <Button
                       type="primary"
                       htmlType="submit"
                       className="loginButton"
-                      // onClick={() => navigate("/forgot-password-2")}
+                      onClick={() => navigate("/forgot-password-3")}
                     >
                       {loading ? "Loading..." : "Continue"}
                     </Button>
-                  </Form.Item>
-                </Form>
+                    <br/>  <br/>
+                  
                 <Row>
                     <Col xs={24} md={12}>
                       <Button

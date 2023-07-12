@@ -161,11 +161,6 @@ function Signin() {
                         required: true,
                         message: "Please input your password!",
                       },
-                      {
-                        type: "string",
-                        min: 8,
-                        message: "password must be atleast 8 characters!",
-                      },
                     ]}
                   >
                     <Input.Password

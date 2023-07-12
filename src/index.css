@@ -1,3 +1,9 @@
+@font-face {
+  font-family: "Visby";
+  src: local('Visby'),
+  url('./fonts/Visby-CF/Fontspring-DEMO-visbycf-regular.otf') format('otf'),
+}
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -23,8 +29,19 @@ code {
   background-size: cover;
   background-position: center;
 }
+
+.AuthBackground{
+  background: url('/public/images/Frame\ 424.png');
+  background-size: cover;
+  background-position: center;
+}
 .fontFamily1{
   font-family: 'Poppins', sans-serif!important;
+  font-weight: auto;
+}
+
+.fontFamily2{
+  font-family: 'Visby'!important;
   font-weight: auto;
 }
 
@@ -61,8 +78,129 @@ code {
 }
 
 
+.header-menu-mobile{
+  font-family: 'Poppins', sans-serif!important;
+  color:white;
+  font-size: 16px!important;
+}
+
+.header-menu-mobile .ant-menu-item{
+  padding:10px 20px!important;
+  height: auto!important;
+}
+
+.ant-menu-horizontal{
+  border-bottom: 0!important;
+}
+
+.authFormBox{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border-radius: 41px 0px 0px 41px;
+background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255, 255, 0.00) 100%);
+}
+
+.ant-input-number-handler-wrap{
+  display: none!important;
+}
+
+
+.authImageBox{
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+
+.loginForm .ant-form-item-label *{
+  font-family: 'Visby', sans-serif!important;
+  color:white!important;
+  font-weight: 550!important;
+  font-size: 14px!important;
+}
+
+.loginForm .ant-form-item-required::before{
+  display: none!important;
+}
+
+.AuthFormInput{
+  border-radius: 10px!important;
+background: rgba(255, 255, 255, 0.15)!important;
+color:white!important;
+height: 49px!important;
+border:none
+}
+.loginButton{
+  width: 157px;
+height: 46px;
+border-radius: 8px!important;
+background: #7CC059!important;
+font-family: 'Visby', sans-serif!important;
+color:white!important;
+font-weight: 550!important;
+}
+
+.AuthFormInput .ant-input { 
+font-size: 14px!important;
+background: transparent!important;
+color:white!important;
+}
+
+.AuthFormInput .ant-input-suffix *{
+  color:white!important;
+}
+
+.ant-input::placeholder{
+  color : white!important;
+}
+
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+    transition: background-color 5000s ease-in-out 0s;
+}
+input:-webkit-autofill{
+  -webkit-text-fill-color: white !important;
+}
+
+
+.authImage1{
+  width:100%;
+  height:65vh;
+  border-radius: 53px;
+background: url(/public/images/Rectangle_1.png);
+background-size: cover;
+}
+.authImage2{
+  width:100%;
+  height:65vh;
+  border-radius: 53px;
+background: url(/public/images/Rectangle_2.png);
+background-size: cover;
+}
+.authImage3{
+  width:100%;
+  height:65vh;
+  border-radius: 53px;
+background: url(/public/images/Rectangle_3.png);
+background-size: cover;
+}
+
+.hover:hover{
+  color:#7CC059!important
+}
+
 @media only screen and (max-width: 600px) {
   .hide-on-phone {
    display: none!important;
+  }
+  .authFormBox{
+    border-radius: 0;
   }
 }

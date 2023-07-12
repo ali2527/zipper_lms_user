@@ -9,7 +9,7 @@ import { POPUP, UPLOADS_URL } from "../../config/constants/api"
 
 
 
-const ClientLayout = ({ children, head }) => {
+const ClientLayout = ({ children, head, footer= true }) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [isModalClosed, setIsModalClosed] = useState(false);
     const [popupData, setPopupData] = useState({})
@@ -61,7 +61,7 @@ const ClientLayout = ({ children, head }) => {
             </Head> */}
             <ClientHeader />
             {children}
-            <ClientFooter />
+          {footer && <ClientFooter />}
 
            
             <Modal

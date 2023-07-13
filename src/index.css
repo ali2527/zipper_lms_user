@@ -120,6 +120,27 @@ background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255,
 }
 
 
+.coachCard1{
+  background: url('/public/images/1.png');
+  background-size: cover;
+}
+
+.coachCard2{
+  background: url('/public/images/2.png');
+  background-size: cover;
+}
+.coachCard3{
+  background: url('/public/images/3.png');
+  background-size: cover;
+}
+.coachCard4{
+  background: url('/public/images/4.png');
+  background-size: cover;
+}
+.coachCard5{
+  background: url('/public/images/5.png');
+  background-size: cover;
+}
 .authImageBox{
   min-height: 100vh;
   display: flex;

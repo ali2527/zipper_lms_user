@@ -22,8 +22,8 @@ import { AUTH } from "../../config/constants/api";
 import { addUser, removeUser } from "../../redux/slice/authSlice";
 import { PiMedal } from "react-icons/pi";
 import { FaArrowRight } from "react-icons/fa";
-import {TbBolt} from "react-icons/tb"
-import {LiaBrainSolid} from "react-icons/lia"
+import { TbBolt } from "react-icons/tb";
+import { LiaBrainSolid } from "react-icons/lia";
 import swal from "sweetalert";
 
 // import router from "next/router";
@@ -146,13 +146,13 @@ function Homepage() {
         className="whiteBackground"
         style={{ backgroundColor: "white", justifyContent: "center" }}
       >
-        <Col xs={24} md={22}>
+        <Col xs={24} md={24}>
           <div
             style={{
               display: "flex",
               justifyContent: "center",
               flexDirection: "column",
-              height: "100vh",
+              minHeight: "100vh",
               padding: "20px",
             }}
           >
@@ -160,7 +160,7 @@ function Homepage() {
               className="fontFamily1"
               style={{
                 fontSize: "35px",
-                fontWeight: 800,
+                fontWeight: 600,
                 color: "black",
                 textAlign: "center",
               }}
@@ -186,7 +186,7 @@ function Homepage() {
                   bordered={false}
                   style={{
                     width: "100%",
-                    height: "300px",
+                    height: "350px",
                     borderRadius: "50px",
                     display: "flex",
                     flexDirection: "column",
@@ -200,12 +200,12 @@ function Homepage() {
                       alignItems: "center",
                     }}
                   >
-                    <Col span={12}>
+                    <Col span={14}>
                       <Typography.Title
                         className="fontFamily1"
                         style={{
                           fontSize: "15px",
-                          fontWeight: 800,
+                          fontWeight: 600,
                           color: "white",
                           textAlign: "left",
                         }}
@@ -214,7 +214,7 @@ function Homepage() {
                       </Typography.Title>
                     </Col>
                     <Col
-                      span={12}
+                      span={10}
                       style={{ display: "flex", justifyContent: "flex-end" }}
                     >
                       <Button
@@ -238,7 +238,7 @@ function Homepage() {
                   className="coachCard2"
                   style={{
                     width: "100%",
-                    height: "300px",
+                    height: "350px",
                     borderRadius: "50px",
                     display: "flex",
                     flexDirection: "column",
@@ -253,12 +253,12 @@ function Homepage() {
                       alignItems: "center",
                     }}
                   >
-                    <Col span={12}>
+                    <Col span={14}>
                       <Typography.Title
                         className="fontFamily1"
                         style={{
                           fontSize: "15px",
-                          fontWeight: 800,
+                          fontWeight: 600,
                           color: "white",
                           textAlign: "left",
                         }}
@@ -267,7 +267,7 @@ function Homepage() {
                       </Typography.Title>
                     </Col>
                     <Col
-                      span={12}
+                      span={10}
                       style={{ display: "flex", justifyContent: "flex-end" }}
                     >
                       <Button
@@ -291,7 +291,7 @@ function Homepage() {
                   className="coachCard3"
                   style={{
                     width: "100%",
-                    height: "300px",
+                    height: "350px",
                     borderRadius: "50px",
                     display: "flex",
                     flexDirection: "column",
@@ -306,12 +306,12 @@ function Homepage() {
                       alignItems: "center",
                     }}
                   >
-                    <Col span={12}>
+                    <Col span={14}>
                       <Typography.Title
                         className="fontFamily1"
                         style={{
                           fontSize: "15px",
-                          fontWeight: 800,
+                          fontWeight: 600,
                           color: "white",
                           textAlign: "left",
                         }}
@@ -320,7 +320,7 @@ function Homepage() {
                       </Typography.Title>
                     </Col>
                     <Col
-                      span={12}
+                      span={10}
                       style={{ display: "flex", justifyContent: "flex-end" }}
                     >
                       <Button
@@ -344,7 +344,7 @@ function Homepage() {
                   className="coachCard4"
                   style={{
                     width: "100%",
-                    height: "300px",
+                    height: "350px",
                     borderRadius: "50px",
                     display: "flex",
                     flexDirection: "column",
@@ -359,12 +359,12 @@ function Homepage() {
                       alignItems: "center",
                     }}
                   >
-                    <Col span={12}>
+                    <Col span={14}>
                       <Typography.Title
                         className="fontFamily1"
                         style={{
                           fontSize: "15px",
-                          fontWeight: 800,
+                          fontWeight: 600,
                           color: "white",
                           textAlign: "left",
                         }}
@@ -373,7 +373,7 @@ function Homepage() {
                       </Typography.Title>
                     </Col>
                     <Col
-                      span={12}
+                      span={10}
                       style={{ display: "flex", justifyContent: "flex-end" }}
                     >
                       <Button
@@ -397,7 +397,7 @@ function Homepage() {
                   className="coachCard5"
                   style={{
                     width: "100%",
-                    height: "300px",
+                    height: "350px",
                     borderRadius: "50px",
                     display: "flex",
                     flexDirection: "column",
@@ -412,12 +412,12 @@ function Homepage() {
                       alignItems: "center",
                     }}
                   >
-                    <Col span={12}>
+                    <Col span={14}>
                       <Typography.Title
                         className="fontFamily1"
                         style={{
                           fontSize: "15px",
-                          fontWeight: 800,
+                          fontWeight: 600,
                           color: "white",
                           textAlign: "left",
                         }}
@@ -426,7 +426,7 @@ function Homepage() {
                       </Typography.Title>
                     </Col>
                     <Col
-                      span={12}
+                      span={10}
                       style={{ display: "flex", justifyContent: "flex-end" }}
                     >
                       <Button
@@ -456,190 +456,543 @@ function Homepage() {
 
       {/* section 3 */}
 
-      <Row
-        style={{ backgroundColor: "#f8fbff", justifyContent: "center" }}
-      >
-        <Col xs={24} md={22}>
+      <Row style={{ backgroundColor: "#f8fbff", justifyContent: "center" }}>
+        <Col xs={24} md={20}>
           <div
             style={{
               display: "flex",
               justifyContent: "center",
               flexDirection: "column",
-              height: "100vh",
+              minHeight: "100vh",
               padding: "20px",
             }}
           >
-             <Row style={{ justifyContent: "center",alignItems:'center' }}>
-        <Col xs={24} sm={12}>
-        <Typography.Title
+            <Row style={{ justifyContent: "center", alignItems: "center" }}>
+              <Col xs={24} sm={12}>
+                <Typography.Title
+                  className="fontFamily1"
+                  style={{
+                    fontSize: "35px",
+                    fontWeight: 600,
+                    color: "black",
+                    textAlign: "left",
+                    margin: "10px 0",
+                  }}
+                >
+                  {
+                    <>
+                      Ignite Your Passion
+                      <br /> for Knowledge.
+                    </>
+                  }
+                </Typography.Title>
+              </Col>
+              <Col xs={24} sm={12}>
+                <Typography.Text
+                  className="fontFamily1"
+                  style={{ fontSize: "16px", color: "grey", textAlign: "left" }}
+                >
+                  {
+                    <>
+                      We are not just here to help you pass exams- we want to
+                      instill a <br /> genuine love for learning that lasts a
+                      lifetime. We're all about <br /> building strong , long
+                      lasting connetions between learners, turors <br /> and
+                      coaches{" "}
+                    </>
+                  }
+                </Typography.Text>
+              </Col>
+            </Row>
+            <br />
+            <br />
+            <Row
+              gutter={50}
+              style={{ justifyContent: "center", alignItems: "center" }}
+            >
+              <Col xs={24} sm={10}>
+                <Row>
+                  <Col
+                    xs={24}
+                    sm={6}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "flex-start",
+                    }}
+                  >
+                    <Button
+                      type="primary"
+                      shape="circle"
+                      style={{
+                        backgroundColor: "white",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        width: "60px",
+                        height: "60px",
+                      }}
+                      icon={
+                        <PiMedal
+                          style={{ color: "#7cc059", fontSize: "25px" }}
+                        />
+                      }
+                    />
+                  </Col>
+                  <Col xs={24} sm={18}>
+                    <Typography.Title
+                      className="fontFamily1"
+                      style={{
+                        fontSize: "25px",
+                        fontWeight: 600,
+                        color: "black",
+                        textAlign: "left",
+                        margin: "10px 0",
+                      }}
+                    >
+                      {
+                        <>
+                          More than just Tutoring
+                          <br /> or Coaching
+                        </>
+                      }
+                    </Typography.Title>
+                    <Typography.Text
+                      className="fontFamily1"
+                      style={{
+                        fontSize: "16px",
+                        color: "grey",
+                        textAlign: "left",
+                      }}
+                    >
+                      {
+                        <>
+                          With our supportive tutor and coaches by your side.
+                          you'll gain the confidence to tackel any challange
+                        </>
+                      }
+                    </Typography.Text>
+                  </Col>
+                </Row>
+                <br />
+                <br />
+                <Row>
+                  <Col
+                    xs={24}
+                    sm={6}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "flex-start",
+                    }}
+                  >
+                    <Button
+                      type="primary"
+                      shape="circle"
+                      style={{
+                        backgroundColor: "white",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        width: "60px",
+                        height: "60px",
+                      }}
+                      icon={
+                        <TbBolt
+                          style={{ color: "#7cc059", fontSize: "25px" }}
+                        />
+                      }
+                    />
+                  </Col>
+                  <Col xs={24} sm={18}>
+                    <Typography.Title
+                      className="fontFamily1"
+                      style={{
+                        fontSize: "25px",
+                        fontWeight: 600,
+                        color: "black",
+                        textAlign: "left",
+                        margin: "10px 0",
+                      }}
+                    >
+                      {<>Adaptable Learning</>}
+                    </Typography.Title>
+                    <Typography.Text
+                      className="fontFamily1"
+                      style={{
+                        fontSize: "16px",
+                        color: "grey",
+                        textAlign: "left",
+                      }}
+                    >
+                      {
+                        <>
+                          Enjoy a learning that fits your style, and learn at
+                          your own pace
+                        </>
+                      }
+                    </Typography.Text>
+                  </Col>
+                </Row>
+                <br />
+                <br />
+                <Row>
+                  <Col
+                    xs={24}
+                    sm={6}
+                    style={{
+                      display: "flex",
+                      alignItems: "center",
+                      justifyContent: "flex-start",
+                    }}
+                  >
+                    <Button
+                      type="primary"
+                      shape="circle"
+                      style={{
+                        backgroundColor: "white",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                        width: "60px",
+                        height: "60px",
+                      }}
+                      icon={
+                        <LiaBrainSolid
+                          style={{ color: "#7cc059", fontSize: "30px" }}
+                        />
+                      }
+                    />
+                  </Col>
+                  <Col xs={24} sm={18}>
+                    <Typography.Title
+                      className="fontFamily1"
+                      style={{
+                        fontSize: "25px",
+                        fontWeight: 600,
+                        color: "black",
+                        textAlign: "left",
+                        margin: "10px 0",
+                      }}
+                    >
+                      {<>Prepare for the Future</>}
+                    </Typography.Title>
+                    <Typography.Text
+                      className="fontFamily1"
+                      style={{
+                        fontSize: "16px",
+                        color: "grey",
+                        textAlign: "left",
+                      }}
+                    >
+                      {
+                        <>
+                          We're commited to preparing you for success in the
+                          real world
+                        </>
+                      }
+                    </Typography.Text>
+                  </Col>
+                </Row>
+              </Col>
+              <Col
+                xs={24}
+                sm={12}
+                style={{
+                  position: "relative",
+                  display: "flex",
+                  justifyContent: "center",
+                }}
+              >
+                <div
+                  className="videoBox"
+                  style={{
+                    width: "100%",
+                    height: "350px",
+                    borderRadius: "50px",
+                    overflow: "hidden",
+                    position: "relative",
+                  }}
+                >
+                  <video autoPlay={true} muted loop className="homeVideo">
+                    <source src={"/images/vdo.mp4"} type="video/mp4" />
+                  </video>
+                </div>
+                <div
+                  style={{
+                    position: "absolute",
+                    height: "100px",
+                    top: "-50px",
+                    backgroundColor: "#7cc059",
+                    borderRadius: "20px",
+                    display: "flex",
+                    padding: "0px 50px",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Row>
+                    <Col>
+                      <Row
+                        style={{
+                          display: "flex",
+                          flexDirection: "row",
+                          alignItems: "center",
+                          justifyContent: "center",
+                        }}
+                      >
+                        <Typography.Title
+                          className="fontFamily1"
+                          style={{
+                            fontSize: "40px",
+                            fontWeight: "normal",
+                            color: "white",
+                            textAlign: "left",
+                            margin: "10px 0",
+                          }}
+                        >
+                          10
+                        </Typography.Title>
+                        &emsp;
+                        <Typography.Text
+                          className="fontFamily1"
+                          style={{
+                            fontSize: "14px",
+                            lineHeight: "16px",
+                            color: "white",
+                            textAlign: "left",
+                          }}
+                        >
+                          {
+                            <>
+                              YEARS <br /> EXPERIANCE
+                            </>
+                          }
+                        </Typography.Text>
+                        &emsp;
+                        <Typography.Text
+                          className="fontFamily1"
+                          style={{
+                            fontSize: "40px",
+                            fontWeight: "normal",
+                            color: "white",
+                            textAlign: "left",
+                            margin: "10px 0",
+                          }}
+                        >
+                          |
+                        </Typography.Text>
+                        &emsp;
+                        <Typography.Title
+                          className="fontFamily1"
+                          style={{
+                            fontSize: "40px",
+                            fontWeight: "normal",
+                            color: "white",
+                            textAlign: "left",
+                            margin: "10px 0",
+                          }}
+                        >
+                          250
+                        </Typography.Title>
+                        &emsp;
+                        <Typography.Text
+                          className="fontFamily1"
+                          style={{
+                            fontSize: "14px",
+                            lineHeight: "16px",
+                            color: "white",
+                            textAlign: "left",
+                          }}
+                        >
+                          {
+                            <>
+                              TYPES OF <br /> COURSES
+                            </>
+                          }
+                        </Typography.Text>
+                      </Row>
+                    </Col>
+                  </Row>
+                </div>
+              </Col>
+            </Row>
+          </div>
+        </Col>
+      </Row>
+
+{/* section 4 */}
+<Row
+        className="whiteBackground"
+        style={{ backgroundColor: "white", justifyContent: "center" }}
+      >
+        <Col xs={24} md={24}>
+          <div
+            style={{
+              display: "flex",
+              justifyContent: "center",
+              flexDirection: "column",
+              minHeight: "100vh",
+              padding: "20px",
+            }}
+          >
+            <Typography.Title
               className="fontFamily1"
               style={{
                 fontSize: "35px",
-                fontWeight: 800,
+                fontWeight: 600,
                 color: "black",
-                textAlign: "left",
-                margin:"10px 0"
+                textAlign: "center",
               }}
             >
-              {<>Ignite Your Passion<br/> for Knowledge.</>}
+              Join Us
             </Typography.Title>
-        </Col>
-        <Col xs={24} sm={12}>
-        <Typography.Text
-              className="fontFamily1"
-              style={{ fontSize: "16px", color: "grey", textAlign: "left" }}
-            >
-              {
-                <>
-                 We are not just here to help you pass exams- we want to instill a <br/> genuine love for learning that lasts a lifetime. We're all about <br/> building strong , long lasting connetions between learners, turors <br/> and coaches{" "}
-                  
-                </>
-              }
-            </Typography.Text>
-          </Col>
-            </Row>
-            <br/><br/>
-            <Row gutter={50} style={{ justifyContent: "center",alignItems:'center' }}>
-        <Col xs={24} sm={10}>
-          <Row>
-            <Col xs={24} sm={6} style={{display:"flex",alignItems:'center', justifyContent:"flex-start"}}>
-            <Button
-                        type="primary"
-                        shape="circle"
-                        style={{
-                          backgroundColor: "white",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          width:"60px",
-                          height:"60px"
-                        }}
-                        icon={<PiMedal style={{ color: "#7cc059",fontSize:'25px' }} />}
-                      />
-            </Col>
-            <Col xs={24} sm={18}>
-            <Typography.Title
-              className="fontFamily1"
-              style={{
-                fontSize: "25px",
-                fontWeight: 800,
-                color: "black",
-                textAlign: "left",
-                margin:"10px 0"
-              }}
-            >
-              {<>More than just Tutoring<br/> or Coaching</>}
-            </Typography.Title>
-            <Typography.Text
-              className="fontFamily1"
-              style={{ fontSize: "16px", color: "grey", textAlign: "left" }}
-            >
-              {
-                <>
-                 With our supportive tutor and coaches by your side. you'll gain the confidence to tackel any challange
-                  
-                </>
-              }
-            </Typography.Text>
-            </Col>
-          </Row>
-          <br/><br/>
-          <Row>
-            <Col xs={24} sm={6} style={{display:"flex",alignItems:'center', justifyContent:"flex-start"}}>
-            <Button
-                        type="primary"
-                        shape="circle"
-                        style={{
-                          backgroundColor: "white",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          width:"60px",
-                          height:"60px"
-                        }}
-                        icon={<TbBolt style={{ color: "#7cc059",fontSize:'25px' }} />}
-                      />
-            </Col>
-            <Col xs={24} sm={18}>
-            <Typography.Title
-              className="fontFamily1"
-              style={{
-                fontSize: "25px",
-                fontWeight: 800,
-                color: "black",
-                textAlign: "left",
-                margin:"10px 0"
-              }}
-            >
-              {<>Adaptable Learning</>}
-            </Typography.Title>
-            <Typography.Text
-              className="fontFamily1"
-              style={{ fontSize: "16px", color: "grey", textAlign: "left" }}
-            >
-              {
-                <>
-                 Enjoy a learning that fits your style, and learn at your own pace
-                  
-                </>
-              }
-            </Typography.Text>
-            </Col>
-          </Row>
-          <br/><br/>
-          <Row>
-            <Col xs={24} sm={6} style={{display:"flex",alignItems:'center', justifyContent:"flex-start"}}>
-            <Button
-                        type="primary"
-                        shape="circle"
-                        style={{
-                          backgroundColor: "white",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          width:"60px",
-                          height:"60px"
-                        }}
-                        icon={<LiaBrainSolid style={{ color: "#7cc059",fontSize:'30px' }} />}
-                      />
-            </Col>
-            <Col xs={24} sm={18}>
-            <Typography.Title
-              className="fontFamily1"
-              style={{
-                fontSize: "25px",
-                fontWeight: 800,
-                color: "black",
-                textAlign: "left",
-                margin:"10px 0"
-              }}
-            >
-              {<>Prepare for the Future</>}
-            </Typography.Title>
-            <Typography.Text
-              className="fontFamily1"
-              style={{ fontSize: "16px", color: "grey", textAlign: "left" }}
-            >
-              {
-                <>
-                We're commited to preparing you for success in the real world
-                </>
-              }
-            </Typography.Text>
-            </Col>
-          </Row>
-          
-       
-        </Col>
-        <Col xs={24} sm={14}>
-  
-          </Col>
-            </Row>
 
           
-
+            <Row gutter={30} justify="center" style={{ margin: "50px 0" }}>
+            
+              <Col xs={22} sm={10}>
+                <Card
+                  className="joinCard1"
+                  bordered={false}
+                  style={{
+                    width: "100%",
+                    height: "500px",
+                    borderRadius: "50px",
+                    display: "flex",
+                    padding:"20px",
+                    flexDirection: "column",
+                  }}
+                >
+                   <div class="animation-blue">
+                                <img class="cirlce-small" src="/images/cirlce-small-blue.png" alt="" />
+                                <img class="circle" src="/images/circle.png" alt=""/>
+                                <img class="kaju" src="/images/kaju-blue.png" alt=""/>
+                            </div>
+                  
+                  {" "}
+                  <Row
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
+                  >
+                 
+                 <Typography.Title
+                        className="fontFamily1"
+                        style={{
+                          fontSize: "35px",
+                          fontWeight: 600,
+                          color: "white",
+                          textAlign: "left",
+                        }}
+                      >
+                        {<>Become a Tutor <br/> or Coach</>}
+                      </Typography.Title>
+                      <Typography.Text
+                  className="fontFamily1"
+                  style={{ fontSize: "18px", color: "white", textAlign: "left" }}
+                >
+                  {
+                    <>
+                    We offer a great opportunity for you <br/> to share your Knowledge and expertise<br/> in a supportive and flexible online<br/> environment</>
+                  }
+                </Typography.Text>
+                
+                  </Row>
+                  <br/>
+                  <Row>
+                <Button
+                        style={{
+                          marginTop: "10px",
+                          padding: "15px 40px",
+                          cursor: "pointer",
+                          height:"auto",
+                          borderWidth:"2px"
+                        }}
+                        ghost
+                        size="large"
+                      >
+                        Apply Now
+                      </Button>
+                </Row>
+             
+                </Card>
+             
+              </Col>
+              <Col xs={22} sm={10}>
+                <Card
+                  bordered={false}
+                  className="joinCard2"
+                  style={{
+                    width: "100%",
+                    height: "500px",
+                    borderRadius: "50px",
+                    display: "flex",
+                    padding:"20px",
+                    flexDirection: "column",
+                    
+                  }}
+                >
+                     <div class="animation-blue">
+                                <img class="cirlce-small" src="/images/cirlce-small-blue.png" alt="" />
+                                <img class="circle" src="/images/circle.png" alt=""/>
+                                <img class="kaju" src="/images/kaju-blue.png" alt=""/>
+                            </div>
+                  
+                  {" "}
+                  <Row
+                    style={{
+                      display: "flex",
+                      justifyContent: "space-between",
+                      alignItems: "center",
+                    }}
+                  >
+                 
+                 <Typography.Title
+                        className="fontFamily1"
+                        style={{
+                          fontSize: "35px",
+                          fontWeight: 600,
+                          color: "white",
+                          textAlign: "left",
+                        }}
+                      >
+                        {<>Your Personalized <br/> Learning Path</>}
+                      </Typography.Title>
+                      <Typography.Text
+                  className="fontFamily1"
+                  style={{ fontSize: "18px", color: "white", textAlign: "left" }}
+                >
+                  {
+                    <>
+                     Step into a world full of opportunities where <br /> we always support and celebrate <br /> your growth and achievements.</>
+                  }
+                </Typography.Text>
+                
+                  </Row>
+                  <br/>
+                  <Row>
+                <Button
+                        style={{
+                          marginTop: "10px",
+                          padding: "15px 40px",
+                          cursor: "pointer",
+                          height:"auto",
+                          borderWidth:"2px"
+                        }}
+                        ghost
+                        size="large"
+                      >
+                        Register Now
+                      </Button>
+                </Row>
+             
+                </Card>
+              </Col>
+            </Row>
            
-         
           </div>
         </Col>
       </Row>

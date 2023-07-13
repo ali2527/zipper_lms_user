@@ -246,6 +246,29 @@ background-size: cover;
 background-position: center;
 }
 
+.joinCard1{
+  background: url(/public/images/green.png);
+background-size: cover;
+background-position: center;
+}
+
+.joinCard2{
+  background: url(/public/images/blue.png);
+background-size: cover;
+background-position: center;
+}
+
+
+.homeVideo{
+  width: 100%;
+  height: 100%;
+  object-fit: fill;
+  padding: 0;
+  transform: scale(1.1);
+  position: relative;
+  border-radius: 2.6041666666666665vw;
+  overflow: hidden;
+}
 
 .hover:hover{
   color:#7CC059!important
@@ -266,6 +289,37 @@ background-position: center;
 }
 .codeInput:focus{
  outline:none;
+}
+
+.animation-blue{
+  position: absolute;
+  bottom: 5%;
+  right: 0;
+}
+.animation-blue .cirlce-small {
+  position: relative;
+  right: 20px;
+  bottom:100px;
+  width:50px;
+
+  transition: all 0.3s ease-in-out;
+}
+
+
+ .animation-blue .circle {
+  mix-blend-mode: overlay;
+  position: relative;
+  width: 150px;
+  bottom:80px;
+  
+  transition: all 0.3s ease-in-out;
+}
+ .animation-blue .kaju {
+  position: relative;
+bottom:20;
+right: 150px;
+  width: 70px;
+  transition: all 0.3s ease-in-out;
 }
 
 

@@ -361,6 +361,7 @@ function Tutor() {
                           justifyContent: "center",
                           alignItems: "center",
                         }}
+                        onClick={() => navigate("/tutor-details")}
                         icon={<FaArrowRight style={{ color: "white" }} />}
                       />
                             </Col>

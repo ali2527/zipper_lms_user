@@ -210,11 +210,28 @@ function Signin() {
                       type="primary"
                       htmlType="submit"
                       className="loginButton"
+                      onClick={() => navigate("/dashboard")}
                     >
                       {loading ? "Loading..." : "Login"}
                     </Button>
                   </Form.Item>
                 </Form>
+
+                <Button
+                        type="link"
+                        style={{
+                          float: "left",
+                          color: "white",
+                          fontWeight: "bold",
+                          
+                          fontSize: "14px",
+                        }}
+                        onClick={() => navigate("/signup")}
+                      >
+                        <p className="fontFamily1" style={{ margin: 0,textDecoration: "underline", }}>
+                         Register Now
+                        </p>
+                      </Button>
               </Col>
             </Row>
           </div>

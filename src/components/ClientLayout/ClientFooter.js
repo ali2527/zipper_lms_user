@@ -5,11 +5,13 @@ import {
   BiLogoYoutube,
   BiLogoInstagram,
 } from "react-icons/bi";
+import { useNavigate } from "react-router";
 
 const { Footer } = Layout;
 const { TextArea } = Input;
 
 const ClientFooter = () => {
+  const navigate = useNavigate
   return (
     <Footer className="footer" style={{ height: "auto", padding: "0" }}>
       <Row
@@ -91,6 +93,7 @@ const ClientFooter = () => {
                           padding: "0px 30px",
                           cursor: "pointer",
                         }}
+                        onClick={()=> navigate("/signup")}
                         ghost
                         size="large"
                       >

@@ -1,8 +1,11 @@
 import React from "react";
 
 import { Col, Button, Row, Typography, Layout, Card } from "antd";
+import { useNavigate } from "react-router";
 
 function LessonDetail() {
+const navigate = useNavigate()
+
   return (
     <Layout style={{ minHeight: "100vh" }}>
       <Row
@@ -284,6 +287,7 @@ function LessonDetail() {
                         border: "1px solid #203657",
                         fontWeight: "bold",
                       }}
+                      onClick={() => navigate("/tutor-details")}
                       ghost
                       size="large"
                     >
@@ -296,11 +300,12 @@ function LessonDetail() {
                       type="primary"
                       htmlType="submit"
                       className="loginButton"
+                      onClick={() => navigate("/chat")}
                     >
                       View Chat
                     </Button>
                     &emsp;
-                    <Button
+                    {/* <Button
                       className="fontFamily1"
                       style={{
                         marginTop: "0px",
@@ -315,7 +320,7 @@ function LessonDetail() {
                       size="large"
                     >
                       Join Lesson
-                    </Button>
+                    </Button> */}
                   </Row>
                 </Col>
                 <Col xs={0} md={2}>

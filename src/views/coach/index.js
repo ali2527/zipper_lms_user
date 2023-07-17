@@ -360,7 +360,9 @@ function Coach() {
                           display: "flex",
                           justifyContent: "center",
                           alignItems: "center",
+                          
                         }}
+                        onClick={()=>navigate("/coach-details")}
                         icon={<FaArrowRight style={{ color: "white" }} />}
                       />
                             </Col>

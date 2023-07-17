@@ -4,6 +4,7 @@ import { BsPhone, BsChatLeftDots } from "react-icons/bs";
 import { CaretDownOutlined } from "@ant-design/icons";
 import { MdMenu } from "react-icons/md";
 import { Layout, Row, Col, Menu, Button, Drawer, Input } from "antd";
+import { useNavigate } from "react-router";
 
 import MainButton from "../MainButton";
 // import Link from 'next/link'
@@ -11,6 +12,7 @@ import MainButton from "../MainButton";
 const { Header } = Layout;
 
 const ClientHeader = () => {
+  const navigate = useNavigate()
   const [visible, setVisible] = useState(false);
 
 
@@ -86,19 +88,19 @@ const ClientHeader = () => {
                 mode="horizontal"
                 className="header-menu"
               >
-                <Menu.Item key="home" className="hover">
+                <Menu.Item key="home" className="hover"   onClick={()=> navigate("/")}>
                   Home
                 </Menu.Item>
-                <Menu.Item key="about" className="hover">
+                <Menu.Item key="about" className="hover"   onClick={()=> navigate("/about-us")}>
                   About
                 </Menu.Item>
-                <Menu.Item key="tutors" className="hover">
+                <Menu.Item key="tutors" className="hover"   onClick={()=> navigate("/tutor")}>
                   Tutors
                 </Menu.Item>
-                <Menu.Item key="coaches" className="hover">
+                <Menu.Item key="coaches" className="hover"   onClick={()=> navigate("/coach")}>
                   Coaches
                 </Menu.Item>
-                <Menu.Item key="contact_us" className="hover">
+                <Menu.Item key="contact_us" className="hover"   onClick={()=> navigate("/contact-us")}>
                   Contact Us
                 </Menu.Item>
               </Menu>
@@ -116,6 +118,7 @@ const ClientHeader = () => {
                     padding: "0px 30px",
                     cursor: "pointer",
                   }}
+                  onClick={()=> navigate("/signin")}
               
                   ghost
                   size="large"
@@ -128,6 +131,7 @@ const ClientHeader = () => {
                     padding: "0px 30px",
                     cursor: "pointer",
                   }}
+                  onClick={()=> navigate("/signup")}
                   
                   ghost
                   size="large"
@@ -183,7 +187,7 @@ const ClientHeader = () => {
           mode="inline"
           className="header-menu-mobile "
         >
-    <Menu.Item key="home" className="hover fontFamily1">
+    <Menu.Item key="home" className="hover fontFamily1" >
                   Home
                 </Menu.Item>
                 <Menu.Item key="about" className="hover fontFamily1">

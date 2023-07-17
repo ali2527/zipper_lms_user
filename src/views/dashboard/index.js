@@ -276,6 +276,7 @@ function Dashboard() {
                   type="primary"
                   htmlType="submit"
                   className="upcomingButton"
+                  onClick={() => navigate("/upcoming-lessons")}
                   icon={<div style={{backgroundColor:"white",borderRadius:"20px",padding:7}}>
                    <FaUserAlt style={{fontSize:'12px',color:"#E86AAF"}}/>
 
@@ -289,6 +290,7 @@ function Dashboard() {
                   type="primary"
                   htmlType="submit"
                   className="completedButton"
+                  onClick={() => navigate("/completed-lessons")}
                   icon={<div style={{backgroundColor:"white",borderRadius:"20px",padding:7}}>
                    <FaBox style={{fontSize:'12px',color:"#649BAB"}}/>
 
@@ -303,6 +305,7 @@ function Dashboard() {
                   type="primary"
                   htmlType="submit"
                   className="messageButton"
+                  onClick={() => navigate("/chat")}
                   icon={<div style={{backgroundColor:"white",borderRadius:"20px",padding:7}}>
                    <FaBox style={{fontSize:'12px',color:"#649BAB"}}/>
 
@@ -311,7 +314,7 @@ function Dashboard() {
                 Message
                 </Button>
                 <br/>
-                <Button
+                {/* <Button
                   type="primary"
                   htmlType="submit"
                   className="tutorButton"
@@ -321,7 +324,7 @@ function Dashboard() {
                   </div>}
                 >
                 My Tutors/Coaches
-                </Button>
+                </Button> */}
                 <br/>
 
 

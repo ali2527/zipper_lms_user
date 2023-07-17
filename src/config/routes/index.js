@@ -6,6 +6,7 @@ import UserAuthCheck from "../../components/AuthCheck/UserAuthCheck";
 import ClientLayout from "../../components/ClientLayout";
 import Homepage from "../../views/homepage";
 import Signin from "../../views/signin";
+import Signup from "../../views/signup";
 import ForgotPassword from "../../views/forget-password-1";
 import ForgotPassword2 from "../../views/forget-password-2";
 import ForgotPassword3 from "../../views/forget-password-3";
@@ -42,6 +43,22 @@ const MyRouter = () => {
             </ClientLayout>
           }
         />
+
+<Route
+          path="/signup"
+          index
+          element={
+            <ClientLayout
+              head={{ title: "Signup", description: "Some Description." }}
+              headerStyle={{ height: { base: "40px", md: 14 } }}
+              footer={false}
+            >
+              <Signup />{" "}
+            </ClientLayout>
+          }
+        />
+
+
         <Route
           path="/forgot-password"
           index

@@ -248,6 +248,7 @@ preview={false}
                   type="primary"
                   htmlType="submit"
                   className="loginButton"
+                  onClick={() => navigate("/calander")}
                 >
                   Book Lesson
                 </Button>

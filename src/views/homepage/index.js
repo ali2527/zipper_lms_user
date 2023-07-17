@@ -446,7 +446,7 @@ function Homepage() {
               </Col>
             </Row>
             <Row style={{ justifyContent: "center" }}>
-              <Button type="primary" htmlType="submit" className="heroButton">
+              <Button type="primary" htmlType="submit" className="heroButton"   onClick={()=> navigate("/tutor")}>
                 View All
               </Button>
             </Row>
@@ -911,6 +911,7 @@ function Homepage() {
                           height:"auto",
                           borderWidth:"2px"
                         }}
+                        onClick={()=> navigate("/")}
                         ghost
                         size="large"
                       >
@@ -982,6 +983,7 @@ function Homepage() {
                           height:"auto",
                           borderWidth:"2px"
                         }}
+                        onClick={()=> navigate("/signup")}
                         ghost
                         size="large"
                       >

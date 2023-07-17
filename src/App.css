@@ -157,6 +157,33 @@
   outline: 0 !important;
 }
 
+
+
+  .signupSelectBox .ant-select-selector{
+    background: #f5f5f5!important;
+    font-weight: 400;
+    outline: none!important;
+    font-size: 16px !important;
+    /* height:50px!important; */
+    width: 100%;
+    display: flex!important;
+    justify-content: center!important;
+    resize: none;
+    appearance: none;
+    -webkit-appearance: none;
+    border-radius: 10px!important;
+    border:none!important;
+    -moz-appearance: none;
+  }
+  
+
+  .signupSelectBox input{
+    height:50px!important;
+  }
+  .signupSelectBox .ant-select-selector:focus{
+    outline: 0 !important;
+  }
+
 .mainInput {
   background: #fff;
   font-weight: 400;

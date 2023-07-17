@@ -36,3 +36,104 @@
     transform: rotate(360deg);
   }
 }
+
+
+.paginationContainer{
+  display: flex;
+  justify-content: center;
+  margin: auto;
+  list-style: none;
+}
+
+.page-link{
+  position:relative;
+  display:flex;
+  justify-content: center;
+  color:#0FB3AF;
+  margin:5px;
+  width: 40px;
+  height: 40px;
+  border-radius: 50px;
+  align-items: center;
+
+  text-decoration:none;
+  background-color:#fff;
+  
+  transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out
+}
+
+@media (prefers-reduced-motion:reduce){
+  .page-link{
+      transition:none
+  }
+}
+.page-link:hover{
+  z-index:2;
+  color:#0FB3AF;
+  background-color:#e9ecef;
+  border-color:#0FB3AF
+}
+.page-link:focus{
+  z-index:3;
+  color:#0FB3AF;
+  background-color:#e9ecef;
+  outline:0;
+
+}
+.page-item:not(:first-child) .page-link{
+  margin-left:-1px
+}
+.page-item.active .page-link{
+  z-index:3;
+  color:#fff;
+  background-color:#0FB3AF;
+ 
+}
+.page-item.disabled .page-link{
+  color:#dadada;
+  pointer-events:none;
+  background-color:#fff;
+  border-color:#dee2e6
+}
+
+.page-item.disabled .page-link *{
+  color:#dadada;
+  pointer-events:none;
+  background-color:#fff;
+  border-color:#dee2e6
+}
+.page-link{
+  padding:.375rem .75rem
+}
+.page-item:first-child .page-link{
+  border-top-left-radius:.25rem;
+  border-bottom-left-radius:.25rem
+}
+.page-item:last-child .page-link{
+  border-top-right-radius:.25rem;
+  border-bottom-right-radius:.25rem
+}
+.pagination-lg .page-link{
+  padding:.75rem 1.5rem;
+  font-size:1.25rem
+}
+.pagination-lg .page-item:first-child .page-link{
+  border-top-left-radius:.3rem;
+  border-bottom-left-radius:.3rem
+}
+.pagination-lg .page-item:last-child .page-link{
+  border-top-right-radius:.3rem;
+  border-bottom-right-radius:.3rem
+}
+.pagination-sm .page-link{
+  padding:.25rem .5rem;
+  font-size:.875rem
+}
+.pagination-sm .page-item:first-child .page-link{
+  border-top-left-radius:.2rem;
+  border-bottom-left-radius:.2rem
+}
+.pagination-sm .page-item:last-child .page-link{
+  border-top-right-radius:.2rem;
+  border-bottom-right-radius:.2rem
+}

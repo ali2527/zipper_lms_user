@@ -36,6 +36,12 @@ code {
   background-position: center;
 }
 
+.blueBackground{
+  background: url('/public/images/Frame\ 424.png');
+  background-size: cover;
+  background-position: center;
+}
+
 .whiteBackground{
   background: url('/public/images/frame.png');
   background-size: cover;
@@ -161,6 +167,17 @@ background: linear-gradient(135deg, rgba(255, 255, 255, 0.15) 0%, rgba(255, 255,
   display: none!important;
 }
 
+
+.contactForm .ant-form-item-label *{
+  font-family: 'Visby', sans-serif!important;
+  color:grey!important;
+  font-weight: 600!important;
+  font-size: 14px!important;
+}
+
+.contactForm .ant-form-item-required::before{
+  display: none!important;
+}
 .AuthFormInput{
   border-radius: 10px!important;
 background: rgba(255, 255, 255, 0.15)!important;
@@ -169,7 +186,7 @@ height: 49px!important;
 border:none
 }
 .loginButton{
-  width: 157px;
+  min-width: 157px;
 height: 46px;
 border-radius: 8px!important;
 background: #7CC059!important;
@@ -177,6 +194,50 @@ font-family: 'Visby', sans-serif!important;
 color:white!important;
 font-weight: 550!important;
 }
+
+.upcomingButton{
+  min-width: 200px;
+height: 46px;
+border-radius: 8px!important;
+background: #FFEBF6!important;
+font-family: 'Visby', sans-serif!important;
+color:black!important;
+font-weight: 550!important;
+}
+
+
+.completedButton{
+  min-width: 200px;
+  height: 46px;
+  border-radius: 8px!important;
+  background: #E7FAFF!important;
+  font-family: 'Visby', sans-serif!important;
+  color:black!important;
+  font-weight: 550!important;
+}
+
+
+.messageButton{
+  min-width: 200px;
+  height: 46px;
+  border-radius: 8px!important;
+  background: #D7FDC3!important;
+  font-family: 'Visby', sans-serif!important;
+  color:black!important;
+  font-weight: 550!important;
+}
+
+.tutorButton{
+  min-width: 200px;
+  height: 46px;
+  border-radius: 8px!important;
+  background: #BBF2F9!important;
+  font-family: 'Visby', sans-serif!important;
+  color:black!important;
+  font-weight: 550!important;
+}
+
+
 .heroButton{
   width: 150px;
   height: 60px;
@@ -210,6 +271,65 @@ color:white!important;
   border-radius: 10px;
 }
 
+
+.ContactFormInput{
+  border-radius: 10px!important;
+background: #efefef9a!important;
+color:grey!important;
+height: 49px!important;
+border:none
+}
+
+.ContactFormInput2{
+  border-radius: 10px!important;
+  background: #efefef9a!important;
+  color:grey!important;
+  height: auto!important;
+  border:none
+}
+
+
+.ContactFormInput .ant-input { 
+  font-size: 14px!important;
+  background: transparent!important;
+  color:grey!important;
+  }
+  
+  .ContactFormInput .ant-input-suffix *{
+    color:grey!important;
+  }
+  
+  .ContactFormInput .ant-input::placeholder{
+    color : grey!important;
+  }
+
+
+  .searchBar .ant-btn{
+    background-color: #7CC059!important;
+
+  }
+
+.rangeSlider  .ant-slider-track {
+  background-color: #7CC059!important;
+}
+
+.rangeSlider  .ant-slider-handle::after{
+  box-shadow: 0 0 0 2px #7CC059!important;
+}
+.avaliblityGroup .ant-checkbox * {
+
+  border-radius: 20px!important;
+}
+
+.avaliblityGroup .ant-checkbox-checked *{
+  background-color: #7CC059!important;
+  border-color: #7CC059!important;
+  border-radius: 20px!important;
+}
+.ant-checkbox-inner *{
+  background-color:green!important;
+}
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -220,6 +340,28 @@ input:-webkit-autofill{
   -webkit-text-fill-color: white !important;
 }
 
+.tutorCard{
+  border-radius: 10px;
+background: #FFF;
+padding:0!important;
+box-shadow: 0px 4px 22px 0px rgba(0, 0, 0, 0.16)!important;
+}
+
+.tutorDetailCard{
+  border-radius: 10px;
+background: #FFF;
+padding:0!important;
+box-shadow: 0px 4px 22px 0px rgba(0, 0, 0, 0.07)!important;
+}
+
+
+.tutorDetailCard .ant-card-body{
+  padding: 0px;
+}
+
+.tutorCard .ant-card-body{
+  padding: 20px;
+}
 
 .authImage1{
   width:100%;
@@ -322,6 +464,33 @@ right: 150px;
   transition: all 0.3s ease-in-out;
 }
 
+
+.infoBox{
+  border-radius: 8px;
+background: #FFF;
+box-shadow: 0px 4px 22px 0px rgba(0, 0, 0, 0.07)!important;
+}
+
+
+.aboutCard1{
+  background: url(/public/images/aboutUs.png);
+background-size: cover;
+background-position: center;
+border-radius: 26px!important;
+}
+
+.contactCard1{
+  border-radius: 8px;
+  background: #FFF;
+  box-shadow: 0px 4px 22px 0px rgba(0, 0, 0, 0.07)!important;
+}
+
+
+.contactCard2{
+  border-radius: 8px;
+background: #FFF;
+box-shadow: 0px 4px 22px 0px rgba(0, 0, 0, 0.16)!important;
+}
 
 @media only screen and (max-width: 600px) {
   .hide-on-phone {

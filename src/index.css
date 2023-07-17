@@ -90,6 +90,40 @@ code {
 }
 
 
+.filterDropdown {
+  border: none;
+  border-radius: 4px;
+  max-width: 300px;
+}
+
+.filterDropdownHeader {
+  padding: 0rem 1rem;
+}
+
+.filterDropdownBody {
+  padding: 1rem 1rem;
+}
+
+.filterDropdownBody {
+  padding: 1rem 1rem;
+}
+
+
+.filterInput {
+  width: 100% !important;
+  border: 1px solid #e0e0e0 !important;
+  border-radius: 4px;
+  margin-bottom: 10px;
+}
+
+.mainLabel {
+  font-size: 15px;
+  color: #333;
+  font-weight: 600;
+  word-break: break-word;
+  margin:0
+}
+
 .header-menu-mobile{
   font-family: 'Poppins', sans-serif!important;
   color:white;
@@ -465,10 +499,24 @@ right: 150px;
 }
 
 
+.chatButton{
+  background-color: #7CC059!important;
+}
+
 .infoBox{
   border-radius: 8px;
 background: #FFF;
 box-shadow: 0px 4px 22px 0px rgba(0, 0, 0, 0.07)!important;
+}
+
+.chatCard{
+  border-radius: 8px;
+background: #FFF;
+box-shadow: 0px 4px 22px 0px rgba(0, 0, 0, 0.07)!important;
+}
+
+.chatCard .ant-card-body{
+  padding:0!important;
 }
 
 

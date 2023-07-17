@@ -16,6 +16,13 @@ import Coach from "../../views/coach"
 import TutorDetails from "../../views/tutor-details"
 import CoachDetails from "../../views/coach-details"
 import Dashboard from "../../views/dashboard"
+import UpcomingLessons from '../../views/upcoming-lessons'
+import CompletedLessons from "../../views/completed-lessons";
+import BookingLogs from "../../views/booking-logs";
+import PaymentLogs from "../../views/payment-logs";
+import LessonDetail from "../../views/lesson-detail"
+import Chat from "../../views/chat"
+import Calander from "../../views/calander"
 
 
 const MyRouter = () => {
@@ -75,10 +82,6 @@ const MyRouter = () => {
             </ClientLayout>
           }
         />
-
-        {/* <Route path="/forgot-password" element={<ForgotPassword />} />
-        <Route path="/forgot-password-2" element={<ForgotPassword />} />
-        <Route path="/forgot-password-3" element={<ForgotPassword />} /> */}
         <Route
           path="/"
           index
@@ -180,6 +183,97 @@ const MyRouter = () => {
               headerStyle={{ height: { base: "40px", md: 14 } }}
             >
               <Dashboard/>
+            </ClientLayout>
+          }
+        />
+
+<Route
+          path="/upcoming-lessons"
+          index
+          element={
+            <ClientLayout
+              head={{ title: "Upcoming Lessons", description: "Some Description." }}
+              headerStyle={{ height: { base: "40px", md: 14 } }}
+            >
+              <UpcomingLessons/>
+            </ClientLayout>
+          }
+        />
+
+<Route
+          path="/completed-lessons"
+          index
+          element={
+            <ClientLayout
+              head={{ title: "Completed Lessons", description: "Some Description." }}
+              headerStyle={{ height: { base: "40px", md: 14 } }}
+            >
+              <CompletedLessons/>
+            </ClientLayout>
+          }
+        />
+
+<Route
+          path="/booking-logs"
+          index
+          element={
+            <ClientLayout
+              head={{ title: "Completed Lessons", description: "Some Description." }}
+              headerStyle={{ height: { base: "40px", md: 14 } }}
+            >
+              <BookingLogs/>
+            </ClientLayout>
+          }
+        />
+
+<Route
+          path="/payment-logs"
+          index
+          element={
+            <ClientLayout
+              head={{ title: "Completed Lessons", description: "Some Description." }}
+              headerStyle={{ height: { base: "40px", md: 14 } }}
+            >
+              <PaymentLogs/>
+            </ClientLayout>
+          }
+        />
+
+<Route
+          path="/lesson-detail"
+          index
+          element={
+            <ClientLayout
+              head={{ title: "Upcoming Lessons", description: "Some Description." }}
+              headerStyle={{ height: { base: "40px", md: 14 } }}
+            >
+              <LessonDetail/>
+            </ClientLayout>
+          }
+        />
+
+<Route
+          path="/chat"
+          index
+          element={
+            <ClientLayout
+              head={{ title: "chat", description: "Some Description." }}
+              headerStyle={{ height: { base: "40px", md: 14 } }}
+            >
+              <Chat/>
+            </ClientLayout>
+          }
+        />
+
+<Route
+          path="/calander"
+          index
+          element={
+            <ClientLayout
+              head={{ title: "chat", description: "Some Description." }}
+              headerStyle={{ height: { base: "40px", md: 14 } }}
+            >
+              <Calander/>
             </ClientLayout>
           }
         />

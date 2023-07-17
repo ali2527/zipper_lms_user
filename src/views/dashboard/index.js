@@ -23,6 +23,8 @@ import { AUTH } from "../../config/constants/api";
 import { addUser, removeUser } from "../../redux/slice/authSlice";
 import swal from "sweetalert";
 import ReactPaginate from "react-paginate";
+import dayjs from "dayjs";
+import {AiOutlineEye} from "react-icons/ai";
 
 
 
@@ -41,42 +43,48 @@ function Dashboard() {
 
   const columns = [
     {
-      title: 'S No',
-      dataIndex: 'key',
-      key: 'key',
-      render: (text) => <span>0{text}</span>,
-     
+      title: "S. No.	",
+      dataIndex: "key",
+      key: "key",
+      width: 100,
+      render: (value, item, index) => (index < 9 && "0") + (index + 1),
     },
     {
-      title: 'Lesson Id',
-      dataIndex: 'lessonId',
-      key: 'lessonId',
+      title: "Lesson ID",
+      dataIndex: "lessonId",
+      key: "lessonId",
     },
     {
-      title: 'Tutor/Coach Name',
-      dataIndex: 'tutor',
-      key: 'tutor',
+      title: "Tutor/Coach Name",
+      dataIndex: "tutor",
+      key: "tutor",
     },
     {
-      title: 'Lesson Date',
-      dataIndex: 'lessonDate',
-      key: 'lessonDate',
+      title: "Lesson Date",
+      dataIndex: "lessonDate",
+      key: "lessonDate",
+      render: (item) => <span>{dayjs(item).format("M/D/YYYY")}</span>,
     },
     {
-      title: 'Lesson Charges',
-      dataIndex: 'charge',
-      key: 'charge',
+      title: "Lesson Charge",
+      dataIndex: "charge",
+      key: "charge",
+      render: (item) => <span>${item}</span>,
     },
     {
-      title: 'Lesson Type',
-      dataIndex: 'type',
-      key: 'type',
+      title: "Lesson Type",
+      dataIndex: "type",
+      key: "type",
     },
     {
-      title: 'Action',
-      key: 'action',
-      render: (_, record) => (
-        <BsThreeDotsVertical/>
+      title: "Action",
+      dataIndex: "_id",
+      key: "_id",
+      render: (item) => (
+        <AiOutlineEye
+          style={{ fontSize: "18px", color: "grey",  cursor: "pointer" }}
+             onClick={() => navigate("/lesson-detail/" )}
+        />
       ),
     },
   ];
@@ -85,7 +93,7 @@ function Dashboard() {
       key: '1',
       lessonId: '#123456',
       tutor: "Jhon",
-      lessonDate: "New Learner",
+      lessonDate: new Date(),
       charge: 50,
       type:"tutoring"
     },
@@ -93,10 +101,47 @@ function Dashboard() {
       key: '2',
       lessonId: '#123456',
       tutor: "Jhon",
-      lessonDate: "New Learner",
+      lessonDate: new Date(),
       charge: 50,
       type:"tutoring"
     },
+   
+  ];
+
+  const data2 = [
+    {
+      key: '1',
+      lessonId: '#123456',
+      tutor: "Jhon",
+      lessonDate: new Date(),
+      charge: 50,
+      type:"tutoring"
+    },
+    {
+      key: '2',
+      lessonId: '#123456',
+      tutor: "Jhon",
+      lessonDate: new Date(),
+      charge: 50,
+      type:"tutoring"
+    },
+    {
+      key: '3',
+      lessonId: '#123456',
+      tutor: "Jhon",
+      lessonDate: new Date(),
+      charge: 50,
+      type:"tutoring"
+    },
+    {
+      key: '4',
+      lessonId: '#123456',
+      tutor: "Jhon",
+      lessonDate: new Date(),
+      charge: 50,
+      type:"tutoring"
+    },
+   
    
   ];
 
@@ -319,7 +364,7 @@ function Dashboard() {
                     Live Lesson
                   </Typography.Title>
 
-                  <Table columns={columns} dataSource={data} />
+                  <Table pagination={false} className="styledTable2" columns={columns} dataSource={data} />
                 </Row>
 
                 <Row
@@ -343,7 +388,7 @@ function Dashboard() {
                     Upcoming Lessons
                   </Typography.Title>
 
-                  <Table columns={columns} dataSource={data} />
+                  <Table pagination={false} className="styledTable2" columns={columns} dataSource={data2} />
                 </Row>
 
                 <Row

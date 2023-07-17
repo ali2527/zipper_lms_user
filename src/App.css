@@ -137,3 +137,185 @@
   border-top-right-radius:.2rem;
   border-bottom-right-radius:.2rem
 }
+
+
+.chartSelectBox .ant-select-selector{
+  background: #f9f9f9!important;
+  font-weight: 400;
+  outline: none!important;
+  font-size: 12px !important;
+  width: 100%;
+  resize: none;
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 10px!important;
+  border:none!important;
+  -moz-appearance: none;
+}
+
+.chartSelectBox .ant-select-selector:focus{
+  outline: 0 !important;
+}
+
+.mainInput {
+  background: #fff;
+  font-weight: 400;
+  padding: 10px 15px;
+  font-size: 14px;
+  width: 100%;
+  resize: none;
+  appearance: none;
+  -webkit-appearance: none;
+  border-radius: 10px;
+  -moz-appearance: none;
+}
+
+.styledTable{
+  min-width: 600px!important;
+  width: 100%!important;
+  border: none;
+
+}
+
+.styledTable table{    
+  border-collapse: inherit!important;
+  border-spacing: 0 15px!important;
+      
+}
+
+.styledTable tbody tr {
+  background-color: #fafafa !important;
+  
+  width: 100%;
+  border-radius: 10px!important; 
+  margin:10px!important;
+
+}
+
+.styledTable .ant-table-cell{
+  background: transparent!important;
+  border: none!important;
+}
+
+.styledTable .ant-table-cell::before{
+  background: transparent!important;
+}
+
+
+.styledTable2{
+  min-width: 600px!important;
+  width: 100%!important;
+  border: none;
+
+}
+
+.styledTable2 table{    
+  border-collapse: inherit!important;
+  border-spacing: 0 10px!important;
+      
+}
+
+.styledTable2 tbody tr {
+  background-color: #fafafa !important;
+  width: 100%;
+  border-radius: 10px!important; 
+  margin:0px!important;
+}
+
+.styledTable2 .ant-table-row{
+  border:1px solid #dadada!important
+}
+
+.styledTable2 .ant-table-cell{
+  background: transparent!important;
+  border: none!important;
+}
+
+.styledTable2 .ant-table-cell::before{
+  background: transparent!important;
+}
+
+.styledPagination {
+  width: max-content;
+  border: 1px solid #e6e9ec!important;
+  border-radius: 5px;
+  font-family: 'Poppins', sans-serif!important;
+  overflow: hidden;
+  height: fit-content!important;
+}
+
+.styledPagination * {
+  font-family: 'Poppins', sans-serif!important;
+
+}
+
+.styledPagination .ant-pagination-prev{
+ padding:5px 20px;
+ height: auto;
+ color: #b0b0b0;
+ margin: 0;
+ border-radius: 0;
+ font-weight: 300;
+}
+.styledPagination .ant-pagination-item{
+  padding:5px 10px;
+  height: auto;
+  font-weight: 300;
+  border-radius: 0;
+  margin: 0;
+  color: #b0b0b0;
+  border:none;
+  border-left: 1px solid #e6e9ec!important;
+}
+
+.styledPagination .ant-pagination-item-active{
+  background-color:#7cc059!important;
+  color: white!important;
+  border: 1px solid #7cc059!important;
+}
+
+.styledPagination .ant-pagination-item-active *{
+  color: white!important;
+}
+
+
+.styledPagination .ant-pagination-item-active:hover{
+  background-color:#7cc059!important;
+  border-left: 1px solid #7cc059!important;
+  color: white!important;
+}
+
+.styledPagination .ant-pagination-item-active:hover *{
+  color: white!important;
+}
+
+.styledPagination .ant-pagination-item:hover{
+  background-color:#7cc059!important;
+  border: 1px solid #7cc059!important;
+  color: white!important;
+}
+
+.styledPagination .ant-pagination-item:hover *{
+  color: white!important;
+}
+
+.styledPagination .ant-pagination-next{
+  padding:5px 20px;
+  height: auto;
+  margin: 0;
+  border-radius: 0;
+  color: #b0b0b0;
+  font-weight: 300;
+  border-left: 1px solid #e6e9ec!important;
+}
+
+.styledPagination .ant-pagination-next:hover{
+  background-color:#7cc059;
+  border-left: 1px solid #7cc059!important;
+  color: white!important;
+}
+
+.styledPagination .ant-pagination-prev:hover{
+  background-color:#7cc059;
+  color: #fff;
+}

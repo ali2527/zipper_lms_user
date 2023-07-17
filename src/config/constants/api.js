@@ -12,6 +12,10 @@ export const AUTH = {
 }
 
 
+export const USERS = {
+    get: "/auth/signin"
+}
+
 
 
 

@@ -24,6 +24,7 @@ import PaymentLogs from "../../views/payment-logs";
 import LessonDetail from "../../views/lesson-detail"
 import Chat from "../../views/chat"
 import Calander from "../../views/calander"
+import MyCalander from "../../views/myCalander"
 
 
 const MyRouter = () => {
@@ -295,6 +296,18 @@ const MyRouter = () => {
           }
         />
 
+<Route
+          path="/my-calander"
+          index
+          element={
+            <ClientLayout
+              head={{ title: "chat", description: "Some Description." }}
+              headerStyle={{ height: { base: "40px", md: 14 } }}
+            >
+              <MyCalander/>
+            </ClientLayout>
+          }
+        />
 
 
       </Routes>

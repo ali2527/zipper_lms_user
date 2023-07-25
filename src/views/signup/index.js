@@ -579,11 +579,22 @@ function AboutUs() {
                       htmlType="submit"
                       className="loginButton"
                     >
-                      {loading ? "Loading..." : "Submit"}
+                      {loading ? "Loading..." : "Register"}
                     </Button>
                   </Form.Item>
                 </Form>
-      
+                <Typography.Text
+                  className="fontFamily1"
+                  style={{
+                    fontSize: "14px",
+                    color: "#3C3C3B",
+                    textAlign: "left",
+                    marginTop: 0,
+                    marginBottom: 30,
+                  }}
+                >
+                  <>Already have an account <span onClick={()=> navigate("/signin")} style={{cursor:'pointer',fontWeight:'bold',textDecoration:"underline"}}>Login Now</span></>
+                </Typography.Text>
             </Card>
           </div>
         </Col>

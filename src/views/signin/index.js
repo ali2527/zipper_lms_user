@@ -217,21 +217,19 @@ function Signin() {
                   </Form.Item>
                 </Form>
 
-                <Button
-                        type="link"
-                        style={{
-                          float: "left",
-                          color: "white",
-                          fontWeight: "bold",
-                          
-                          fontSize: "14px",
-                        }}
-                        onClick={() => navigate("/signup")}
-                      >
-                        <p className="fontFamily1" style={{ margin: 0,textDecoration: "underline", }}>
-                         Register Now
-                        </p>
-                      </Button>
+              
+                <Typography.Text
+                  className="fontFamily1"
+                  style={{
+                    fontSize: "14px",
+                    color: "white",
+                    textAlign: "left",
+                    marginTop: 0,
+                    marginBottom: 30,
+                  }}
+                >
+                  <>Not a User? <span onClick={()=> navigate("/signup")} style={{cursor:'pointer',fontWeight:'bold',textDecoration:"underline"}}>Register Now</span></>
+                </Typography.Text>
               </Col>
             </Row>
           </div>

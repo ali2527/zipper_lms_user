@@ -1,30 +1,248 @@
 import { useState } from "react";
 import { Image } from "antd";
-import { BsPhone, BsChatLeftDots } from "react-icons/bs";
+import {IoIosChatbubbles} from "react-icons/io";
 import { CaretDownOutlined } from "@ant-design/icons";
 import { MdMenu } from "react-icons/md";
-import { Layout, Row, Col, Menu, Button, Drawer, Input } from "antd";
+import { Layout, Row, Col, Menu, Button,Badge,Modal, Drawer,Popover,Dropdown, Avatar,Typography, Input,Alert,message } from "antd";
 import { useNavigate } from "react-router";
-
+import { FaBars, FaEllipsisV, FaUser, FaSignOutAlt } from "react-icons/fa";
+import { FiBell } from "react-icons/fi";
+import {GoBellFill} from "react-icons/go"
+import { UPLOADS_URL,AUTH } from "../../config/constants/api";
+import {Get} from "../../config/api/get"
+import { useSelector, useDispatch } from "react-redux";
 import MainButton from "../MainButton";
+import { AiFillCaretDown, AiFillApple } from "react-icons/ai"
+import { removeUser } from "../../redux/slice/authSlice";
 // import Link from 'next/link'
 
 const { Header } = Layout;
 
 const ClientHeader = () => {
+  const dispatch = useDispatch()
   const navigate = useNavigate()
+  const user = useSelector((state) => state.user.userData);
+  const token = useSelector((state) => state.user.userToken);
+  const [logoutModal, setLogoutModal] = useState(false);
+  
   const [visible, setVisible] = useState(false);
 
+  const items = [
+    {
+      key: "1",
+      label: (
+        <div
+          className="headerDropdown"
+          style={{
+            fontSize: "16px",
+            display: "flex",
+            alignItems: "center",
+            padding: "5px 12px",
+          }}
+          onClick={() => navigate("/profile")}
+        >
+          <FaUser style={{ fontSize: "16px" }} /> &nbsp; My Profile
+        </div>
+      ),
+    },
+    {
+      key: "2",
+      label: (
+        <div
+          style={{
+            fontSize: "16px",
+            display: "flex",
+            alignItems: "center",
+            padding: "5px 12px",
+          }}
+          onClick={() => setLogoutModal(true)}
+        >
+          <FaSignOutAlt style={{ fontSize: "16px" }} />
+          &nbsp; Logout
+        </div>
+      ),
+    },
+  ];
 
-  const getColorMobile = (uri) => {
-    // if (path == uri) {
-    //   return "#ad0103";
-    // } else {
-    //   return "transparent";
-    // }
 
-    return "transparent";
+  const content = (
+    <div style={{ width: "350px" }}>
+      <div
+        style={{
+          padding: "10px 20px",
+          display: "flex",
+          justifyContent: "space-between",
+          alignItems: "center",
+        }}
+      >
+        <h3>Notifications</h3>
+        <Alert
+          message="5 New"
+          type="success"
+          style={{ fontSize: "12px", padding: "2px 10px", color: "green" }}
+        />
+      </div>
+      <hr
+        style={{
+          borderLeft: "none",
+          borderBottom: "none",
+          borderRight: "none",
+          borderTop: "1px solid rgb(0 0 0 / 15%)",
+        }}
+      />
+      <div style={{ height: "250px", overflow: "auto" }}>
+        <div style={{ padding: 10 }}>
+          <Row
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
+            <Col xs={2}>
+              <div
+                style={{
+                  padding: "10px 10px 10px 10px",
+                  width: "16px",
+                  display: "flex",
+                  backgroundColor: "#385790",
+                  borderRadius: "5px",
+                }}
+              >
+                <FiBell
+                  style={{ fontSize: "16px", margin: 0, color: "white" }}
+                />
+              </div>
+            </Col>
+            <Col xs={20}>
+            <Typography.Title
+                  className="fontFamily1"
+                  style={{ fontSize: "14px", color: "black",margin:0 }}
+                >
+                  New Notification
+                </Typography.Title>
+
+                <Typography.Text
+                  className="fontFamily1"
+                  style={{ fontSize: "12px", color: "black",margin:0 }}
+                >
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id nam
+                veniam aperiam eveniet mollitia quos nemo! Officiis voluptates
+                illo delectus.
+                </Typography.Text>
+             
+            </Col>
+          </Row>
+        </div>
+
+        <div style={{ padding: 10 }}>
+          <Row
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
+            <Col xs={2}>
+              <div
+                style={{
+                  padding: "10px 10px 10px 10px",
+                  width: "16px",
+                  display: "flex",
+                  backgroundColor: "#385790",
+                  borderRadius: "5px",
+                }}
+              >
+                <FiBell
+                  style={{ fontSize: "16px", margin: 0, color: "white" }}
+                />
+              </div>
+            </Col>
+            <Col xs={20}>
+            <Typography.Title
+                  className="fontFamily1"
+                  style={{ fontSize: "14px", color: "black",margin:0 }}
+                >
+                  New Notification
+                </Typography.Title>
+
+                <Typography.Text
+                  className="fontFamily1"
+                  style={{ fontSize: "12px", color: "black",margin:0 }}
+                >
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id nam
+                veniam aperiam eveniet mollitia quos nemo! Officiis voluptates
+                illo delectus.
+                </Typography.Text>
+             
+            </Col>
+          </Row>
+        </div>
+
+        <div style={{ padding: 10 }}>
+          <Row
+            style={{ flexDirection: "row", justifyContent: "space-between" }}
+          >
+            <Col xs={2}>
+              <div
+                style={{
+                  padding: "10px 10px 10px 10px",
+                  width: "16px",
+                  display: "flex",
+                  backgroundColor: "#385790",
+                  borderRadius: "5px",
+                }}
+              >
+                <FiBell
+                  style={{ fontSize: "16px", margin: 0, color: "white" }}
+                />
+              </div>
+            </Col>
+            <Col xs={20}>
+            <Typography.Title
+                  className="fontFamily1"
+                  style={{ fontSize: "14px", color: "black",margin:0 }}
+                >
+                  New Notification
+                </Typography.Title>
+
+                <Typography.Text
+                  className="fontFamily1"
+                  style={{ fontSize: "12px", color: "black",margin:0 }}
+                >
+                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id nam
+                veniam aperiam eveniet mollitia quos nemo! Officiis voluptates
+                illo delectus.
+                </Typography.Text>
+             
+            </Col>
+          </Row>
+        </div>
+
+      </div>
+
+      <hr
+        style={{
+          borderLeft: "none",
+          borderBottom: "none",
+          borderRight: "none",
+          borderTop: "1px solid rgb(0 0 0 / 15%)",
+        }}
+      />
+
+      <div
+        style={{
+          padding: "10px 20px",
+          display: "flex",
+          justifyContent: "flex-end",
+          alignItems: "center",
+        }}
+      >
+        <Button type="link">View All</Button>
+      </div>
+    </div>
+  );
+
+  const logout = () => {
+    setLogoutModal(false);
+
+    dispatch(removeUser());
+    navigate("/signin");
   };
+
+
   return (
     <Header
       style={{
@@ -105,7 +323,7 @@ const ClientHeader = () => {
                 </Menu.Item>
               </Menu>
               &emsp; &emsp;
-              <div
+             {!token ? <div
                 style={{
                   display: "flex",
                   alignItems: "center",
@@ -138,7 +356,52 @@ const ClientHeader = () => {
                 >
                   Register
                 </Button>
-              </div>
+              </div> : <div
+                style={{
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "right",
+                }}
+                className="header-btn-container"
+              >
+                <IoIosChatbubbles style={{color:"white",fontSize:"30px"}} onClick={()=> navigate("/chat")}/>
+                &emsp; &emsp;
+                <Popover
+                content={content}
+                placement="bottomRight"
+                arrow={false}
+                className="headerPopover"
+              >
+                <Badge count={0} style={{ backgroundColor: "#385790" }}>
+                  <GoBellFill style={{ fontSize: "25px",color:"white", }} />
+                </Badge>
+              </Popover>
+              &emsp; &emsp;
+              <Avatar
+                size={40}
+                src={
+                  !user.image ? "/images/avatar.png" : UPLOADS_URL + user.image
+                }
+              />
+               <Dropdown
+                menu={{
+                  items,
+                }}
+                trigger={["click"]}
+                placement="bottomRight"
+              >
+                <p
+                  style={{
+                    marginLeft: 10,
+                    fontSize: "16px",
+                    textTransform: "capitalize",
+                  }}
+                >
+                  {user?.fullname} <AiFillCaretDown fontSize={12} />{" "}
+                </p>
+              </Dropdown>
+
+              </div>}
             </Col>
 
             <Col
@@ -234,7 +497,57 @@ const ClientHeader = () => {
           </Col>
         </Row>
       </Drawer>
+
+      <Modal
+        visible={logoutModal}
+        onOk={() => logout()}
+        onCancel={() => setLogoutModal(false)}
+        okText="Yes"
+        className="StyledModal"
+        style={{
+          left: 0,
+          right: 0,
+          marginLeft: "auto",
+          marginRight: "auto",
+          textAlign: "center",
+        }}
+        cancelText="No"
+        cancelButtonProps={{
+          style: {
+            border: "2px solid #385790",
+            color: "#385790",
+            height: "auto",
+            padding: "6px 35px",
+            borderRadius: "50px",
+            fontSize: "16px",
+            marginTop: "15px",
+          },
+        }}
+        okButtonProps={{
+          style: {
+            backgroundColor: "#385790",
+            color: "white",
+            marginTop: "15px",
+            height: "auto",
+            padding: "5px 35px",
+            borderRadius: "50px",
+            fontSize: "16px",
+            border: "2px solid #385790",
+          },
+        }}
+      >
+        <Typography.Title level={4} style={{ fontSize: "25px" }}>
+          Logout
+        </Typography.Title>
+        <Typography.Text style={{ fontSize: 16 }}>
+          Are You Sure You Want To Logout ?
+        </Typography.Text>
+      </Modal>
+
+
     </Header>
+
+    
   );
 };
 

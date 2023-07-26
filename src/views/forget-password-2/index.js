@@ -16,7 +16,7 @@ import {
   Image,
   Divider,
 } from "antd";
-import { useNavigate } from "react-router";
+import { useNavigate,useLocation } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { Post } from "../../config/api/post";
 import { AUTH } from "../../config/constants/api";
@@ -25,16 +25,10 @@ import { FiMail, FiLock } from "react-icons/fi";
 import swal from "sweetalert";
 
 
-// import router from "next/router";
-const onFinish = (values) => {
-  console.log("Success:", values);
-  // router.push("/forget-password-2")
-};
-const onFinishFailed = (errorInfo) => {
-  console.log("Failed:", errorInfo);
-};
+
 
 function ForgetPassword2() {
+  const {state} = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
     let input_1 = useRef();
@@ -50,6 +44,32 @@ function ForgetPassword2() {
     input3: "",
     input4: "",
   });
+
+  console.log("state",state)
+  // import router from "next/router";
+  const onFinish = () => { 
+
+    let code = codeData.input1 + codeData.input2 + codeData.input3 + codeData.input4
+
+    if(codeData.input1 == "" || codeData.input2 == "" || codeData.input3 == "" || codeData.input4 == "" ){
+      swal("Error","Incomplete Code" ,"error");
+    }
+    Post(AUTH.verifyCode, {code,email:state.email})
+      .then((response) => {
+        setLoading(false);
+        if (response?.data?.status) {
+          swal("Success", response?.data?.message, "success");
+          navigate("/forgot-password-3", { replace: true,state:{code,email:state.email} });
+        } else {
+          swal("Oops!", response?.data?.message || response?.response?.data?.message, "error");
+        }
+      })
+      .catch((e) => {
+        console.log(e,"ww")
+        swal("Oops!","internal server error", "error");
+        setLoading(false);
+      });
+  };
 
     function handleInputChange(name, value) {
     setCodeData({ ...codeData, [name]: value });
@@ -154,7 +174,7 @@ function ForgetPassword2() {
                       type="primary"
                       htmlType="submit"
                       className="loginButton"
-                      onClick={() => navigate("/forgot-password-3")}
+                      onClick={() => onFinish()}
                     >
                       {loading ? "Loading..." : "Continue"}
                     </Button>

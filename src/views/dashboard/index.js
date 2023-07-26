@@ -13,16 +13,16 @@ import {
   Button,
   Progress,
   Checkbox,
-  Select,
+  Avatar,
   Image,
 } from "antd";
 import { useNavigate } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { Post } from "../../config/api/post";
-import { AUTH } from "../../config/constants/api";
 import { addUser, removeUser } from "../../redux/slice/authSlice";
 import swal from "sweetalert";
 import ReactPaginate from "react-paginate";
+import { UPLOADS_URL,AUTH } from "../../config/constants/api";
 import dayjs from "dayjs";
 import {AiOutlineEye} from "react-icons/ai";
 
@@ -35,6 +35,8 @@ import { BsThreeDotsVertical } from "react-icons/bs";
 function Dashboard() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const user = useSelector((state) => state.user.userData);
+  const token = useSelector((state) => state.user.userToken);
   const { Search } = Input;
   const [loading, setLoading] = useState(false);
   const [range, setRange] = useState([10, 200]);
@@ -237,13 +239,12 @@ function Dashboard() {
                   alignItems: "center",
                 }}
               >
-                <Image
-                  src="/images/tutor2.png"
-                  height={150}
-                  width={150}
-                  style={{ borderRadius: "100px", objectFit: "cover" }}
-                  preview={false}
-                />
+                 <Avatar
+                size={200}
+                src={
+                  !user.image ? "/images/avatar.png" : UPLOADS_URL + user.image
+                }
+              />
                 <Typography.Title
                   className="fontFamily1"
                   style={{
@@ -254,7 +255,7 @@ function Dashboard() {
                     marginTop: 20,
                   }}
                 >
-                 Olivia Mack
+               {user?.firstName + " " + user?.lastName } 
                 </Typography.Title>
                 <Typography.Text
                   className="fontFamily1"
@@ -265,9 +266,7 @@ function Dashboard() {
                     justifyContent: "center",
                   }}
                 >
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever since
+                  {user?.bio}
                 </Typography.Text>
 
                 <br />
@@ -685,11 +684,11 @@ function Dashboard() {
                 </Card>
               </Col>
             </Row>
-            <Row style={{ justifyContent: "center" }}>
+            {/* <Row style={{ justifyContent: "center" }}>
               <Button type="primary" htmlType="submit" className="loginButton">
                 View All
               </Button>
-            </Row>
+            </Row> */}
                 </Row>
 
                 

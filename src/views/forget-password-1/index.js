@@ -24,14 +24,7 @@ import { FiMail, FiLock } from "react-icons/fi";
 import swal from "sweetalert";
 
 
-// import router from "next/router";
-const onFinish = (values) => {
-  console.log("Success:", values);
-  // router.push("/forget-password-2")
-};
-const onFinishFailed = (errorInfo) => {
-  console.log("Failed:", errorInfo);
-};
+
 
 function ForgetPassword() {
   const dispatch = useDispatch();
@@ -39,6 +32,34 @@ function ForgetPassword() {
   const user = useSelector((state) => state.user.userData);
   const token = useSelector((state) => state.user.userToken);
   const [loading, setLoading] = React.useState(false);
+// import router from "next/router";
+const onFinish = (values) => {
+  
+  console.log("Success:", values);
+  setLoading(true);
+  
+
+  Post(AUTH.emailCode, values)
+    .then((response) => {
+      setLoading(false);
+      if (response?.data) {
+        swal("Success", response?.data?.message, "success");
+        navigate("/forgot-password-2", { replace: true,state:values });
+      } else {
+        swal("Oops!", response?.data?.message || response?.response?.data?.message, "error");
+      }
+    })
+    .catch((e) => {
+      console.log(e,"ww")
+      swal("Oops!","internal server error", "error");
+      setLoading(false);
+    });
+};
+const onFinishFailed = (errorInfo) => {
+  console.log("Failed:", errorInfo);
+};
+
+
   return (
      
     <Layout className="AuthBackground" style={{ minHeight: "100vh" }}>
@@ -135,7 +156,7 @@ function ForgetPassword() {
                       type="primary"
                       htmlType="submit"
                       className="loginButton"
-                      onClick={() => navigate("/forgot-password-2")}
+                      // onClick={() => navigate("/forgot-password-2")}
                     >
                       {loading ? "Loading..." : "Continue"}
                     </Button>

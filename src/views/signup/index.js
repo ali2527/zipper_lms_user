@@ -15,37 +15,63 @@ import { FiMail, FiLock } from "react-icons/fi";
 
 function AboutUs() {
   const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.userData);
+  const token = useSelector((state) => state.user.userToken);
   const { Option } = Select;
   const navigate = useNavigate();
   const [loading, setLoading] = React.useState(false);
 
+  React.useEffect(() => {
+    if (user && token) {
+      navigate("/dashboard", { replace: true });
+    }
+  }, [user, token]);
 
 
   const onFinish = (values) => {
     console.log("Success:", values);
     setLoading(true);
+   
+    const day = parseInt(values.birthday);
+const month = parseInt(values.birthmonth) - 1; // Months are zero-based in JavaScript (0-11)
+const year = parseInt(values.birthyear);
+
+const birthday = new Date(year, month, day);
 
     let data = {
+      firstName:values.firstName,
+      lastName:values.lastName,
       email: values.email,
       password: values.password,
-      devideId: "123456789",
+      city:values.city,
+      birthday: birthday,
+      parent:values.parent,
+      phoneNumber:values.phone,
+      homeNumber:values.homeNumber,
+      school:values.school,
+      gradeLevel:values.grade,
+      city:values.city,
+      state:values.state,
+      zip:values.zip,
+      subjects:values.subjects.split(",").map((value) => value.trim()),      
     };
-    Post(AUTH.signin, data)
+    Post(AUTH.signup, data)
       .then((response) => {
         setLoading(false);
-        if (response?.data) {
-          console.log("response", response.data.token);
-          console.log("response", response.data.user);
-          dispatch(
-            addUser({ user: response.data.user, token: response.data.token })
-          );
-          navigate("/", { replace: true });
+
+        console.log(response,"response;;;")
+
+
+        if (response?.data?.status) {
+          swal("Success", response?.data?.message, "success");
+          navigate("/signin", { replace: true });
         } else {
-          swal("Oops!", response.response.data.message, "error");
+          swal("Oops!", response?.data?.message || response?.response?.data?.message, "error");
         }
       })
       .catch((e) => {
-        console.log(":::;", e);
+        console.log(e,"ww")
+        swal("Oops!","internal server error", "error");
         setLoading(false);
       });
   };
@@ -256,33 +282,12 @@ function AboutUs() {
                     ]}
                   >
                     <Select size="large" className="signupSelectBox" placeholder="Select Year">
-                    <option value="1997">1997</option>
-  <option value="1998">1998</option>
-  <option value="1999">1999</option>
-  <option value="2000">2000</option>
-  <option value="2001">2001</option>
-  <option value="2002">2002</option>
-  <option value="2003">2003</option>
-  <option value="2004">2004</option>
-  <option value="2005">2005</option>
-  <option value="2006">2006</option>
-  <option value="2007">2007</option>
-  <option value="2008">2008</option>
-  <option value="2009">2009</option>
-  <option value="2010">2010</option>
-  <option value="2011">2011</option>
-  <option value="2012">2012</option>
-  <option value="2013">2013</option>
-  <option value="2014">2014</option>
-  <option value="2015">2015</option>
-  <option value="2016">2016</option>
-  <option value="2017">2017</option>
-  <option value="2018">2018</option>
-  <option value="2019">2019</option>
-  <option value="2020">2020</option>
-  <option value="2021">2021</option>
-  <option value="2022">2022</option>
-  <option value="2023">2023</option>
+                      
+                    {Array.from({ length: 2024 - 1980 }, (_, index) => (
+    <option key={index} value={1980 + index}>
+      {1980 + index}
+    </option>
+  ))}
       </Select>
                   </Form.Item>
                     </Col>

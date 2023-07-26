@@ -335,6 +335,7 @@ border:none
   border-radius: 10px!important;
 background: #efefef9a!important;
 border:none;
+height: 49px!important;
 font-family: 'Poppins', sans-serif!important;
 font-weight: auto;
 font-size: 14px!important;
@@ -417,6 +418,13 @@ input:-webkit-autofill:active {
 input:-webkit-autofill{
   -webkit-text-fill-color: white !important;
 }
+
+.signupFormInput:-webkit-autofill {
+  -webkit-text-fill-color: black !important;
+}
+
+
+
 
 .tutorCard{
   border-radius: 10px;

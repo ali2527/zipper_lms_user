@@ -1,14 +1,16 @@
-import { Put } from "../api";
+export const BASE_URL = "https://secure.demo243.webhostlabs.net:3002/api/"
+export const UPLOADS_URL = "https://secure.demo243.webhostlabs.net:3002/Uploads/"
 
-export const BASE_URL = "https://lm.demos2clients.com/api"
-export const UPLOADS_URL = "https://lm.demos2clients.com/uploads"
-
-// export const BASE_URL = "http://localhost:5001/api"
-// export const UPLOADS_URL = "http://localhost:5001/uploads"
+// export const BASE_URL = "http://localhost:5000/api/"
+// export const UPLOADS_URL = "http://localhost:5000/Uploads"
 
 
 export const AUTH = {
-    login: "/auth/signin"
+    signin: "auth/signin",
+    signup:"auth/signup",
+    emailCode:"auth/emailVerificationCode",
+    verifyCode:"auth/verifyRecoverCode",
+    resetPassword:"auth/resetPassword",
 }
 
 

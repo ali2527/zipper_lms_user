@@ -24,7 +24,11 @@ import PaymentLogs from "../../views/payment-logs";
 import LessonDetail from "../../views/lesson-detail"
 import Chat from "../../views/chat"
 import Calander from "../../views/calander"
+<<<<<<< Updated upstream
 import MyCalander from "../../views/myCalander"
+=======
+import Profile from "../../views/profile"
+>>>>>>> Stashed changes
 
 
 const MyRouter = () => {
@@ -58,6 +62,21 @@ const MyRouter = () => {
             </ClientLayout>
           }
         />
+
+<Route
+          path="/profile"
+          index
+          element={
+            <ClientLayout
+              head={{ title: "Profile", description: "Some Description." }}
+              headerStyle={{ height: { base: "40px", md: 14 } }}
+              footer={false}
+            >
+              <Profile />{" "}
+            </ClientLayout>
+          }
+        />
+
 
 
         <Route

@@ -11,7 +11,7 @@ const { Footer } = Layout;
 const { TextArea } = Input;
 
 const ClientFooter = () => {
-  const navigate = useNavigate
+  const navigate = useNavigate()
   return (
     <Footer className="footer" style={{ height: "auto", padding: "0" }}>
       <Row

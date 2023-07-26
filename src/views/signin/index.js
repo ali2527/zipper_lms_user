@@ -46,20 +46,24 @@ function Signin() {
     let data = {
       email: values.email,
       password: values.password,
-      devideId: "123456789",
     };
     Post(AUTH.signin, data)
       .then((response) => {
+
+        console.log(response,"#####")
         setLoading(false);
-        if (response?.data) {
-          console.log("response", response.data.token);
-          console.log("response", response.data.user);
+        if (response?.data?.status) {
+          navigate("/dashboard", { replace: true });
+
           dispatch(
-            addUser({ user: response.data.user, token: response.data.token })
+            addUser({ user: response.data.data.user, token: response.data.data.token })
           );
-          navigate("/", { replace: true });
+          swal("Success", response.data.message, "success");
+         
         } else {
-          swal("Oops!", response.response.data.message, "error");
+          
+          console.log("response", response);
+          swal("Oops!", response.data.message, "error");
         }
       })
       .catch((e) => {
@@ -76,18 +80,18 @@ function Signin() {
     <Layout className="AuthBackground" style={{ minHeight: "100vh" }}>
       <Row>
         <Col xs={0} sm={0} md={14}>
-        <div className="authImageBox">
-          <Row style={{width:'100%',paddingRight:'20px'}} gutter={40}>
-            <Col xs={0} sm={6} md={6}>
-             <div className="authImage1" />
-            </Col>
-            <Col xs={0} sm={6} md={6}>
-            <div className="authImage2" />
-            </Col>
-            <Col xs={0} sm={12} md={12}>
-            <div className="authImage3" />
-            </Col>
-          </Row>
+          <div className="authImageBox">
+            <Row style={{ width: "100%", paddingRight: "20px" }} gutter={40}>
+              <Col xs={0} sm={6} md={6}>
+                <div className="authImage1" />
+              </Col>
+              <Col xs={0} sm={6} md={6}>
+                <div className="authImage2" />
+              </Col>
+              <Col xs={0} sm={12} md={12}>
+                <div className="authImage3" />
+              </Col>
+            </Row>
           </div>
         </Col>
 
@@ -210,13 +214,13 @@ function Signin() {
                       type="primary"
                       htmlType="submit"
                       className="loginButton"
-                      onClick={() => navigate("/dashboard")}
                     >
                       {loading ? "Loading..." : "Login"}
                     </Button>
                   </Form.Item>
                 </Form>
 
+<<<<<<< Updated upstream
               
                 <Typography.Text
                   className="fontFamily1"
@@ -230,6 +234,26 @@ function Signin() {
                 >
                   <>Not a User? <span onClick={()=> navigate("/signup")} style={{cursor:'pointer',fontWeight:'bold',textDecoration:"underline"}}>Register Now</span></>
                 </Typography.Text>
+=======
+                <Button
+                  type="link"
+                  style={{
+                    float: "left",
+                    color: "white",
+                    fontWeight: "bold",
+
+                    fontSize: "14px",
+                  }}
+                  onClick={() => navigate("/signup")}
+                >
+                  <p
+                    className="fontFamily1"
+                    style={{ margin: 0, textDecoration: "underline" }}
+                  >
+                    Register Now
+                  </p>
+                </Button>
+>>>>>>> Stashed changes
               </Col>
             </Row>
           </div>

@@ -38,10 +38,10 @@ function Homepage() {
 
   // useEffect if user is already logged in
   React.useEffect(() => {
-    if (user && token) {
-      navigate("/", { replace: true });
+    if (token) {
+      navigate("/dashboard");
     }
-  }, [user, token]);
+  }, [token]);
 
   const onFinish = (values) => {
     console.log("Success:", values);

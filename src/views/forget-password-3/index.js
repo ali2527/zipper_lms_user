@@ -15,7 +15,7 @@ import {
   Image,
   Divider,
 } from "antd";
-import { useNavigate } from "react-router";
+import { useNavigate,useLocation } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { Post } from "../../config/api/post";
 import { AUTH } from "../../config/constants/api";
@@ -26,6 +26,7 @@ import swal from "sweetalert";
 // import router from "next/router";
 
 function ForgotPassword3() {
+  const {state} = useLocation();
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const user = useSelector((state) => state.user.userData);
@@ -44,27 +45,23 @@ function ForgotPassword3() {
     setLoading(true);
 
     let data = {
-      email: values.email,
       password: values.password,
-      devideId: "123456789",
+      confirmPassword:values.confirmPassword,
+      email:state.email,
+      code:state.code
     };
-    Post(AUTH.signin, data)
+    Post(AUTH.resetPassword, data)
       .then((response) => {
         setLoading(false);
-        if (response?.data) {
-          console.log("response", response.data.token);
-          console.log("response", response.data.user);
-          dispatch(
-            addUser({ user: response.data.user, token: response.data.token })
-          );
-          navigate("/", { replace: true });
+        if (response?.data?.status) {
+          swal("Success", response?.data?.message, "success");
+          navigate("/signin", { replace: true });
         } else {
-          swal("Oops!", response.response.data.message, "error");
+          swal("Oops!", response?.data?.message || response?.response?.data?.message, "error");
         }
       })
       .catch((e) => {
-        console.log(":::;", e);
-        setLoading(false);
+        swal("Oops!","internal server error", "error");
       });
   };
 

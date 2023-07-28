@@ -24,11 +24,8 @@ import PaymentLogs from "../../views/payment-logs";
 import LessonDetail from "../../views/lesson-detail"
 import Chat from "../../views/chat"
 import Calander from "../../views/calander"
-<<<<<<< Updated upstream
 import MyCalander from "../../views/myCalander"
-=======
 import Profile from "../../views/profile"
->>>>>>> Stashed changes
 
 
 const MyRouter = () => {

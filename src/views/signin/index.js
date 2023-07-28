@@ -219,8 +219,6 @@ function Signin() {
                     </Button>
                   </Form.Item>
                 </Form>
-
-<<<<<<< Updated upstream
               
                 <Typography.Text
                   className="fontFamily1"
@@ -234,26 +232,7 @@ function Signin() {
                 >
                   <>Not a User? <span onClick={()=> navigate("/signup")} style={{cursor:'pointer',fontWeight:'bold',textDecoration:"underline"}}>Register Now</span></>
                 </Typography.Text>
-=======
-                <Button
-                  type="link"
-                  style={{
-                    float: "left",
-                    color: "white",
-                    fontWeight: "bold",
 
-                    fontSize: "14px",
-                  }}
-                  onClick={() => navigate("/signup")}
-                >
-                  <p
-                    className="fontFamily1"
-                    style={{ margin: 0, textDecoration: "underline" }}
-                  >
-                    Register Now
-                  </p>
-                </Button>
->>>>>>> Stashed changes
               </Col>
             </Row>
           </div>

@@ -409,6 +409,20 @@ font-size: 14px!important;
   background-color:green!important;
 }
 
+.swal-text{
+  text-align: center!important;
+  width: 80%!important;
+}
+
+.swal-footer{
+  display:flex!important;
+  justify-content: center!important;
+}
+
+.swal-button{
+  background-color: #7cc059;
+}
+
 input:-webkit-autofill,
 input:-webkit-autofill:hover,
 input:-webkit-autofill:focus,
@@ -423,7 +437,31 @@ input:-webkit-autofill{
   -webkit-text-fill-color: black !important;
 }
 
+.StyledModal .ant-modal-footer {
+ display: flex;
+ justify-content: center;
+}
 
+
+.StyledModal .ant-modal-content{
+ height: 300px;
+ display: flex;
+ flex-direction: column;
+ justify-content: center;
+ align-items: center;
+}
+
+.StyledModal .ant-btn-primary{
+  background-color: #7CC059!important;
+  border-radius: 10px!important;
+  border-color: #7CC059!important;
+}
+
+.StyledModal .ant-btn-default{
+  border-radius: 10px!important;
+  /* border-color: #7CC059!important;
+  color: #7CC059!important; */
+}
 
 
 .tutorCard{

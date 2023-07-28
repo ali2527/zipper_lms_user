@@ -13,7 +13,7 @@ import {FaEnvelope} from "react-icons/fa";
 import {BsFillTelephoneFill} from "react-icons/bs";
 import { FiMail, FiLock } from "react-icons/fi";
 
-function AboutUs() {
+function Signup() {
   const dispatch = useDispatch();
   const user = useSelector((state) => state.user.userData);
   const token = useSelector((state) => state.user.userToken);
@@ -488,13 +488,13 @@ const birthday = new Date(year, month, day);
                     rules={[
                       {
                         required: true,
-                        message: "Enter Intrested Subject Name",
+                        message: "Enter Intrested Subjects",
                       },
                     ]}
                   >
                     <Input
                       size="large"
-                      placeholder="Enter Intrested Subject Name"
+                      placeholder="Enter Intrested Subjects (comma seperated)"
                       className="signupFormInput"
                     
                     />
@@ -608,4 +608,4 @@ const birthday = new Date(year, month, day);
   );
 }
 
-export default AboutUs;
+export default Signup;

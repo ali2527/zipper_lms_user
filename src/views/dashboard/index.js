@@ -242,7 +242,7 @@ function Dashboard() {
                  <Avatar
                 size={200}
                 src={
-                  !user.image ? "/images/avatar.png" : UPLOADS_URL + user.image
+                  !user.image ? "/images/avatar.png" : UPLOADS_URL + "/" + user.image
                 }
               />
                 <Typography.Title

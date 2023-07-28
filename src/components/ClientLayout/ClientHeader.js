@@ -380,7 +380,7 @@ const ClientHeader = () => {
               <Avatar
                 size={40}
                 src={
-                  !user.image ? "/images/avatar.png" : UPLOADS_URL + user.image
+                  !user.image ? "/images/avatar.png" : UPLOADS_URL + "/" + user.image
                 }
               />
                <Dropdown
@@ -395,9 +395,10 @@ const ClientHeader = () => {
                     marginLeft: 10,
                     fontSize: "16px",
                     textTransform: "capitalize",
+                    color:"white",
                   }}
                 >
-                  {user?.fullname} <AiFillCaretDown fontSize={12} />{" "}
+                  {user?.firstName} <AiFillCaretDown fontSize={12} />{" "}
                 </p>
               </Dropdown>
 

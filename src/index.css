@@ -4,6 +4,9 @@
   url('./fonts/Visby-CF/Fontspring-DEMO-visbycf-regular.otf') format('otf'),
 }
 
+@import url('https://fonts.cdnfonts.com/css/visby');
+
+
 body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
@@ -247,36 +250,68 @@ font-weight: 550!important;
 }
 
 .upcomingButton{
-  min-width: 200px;
-height: 46px;
+  min-width: 250px;
+height: 50px;
 border-radius: 8px!important;
 background: #FFEBF6!important;
 font-family: 'Visby', sans-serif!important;
 color:black!important;
-font-weight: 550!important;
+font-weight: normal!important;
 }
 
 
 .completedButton{
-  min-width: 200px;
-  height: 46px;
+  min-width: 250px;
+  height: 50px;
   border-radius: 8px!important;
   background: #E7FAFF!important;
   font-family: 'Visby', sans-serif!important;
   color:black!important;
-  font-weight: 550!important;
+  font-weight: normal!important;
 }
 
 
 .messageButton{
-  min-width: 200px;
-  height: 46px;
+  min-width: 250px;
+  height: 50px;
   border-radius: 8px!important;
   background: #D7FDC3!important;
   font-family: 'Visby', sans-serif!important;
   color:black!important;
-  font-weight: 550!important;
+  font-weight: normal!important;
 }
+
+.scheduleButton{  min-width: 250px;
+  height: 50px;
+  border-radius: 8px!important;
+  background: #ECE7FF!important;
+  font-family: 'Visby', sans-serif!important;
+  color:black!important;
+  font-weight: normal!important;}
+
+.serviceButton{  min-width: 250px;
+  height: 50px;
+  border-radius: 8px!important;
+  background: #BBF2F9!important;
+  font-family: 'Visby', sans-serif!important;
+  color:black!important;
+  font-weight: normal!important;}
+
+.ratesButton{  min-width: 250px;
+  height: 50px;
+  border-radius: 8px!important;
+  background: #FDC3C3!important;
+  font-family: 'Visby', sans-serif!important;
+  color:black!important;
+  font-weight: normal!important;}
+
+.reviewButton{  min-width: 250px;
+  height: 50px;
+  border-radius: 8px!important;
+  background: #F4F9BB!important;
+  font-family: 'Visby', sans-serif!important;
+  color:black!important;
+  font-weight: normal!important;}
 
 .tutorButton{
   min-width: 200px;

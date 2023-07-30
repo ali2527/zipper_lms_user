@@ -25,7 +25,7 @@ import ReactPaginate from "react-paginate";
 import { UPLOADS_URL,AUTH } from "../../config/constants/api";
 import dayjs from "dayjs";
 import {AiOutlineEye} from "react-icons/ai";
-
+import {BiSolidMessageAltDetail} from "react-icons/bi"
 
 
 //icons
@@ -306,7 +306,8 @@ function Dashboard() {
                   className="messageButton"
                   onClick={() => navigate("/chat")}
                   icon={<div style={{backgroundColor:"white",borderRadius:"20px",padding:7}}>
-                   <FaBox style={{fontSize:'12px',color:"#649BAB"}}/>
+                    <BiSolidMessageAltDetail style={{fontSize:'14px',color:"#6FAF4D"}}/>
+
 
                   </div>}
                 >

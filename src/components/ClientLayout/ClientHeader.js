@@ -272,7 +272,7 @@ const ClientHeader = () => {
           >
             <Col
               xs={18}
-              md={7}
+              md={4}
               style={{ textAlign: "left" }}
               className="site-header-logo"
             >
@@ -284,16 +284,18 @@ const ClientHeader = () => {
                 height={80}
                 src="/images/logo-header 1.png"
                 style={{ maxWidth: 200 }}
+                onClick={()=> navigate("/")}
               />
               {/* </Link> */}
             </Col>
             <Col
               xs={0}
-              md={17}
+              md={20}
               style={{
                 display: "flex",
                 justifyContent: "flex-end",
                 alignItems: "center",
+        
               }}
               className="hide-on-phone"
             >
@@ -302,13 +304,18 @@ const ClientHeader = () => {
                   fontSize: 14,
                   fontWeight: 500,
                   backgroundColor: "transparent",
+                  minWidth:"fit-content"
                 }}
                 mode="horizontal"
                 className="header-menu"
               >
-                <Menu.Item key="home" className="hover"   onClick={()=> navigate("/")}>
+                {!token && <Menu.Item key="home" className="hover"   onClick={()=> navigate("/")}>
                   Home
-                </Menu.Item>
+                </Menu.Item>}
+
+               {token && <Menu.Item key="home" className="hover"   onClick={()=> navigate("/dashboard")}>
+                  Dashboard
+                </Menu.Item>}
                 <Menu.Item key="about" className="hover"   onClick={()=> navigate("/about-us")}>
                   About
                 </Menu.Item>

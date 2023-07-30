@@ -26,6 +26,7 @@ import Chat from "../../views/chat"
 import Calander from "../../views/calander"
 import MyCalander from "../../views/myCalander"
 import Profile from "../../views/profile"
+import ChangePassword from "../../views/change-password";
 
 
 const MyRouter = () => {
@@ -125,6 +126,19 @@ const MyRouter = () => {
               headerStyle={{ height: { base: "40px", md: 14 } }}
             >
               <Homepage />
+            </ClientLayout>
+          }
+        />
+
+<Route
+          path="/change-password"
+          index
+          element={
+            <ClientLayout
+              head={{ title: "Change Password", description: "Some Description." }}
+              headerStyle={{ height: { base: "40px", md: 14 } }}
+            >
+              <ChangePassword />
             </ClientLayout>
           }
         />

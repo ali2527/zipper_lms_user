@@ -1,17 +1,18 @@
 import axios from "axios";
-const { BASE_URL } = require("../constants/api");
+import { BASE_URL } from "../constants/api";
+import {CONTENT_TYPE} from "../constants/index"
 
-async function Post(path, postData, token, paramObj) {
+async function Post(path, postData, token, paramObj,contentType = CONTENT_TYPE.JSON) {
   try {
     let url = BASE_URL + path;
     const header = {
       headers: token
         ? {
-            "Content-Type": "application/json",
+            "Content-Type": contentType,
             Authorization: `Bearer ${token}`,
           }
         : {
-            "Content-Type": "application/json",
+            "Content-Type": contentType,
           },
     };
 

@@ -16,15 +16,48 @@ export const AUTH = {
 }
 
 
+
 export const STUDENT = {
     updateProfile : "/profile/updateProfile",
     changePassword:"/profile/changePassword"
 }
 
 export const USERS = {
-    get: "/auth/signin"
+    get: "/auth/signin",
+    getAllCoaches:"/admin/user/getAllCoaches",
+    getAllTutors:"/admin/user/getAllTutors",
+    getCoachById:"/admin/user/getCoachById/"
 }
 
+export const COACH = {
+    updateProfile : "/coach/profile/updateProfile",
+    changePassword:"/coach/profile/changePassword"
+}
+
+export const SERVICES = {
+    getAll: "/service/getAllServices"
+}
+
+export const RATES = {
+    getMyRates: "/rates/getMyRates",
+    setRates : "/rates/setRates"
+}
+
+export const COMISSSION = {
+    getComission : "/comission/getComission"
+}
+
+export const SCHEDULE = {
+    addSchedule: "/schedule/addSchedule",
+    getMySchedule:"/schedule/getMySchedule",
+    getScheduleByCoachId:"/schedule/getScheduleByCoachId/"
+}
+
+
+export const REVIEWS={
+    getAll:"/review/getAllReviewsByCoachId/",
+    getCoachRatings:"/review/getCoachRatings/"
+}
 
 
 

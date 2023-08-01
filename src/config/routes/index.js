@@ -209,7 +209,7 @@ const MyRouter = () => {
         />
 
 <Route
-          path="/coach-details"
+          path="/coach-details/:id"
           index
           element={
             <ClientLayout
@@ -314,7 +314,7 @@ const MyRouter = () => {
         />
 
 <Route
-          path="/calander"
+          path="/calander/:id"
           index
           element={
             <ClientLayout

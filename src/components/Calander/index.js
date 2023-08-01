@@ -24,7 +24,7 @@ const responsive = {
 };
 
 
-function Calander({schedule,selectedDate,setSelectedDate}) {
+function Calander({schedule,selectedDate,setSelectedDate,handleSelect}) {
   const [currentIndex, setCurrentIndex] = useState(0);
   const [selectedMonthRange, setSelectedMonthRange] = useState([
     dayjs(),
@@ -137,7 +137,7 @@ function Calander({schedule,selectedDate,setSelectedDate}) {
                   >
                     {dateObjects.map((date, index) => (
                       <div
-                        onClick={() => setSelectedDate(new Date(date))}
+                        onClick={() => isDayAvailable(date.format("dddd")) && handleSelect(date)}
                         className={
                           !isDayAvailable(date.format("dddd")) && "disabledTab"
                         }

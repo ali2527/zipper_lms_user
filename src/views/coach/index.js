@@ -1,6 +1,6 @@
 import React, { useState } from "react";
 import {
-  Form,
+  message,
   Slider,
   Input,
   Col,
@@ -10,61 +10,155 @@ import {
   Card,
   Button,
   Checkbox,
+  Rate,
   Select,
 } from "antd";
 import { useNavigate } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { Post } from "../../config/api/post";
-import { AUTH } from "../../config/constants/api";
 import { addUser, removeUser } from "../../redux/slice/authSlice";
 import swal from "sweetalert";
 import ReactPaginate from "react-paginate";
-
+import { Get } from "../../config/api/get";
+import {
+  USERS,
+  AUTH,
+  RATES,
+  REVIEWS,
+  UPLOADS_URL,
+} from "../../config/constants/api";
+import { SUBJECTS } from "../../config/constants";
 //icons
-import { FaArrowRight,FaArrowLeft } from "react-icons/fa";
+import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import { AiFillStar } from "react-icons/ai";
+import { useEffect } from "react";
 
 function Coach() {
-  const dispatch = useDispatch();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.userData);
+  const token = useSelector((state) => state.user.userToken);
   const { Search } = Input;
   const [loading, setLoading] = useState(false);
+  const [coaches, setCoaches] = useState([]);
   const [range, setRange] = useState([10, 200]);
+  const [availability, setAvailability] = useState(0, 1, 2, 3, 4, 5, 6);
+  const [paginationConfig, setPaginationConfig] = useState({
+    pageNumber: 1,
+    limit: 10,
+    totalDocs: 0,
+    totalPages: 0,
+  });
 
-  const onSearch = (value) => console.log(value);
+  const [searchFilter,setSearchFilter]=useState({
+    keyword:"",
+    subjects:null,
+    days: [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ]
+    })
 
-  const onFinish = (values) => {
-    console.log("Success:", values);
+
+
+
+    
+const handleFilter = () =>{
+  let _days = [
+    "Sunday",
+    "Monday",
+    "Tuesday",
+    "Wednesday",
+    "Thursday",
+    "Friday",
+    "Saturday",
+  ];
+
+  let days = searchFilter?.days?.map(item => _days.indexOf(item)).join(",") || null
+  let _subjects =searchFilter?.subjects ? searchFilter?.subjects.join(",") : null
+
+  getAllCoaches(1,searchFilter.keyword,range[1],range[0],_subjects,days)
+}
+
+const handleClear = () => {
+  setSearchFilter({
+    keyword:"",
+    subjects:null,
+    days: [
+      "Sunday",
+      "Monday",
+      "Tuesday",
+      "Wednesday",
+      "Thursday",
+      "Friday",
+      "Saturday",
+    ]
+    });
+    setRange([0,200]);
+    getAllCoaches(1)
+}
+  const onSearch = (value) => {
+    setSearchFilter({...searchFilter,keyword:value})
+    getAllCoaches(1,value)
+  };
+
+  useEffect(() => {
+
+    getAllCoaches();
+  }, []);
+
+  const getAllCoaches = async (pageNumber, keyword, max, min, sbj, days) => {
     setLoading(true);
-
-    let data = {
-      email: values.email,
-      password: values.password,
-      devideId: "123456789",
-    };
-    Post(AUTH.signin, data)
-      .then((response) => {
-        setLoading(false);
-        if (response?.data) {
-          console.log("response", response.data.token);
-          console.log("response", response.data.user);
-          dispatch(
-            addUser({ user: response.data.user, token: response.data.token })
-          );
-          navigate("/", { replace: true });
-        } else {
-          swal("Oops!", response.response.data.message, "error");
-        }
-      })
-      .catch((e) => {
-        console.log(":::;", e);
-        setLoading(false);
+    try {
+      const response = await Get(USERS.getAllCoaches,null, {
+        page: pageNumber
+          ? pageNumber.toString()
+          : paginationConfig.pageNumber.toString(),
+        limit: "9",
+        keyword: keyword ? keyword : "",
+        maxHourlyRate: max ? max.toString() : null,
+        minHourlyRate: min ? min.toString() : null,
+        subjects: sbj ? sbj : null,
+        daysToFilter: days ? days : null,
       });
+      setLoading(false);
+      console.log("response", response);
+      if (response?.status) {
+        setCoaches(response?.data?.docs);
+        // setRatings(response.data.ratings)
+        setPaginationConfig({
+          pageNumber: response?.data?.page,
+          limit: response?.data?.limit,
+          totalDocs: response?.data?.totalReviews,
+          totalPages: response?.data?.totalPages,
+        });
+      } else {
+        message.error("Something went wrong!");
+        console.log("error====>", response);
+      }
+    } catch (error) {
+      console.log(error.message);
+      setLoading(false);
+    }
   };
 
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+
+  const handlePageChange = (e) => {
+    setPaginationConfig({
+      ...paginationConfig,
+      pageNumber: Number(e.selected) + 1,
+    });
+
+    getAllCoaches(Number(e.selected) + 1);
   };
+
+
+  console.log("coaches", coaches);
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
@@ -87,7 +181,7 @@ function Coach() {
             marginBottom: 20,
           }}
         >
-          {<> Coach</>}
+          {<> Coaches</>}
         </Typography.Title>
         <Search
           size="large"
@@ -196,7 +290,9 @@ function Coach() {
                 </Typography.Text>
 
                 <Checkbox.Group
+                
                   className="avaliblityGroup"
+                  onChange={(e)=>setSearchFilter({...searchFilter,days:e})}
                   options={[
                     "Monday",
                     "Tuesday",
@@ -206,15 +302,7 @@ function Coach() {
                     "Saturday",
                     "Sunday",
                   ]}
-                  defaultValue={[
-                    "Monday",
-                    "Tuesday",
-                    "Wednesday",
-                    "Thursday",
-                    "Friday",
-                    "Saturday",
-                    "Sunday",
-                  ]}
+                  value={searchFilter.days}
                   style={{
                     display: "flex",
                     flexDirection: "column",
@@ -238,44 +326,47 @@ function Coach() {
                 </Typography.Text>
 
                 <Select
-                  defaultValue="all"
+                    onChange={(e)=>setSearchFilter({...searchFilter,subjects:e})}
+                    value={searchFilter.subjects ? searchFilter.subjects : [] }
+                  mode="multiple"
+                  placeholder="Select Subjects"
+                  maxTagCount= 'responsive'
                   style={{
                     width: "100%",
                     fontSize: "14px",
                   }}
                   size="large"
                   //   onChange={handleChange}
-                  options={[
-                    {
-                      value: "all",
-                      label: "All Subjects",
-                    },
-                    {
-                      value: "maths",
-                      label: "Maths",
-                    },
-                    {
-                      value: "physics",
-                      label: "Physics",
-                    },
-                    {
-                      value: "chemistry",
-                      label: "Chemistry",
-                    },
-                    {
-                      value: "biology",
-                      label: "Biology",
-                    },
-                    {
-                      value: "history",
-                      label: "History",
-                    },
-                    {
-                      value: "geography",
-                      label: "Geography",
-                    },
-                  ]}
+                  options={SUBJECTS.map(item => { return({
+                    value:item,
+                    label:item[0].toUpperCase() + item.slice(1)
+                  })} )}
                 />
+              </Row>
+              <Row gutter={10}>
+                <Col xs={24} md={12}>
+                <Button
+                  type="primary"
+                  size="large"
+                  block
+                  style={{backgroundColor:"#7ec25d"}}
+                  onClick={()=>handleFilter()}
+                  >
+                Filter
+                </Button>
+                </Col>
+                <Col xs={24} md={12}>
+                <Button
+                onClick={()=>handleClear()}
+                  type="primary"
+                  size="large"
+                  block
+                  ghost
+                  style={{borderColor:"#7ec25d",color:"#7ec25d"}}
+                  >
+                Clear
+                </Button>
+                </Col>
               </Row>
             </Card>
           </div>
@@ -289,103 +380,176 @@ function Coach() {
               padding: "10px",
             }}
           >
-            <Row gutter={[30,30]} >
-            {
-                [{name:"one",rating:5},{name:"two",rating:4},{name:"three",rating:3},{name:"one",rating:5},{name:"two",rating:2},{name:"three",rating:1}].map((item,index) => {
-                    return(
+            <Row gutter={[30, 30]}>
+
+            {coaches.length == 0 && <div style={{width:"100%",minHeight:"400px",display:'flex',justifyContent:'center',alignItems:"center"}}>
+              
+            <Typography.Title
+                                className="fontFamily1"
+                                style={{
+                                  fontSize: "25px",
+                                  fontWeight: "bold",
+                                  color: "black",
+                                  textAlign: "left",
+                                  marginTop: 0,
+                                }}
+                              >
+                              No Coaches Found
+                              </Typography.Title>
+                              </div>}
+
+
+
+              {coaches.length > 0 &&
+                coaches.map((item, index) => {
+                  console.log("item", item);
+                  return (
                     <Col xs={24} sm={12} lg={8}>
+                      <Card
+                        className="tutorCard"
+                        cover={
+                          <img
+                            alt="example"
+                            style={{
+                              height: "300px",
+                              objectFit: "cover",
+                              backgroundPosition: "center",
+                            }}
+                            src={
+                              item.image
+                                ? UPLOADS_URL + "/" + item.image
+                                : "/images/avatar.png"
+                            }
+                          />
+                        }
+                      >
+                        <Row
+                          style={{
+                            justifyContent: "space-between",
+                            minHeight: "150px",
+                          }}
+                        >
+                          <Col
+                            style={{
+                              display: "flex",
+                              flexDirection: "column",
+                              justifyContent: "space-between",
+                            }}
+                          >
+                            <Row>
+                              <Typography.Title
+                                className="fontFamily1"
+                                style={{
+                                  fontSize: "25px",
+                                  fontWeight: "bold",
+                                  color: "black",
+                                  textAlign: "left",
+                                  marginTop: 0,
+                                }}
+                              >
+                                {item?.firstName + " " + item?.lastName}
+                              </Typography.Title>
+                            </Row>
 
-                        <Card className="tutorCard" cover={<img alt="example" style={{height:"300px",objectFit:"cover",backgroundPosition:'center'}} src="/images/tutor.png" />}>
-                        <Row style={{justifyContent:'space-between'}}>
-                            <Col>
-                            <Typography.Title
-                  className="fontFamily1"
-                  style={{
-                    fontSize: "25px",
-                    fontWeight: "bold",
-                    color: "black",
-                    textAlign: "left",
-                    marginTop: 0,
-                  }}
-                >
-                  Jackson (Physics)
-                </Typography.Title>
+                            <Row
+                              style={{
+                                display: "flex",
+                                flexDirection: "column",
+                              }}
+                            >
+                              {item.totalReviews > 0 && (
+                                <>
+                                  <Row>
+                                    <Typography.Title
+                                      className="fontFamily1"
+                                      style={{
+                                        fontSize: "20px",
+                                        fontWeight: "bold",
+                                        color: "#0FB3AF",
+                                        textAlign: "left",
+                                        marginTop: 5,
+                                        marginBottom: 0,
+                                      }}
+                                    >
+                                      {item.averageRating}
+                                    </Typography.Title>
+                                    &emsp;
+                                    <Rate
+                                      disabled
+                                      allowHalf
+                                      value={item.averageRating}
+                                      style={{
+                                        color: "#FABF35",
+                                        marginTop: 0,
+                                        fontSize: "16px",
+                                      }}
+                                    />
+                                  </Row>
 
-                <Typography.Title
-                  className="fontFamily1"
-                  style={{
-                    fontSize: "20px",
-                    fontWeight: "bold",
-                    color: "#0FB3AF",
-                    textAlign: "left",
-                    marginTop: 0,
-                    marginBottom: 0,
-                  }}
-                >
-                  {item.rating} <AiFillStar style={{fontSize:16,color:item.rating >= 1 ? "#FABF35" :"#e5e5e5"}}/> <AiFillStar style={{fontSize:16,color:item.rating >= 2 ? "#FABF35" :"#e5e5e5"}}/> <AiFillStar style={{fontSize:16,color:item.rating >= 3 ? "#FABF35" :"#e5e5e5"}}/>  <AiFillStar style={{fontSize:16,color:item.rating >= 4 ? "#FABF35" :"#e5e5e5"}}/> <AiFillStar style={{fontSize:16,color:item.rating >= 5 ? "#FABF35" :"#e5e5e5"}}/>
-                </Typography.Title>
-                <Typography.Title
-                  className="fontFamily1"
-                  style={{
-                    fontSize: "12px",
-                    fontWeight: "bold",
-                    color: "black",
-                    textAlign: "left",
-                    marginTop: 0,
-                  }}
-                >
-                  33 Ratings
-                </Typography.Title>
+                                  <Typography.Title
+                                    className="fontFamily1"
+                                    style={{
+                                      fontSize: "12px",
+                                      fontWeight: "bold",
+                                      color: "black",
+                                      textAlign: "left",
+                                      marginTop: 10,
+                                    }}
+                                  >
+                                    {item.totalReviews} Reviews
+                                  </Typography.Title>
+                                </>
+                              )}
+                            </Row>
 
-                <Typography.Text
-                  className="fontFamily1"
-                  style={{
-                    fontSize: "22px",
-                    color: "black",
-                    textAlign: "left",
-                    marginTop: 10,
-                  }}
-                >
-                  $300 / Hour
-                </Typography.Text>
-                            </Col>
+                            <Row>
+                              <Typography.Text
+                                className="fontFamily1"
+                                style={{
+                                  fontSize: "22px",
+                                  color: "black",
+                                  textAlign: "left",
+                                  marginTop: 20,
+                                }}
+                              >
+                                ${item.hourlyRate} / Hour
+                              </Typography.Text>
+                            </Row>
+                          </Col>
 
-                            <Col style={{display:"flex", alignItems:"flex-end"}}>
+                          <Col
+                            style={{ display: "flex", alignItems: "flex-end" }}
+                          >
                             <Button
-                        type="primary"
-                        shape="circle"
-                        size="large"
-                        style={{
-                          backgroundColor: "#7cc059",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                          
-                        }}
-                        onClick={()=>navigate("/coach-details")}
-                        icon={<FaArrowRight style={{ color: "white" }} />}
-                      />
-                            </Col>
+                              type="primary"
+                              shape="circle"
+                              size="large"
+                              style={{
+                                backgroundColor: "#7cc059",
+                                display: "flex",
+                                justifyContent: "center",
+                                alignItems: "center",
+                              }}
+                              onClick={() => navigate("/coach-details/"+item._id)}
+                              icon={<FaArrowRight style={{ color: "white" }} />}
+                            />
+                          </Col>
                         </Row>
-                       
-
-                
-                        </Card>
-
+                      </Card>
                     </Col>
-                    )
-                })
-            }
-            </Row>   
-            <br/>
-            
-            <ReactPaginate
+                  );
+                })}
+            </Row>
+            <br />
+
+          {coaches.length > 0 &&   <ReactPaginate
               breakLabel="..."
               nextLabel={<FaArrowRight style={{ color: "grey" }} />}
               pageRangeDisplayed={window.innerWidth > 500 ? 4 : 1}
               marginPagesDisplayed={window.innerWidth > 500 ? 4 : 1} //handle Pa
-              pageCount={3}
-              forcePage={1}
+              onPageChange={handlePageChange}
+              pageCount={paginationConfig?.totalPages}
+              forcePage={paginationConfig?.pageNumber - 1}
               previousLabel={<FaArrowLeft style={{ color: "grey" }} />}
               renderOnZeroPageCount={null}
               pageClassName="page-item" //m
@@ -398,8 +562,7 @@ function Coach() {
               breakLinkClassName="page-link"
               containerClassName="paginationContainer"
               activeClassName="active"
-            />      
-         
+            />}
           </div>
         </Col>
       </Row>

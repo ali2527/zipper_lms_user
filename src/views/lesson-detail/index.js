@@ -1,10 +1,82 @@
-import React from "react";
+import React, { useEffect, useState, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
+import {
+  Col,
+  Button,
+  Row,
+  Avatar,
+  Typography,
+  Layout,
+  Checkbox,
+  Rate,
+  Progress,
+  Image,
+  Card,
+  Form,
+  Spin,
+  Input,
+  Select,
+  InputNumber,
+  TimePicker,
+} from "antd";
+import { useNavigate,useParams } from "react-router";
+import { CloseCircleOutlined, PlusOutlined } from "@ant-design/icons";
+import { LESSON,UPLOADS_URL, USERS } from "../../config/constants/api";
+import { Post } from "../../config/api/post";
+import { Get } from "../../config/api/get";
+import { RATES,SERVICES } from "../../config/constants/api";
+import { addUser, removeUser } from "../../redux/slice/authSlice";
+import { SUBJECTS, CONTENT_TYPE } from "../../config/constants/index";
+import swal from "sweetalert";
+import AliceCarousel from "react-alice-carousel";
+import "react-alice-carousel/lib/alice-carousel.css";
+//icons
+import { FaLongArrowAltLeft } from "react-icons/fa";
+import { TbCameraPlus } from "react-icons/tb";
+import { BsFiles } from "react-icons/bs";
+import dayjs from "dayjs";
+import ReactPaginate from "react-paginate";
+//icons
+import { FaArrowRight ,FaArrowLeft } from "react-icons/fa";
+import { AiFillStar } from "react-icons/ai";
 
-import { Col, Button, Row, Typography, Layout, Card } from "antd";
-import { useNavigate } from "react-router";
 
 function LessonDetail() {
-const navigate = useNavigate()
+  const {id} = useParams();
+  const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const [lesson,setLesson]= useState({});
+  const [loading, setLoading] = useState(true);
+  const user = useSelector((state) => state.user.userData);
+  const token = useSelector((state) => state.user.userToken);
+
+
+  useEffect(()=>{
+    getLessonDetails();
+  },[])
+
+
+
+  const getLessonDetails = async () =>{
+
+    try {
+      const response = await Get(LESSON.getLessonById + id,token);
+
+      console.log("response",response)
+      if (response?.status) {
+        setLesson(response?.data?.lesson);
+      } else {
+        swal("Error", response?.data?.message, "error");
+        
+      }
+      setLoading(false);
+    } catch (error) {
+      console.log(error.message);
+      setLoading(false);
+    }
+  }
+
+
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
@@ -48,7 +120,10 @@ const navigate = useNavigate()
                 padding: "20px",
               }}
             >
-              <Row>
+              {loading && <Row style={{minHeight:"50vh"}} className="flex">
+              <Spin size="large" />
+                </Row>}
+             {!loading && <Row>
                 <Col xs={24} md={22}>
                   <Row>
                     <Col xs={12} sm={5}>
@@ -72,7 +147,7 @@ const navigate = useNavigate()
                           textAlign: "left",
                         }}
                       >
-                        #123456
+                        {lesson?.lessonId}
                       </Typography.Text>
                     </Col>
 
@@ -97,7 +172,7 @@ const navigate = useNavigate()
                           textAlign: "left",
                         }}
                       >
-                        1
+                        {lesson?.noOfLesson}
                       </Typography.Text>
                     </Col>
                   </Row>
@@ -124,7 +199,7 @@ const navigate = useNavigate()
                           textAlign: "left",
                         }}
                       >
-                        Coaching
+                        {lesson.lessonType}
                       </Typography.Text>
                     </Col>
 
@@ -149,7 +224,9 @@ const navigate = useNavigate()
                           textAlign: "left",
                         }}
                       >
-                        English
+                        {lesson?.subject &&
+                          lesson?.subject[0].toUpperCase() +
+                            lesson?.subject.slice(1)}
                       </Typography.Text>
                     </Col>
                   </Row>
@@ -176,7 +253,7 @@ const navigate = useNavigate()
                           textAlign: "left",
                         }}
                       >
-                        MM/DD/YYYY
+                        {dayjs(lesson?.LessonDate).format("DD/MM/YYYY")}
                       </Typography.Text>
                     </Col>
 
@@ -201,7 +278,16 @@ const navigate = useNavigate()
                           textAlign: "left",
                         }}
                       >
-                        12:00 PM - 12:30 PM
+                        {lesson?.slots?.length > 0 &&
+                          lesson?.slots.map((item) => {
+                            return (
+                              <>
+                                {dayjs(item.lessonStartTime).format("hh:mm a") +
+                                  " to " +
+                                  dayjs(item.lessonEndTime).format("hh:mm a")}
+                              </>
+                            );
+                          })}
                       </Typography.Text>
                     </Col>
                   </Row>
@@ -228,7 +314,7 @@ const navigate = useNavigate()
                           textAlign: "left",
                         }}
                       >
-                        $100
+                        ${lesson.charges}
                       </Typography.Text>
                     </Col>
                   </Row>
@@ -270,7 +356,9 @@ const navigate = useNavigate()
                           textAlign: "left",
                         }}
                       >
-                        Jhon
+                        {lesson?.coach?.firstName +
+                          " " +
+                          lesson?.coach?.lastName}
                       </Typography.Text>
                     </Col>
                   </Row>
@@ -287,7 +375,7 @@ const navigate = useNavigate()
                         border: "1px solid #203657",
                         fontWeight: "bold",
                       }}
-                      onClick={() => navigate("/tutor-details")}
+                      onClick={() => {lesson.lessonType == "COACHING" ? navigate("/coach-details/" + lesson.coach._id) : navigate("/tutor-details/" + lesson.coach._id)}}
                       ghost
                       size="large"
                     >
@@ -295,33 +383,28 @@ const navigate = useNavigate()
                     </Button>
                   </Row>
 
-                  <Row style={{ marginTop: 30 }}>
-                    <Button
-                      type="primary"
-                      htmlType="submit"
-                      className="loginButton"
-                      onClick={() => navigate("/chat")}
-                    >
-                      View Chat
-                    </Button>
+                 {(lesson.status == "UPCOMING") &&  <Row style={{ marginTop: 30 }}>
+                    {lesson.isPaid ? (
+                      <Button
+                        type="primary"
+                        htmlType="submit"
+                        className="loginButton"
+                        // onClick={() => navigate("/chat")}
+                      >
+                        View Chat
+                      </Button>
+                    ) : (
+                      <Button
+                        type="primary"
+                        htmlType="submit"
+                        className="loginButton"
+                        onClick={() => navigate("/payment/"+id)}
+                      >
+                        Make Payment
+                      </Button>
+                    )}
                     &emsp;
-                    {/* <Button
-                      className="fontFamily1"
-                      style={{
-                        marginTop: "0px",
-                        padding: "10px 40px",
-                        cursor: "pointer",
-                        color: "black",
-                        height: "auto",
-                        border: "1px solid #203657",
-                        fontWeight: "bold",
-                      }}
-                      ghost
-                      size="large"
-                    >
-                      Join Lesson
-                    </Button> */}
-                  </Row>
+                  </Row>}
                 </Col>
                 <Col xs={0} md={2}>
                   <Typography.Title
@@ -336,12 +419,12 @@ const navigate = useNavigate()
                   >
                     {
                       <>
-                        Status: <span style={{ color: "red" }}>Live</span>
+                        Status: <span style={{ color: "red" }}>{lesson?.status}</span>
                       </>
                     }
                   </Typography.Title>
                 </Col>
-              </Row>
+              </Row>}
             </Card>
           </div>
         </Col>

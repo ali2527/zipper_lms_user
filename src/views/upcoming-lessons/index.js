@@ -26,7 +26,7 @@ import { FaSearch, FaFilter, FaCaretDown, FaEye } from "react-icons/fa";
 import {AiOutlineEye} from "react-icons/ai";
 import ClientLayout from "../../components/ClientLayout";
 import { Get } from "../../config/api/get";
-import { USERS } from "../../config/constants/api";
+import { LESSON, USERS } from "../../config/constants/api";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -37,87 +37,7 @@ function UpcomingLessons() {
   const [modalOpen, setModalOpen] = useState(false);
   const [selectedIndex, setSelectedIndex] = useState(null);
   const [selectedUser, setSelectedUser] = useState(null);
-  const [users, setUsers] = useState([ {
-    key: '1',
-    lessonId: '#123456',
-    tutor: "Jhon",
-    lessonDate: new Date(),
-    charge: 50,
-    type:"tutoring"
-  },
-  {
-    key: '2',
-    lessonId: '#123456',
-    tutor: "Jhon",
-    lessonDate: new Date(),
-    charge: 50,
-    type:"tutoring"
-  },
-  {
-    key: '3',
-    lessonId: '#123456',
-    tutor: "Jhon",
-    lessonDate: new Date(),
-    charge: 50,
-    type:"tutoring"
-  },
-  {
-    key: '4',
-    lessonId: '#123456',
-    tutor: "Jhon",
-    lessonDate: new Date(),
-    charge: 50,
-    type:"tutoring"
-  },
-  {
-    key: '5',
-    lessonId: '#123456',
-    tutor: "Jhon",
-    lessonDate: new Date(),
-    charge: 50,
-    type:"tutoring"
-  },
-  {
-    key: '6',
-    lessonId: '#123456',
-    tutor: "Jhon",
-    lessonDate: new Date(),
-    charge: 50,
-    type:"tutoring"
-  },
-  {
-    key: '7',
-    lessonId: '#123456',
-    tutor: "Jhon",
-    lessonDate: new Date(),
-    charge: 50,
-    type:"tutoring"
-  },
-  {
-    key: '8',
-    lessonId: '#123456',
-    tutor: "Jhon",
-    lessonDate: new Date(),
-    charge: 50,
-    type:"tutoring"
-  },
-  {
-    key: '9',
-    lessonId: '#123456',
-    tutor: "Jhon",
-    lessonDate: new Date(),
-    charge: 50,
-    type:"tutoring"
-  },
-  {
-    key: '10',
-    lessonId: '#123456',
-    tutor: "Jhon",
-    lessonDate: new Date(),
-    charge: 50,
-    type:"tutoring"
-  },
- ]);
+  const [lessons,setLessons] = useState([])
   const [paginationConfig, setPaginationConfig] = useState({
     pageNumber: 1,
     limit: 10,
@@ -129,6 +49,7 @@ function UpcomingLessons() {
 
   const [filter, setFilter] = useState({
     status: null,
+    type: null,
     keyword: "",
     from: null,
     to: null,
@@ -144,9 +65,11 @@ function UpcomingLessons() {
 
 
   useEffect(() => {
-    // getUsers();
+    getLessons();
   }, []);
 
+
+  console.log(lessons,"lessons")
   
 
   const handlePageChange = (pageNumber) => {
@@ -155,7 +78,7 @@ function UpcomingLessons() {
       pageNumber: pageNumber,
     });
 
-    getUsers(pageNumber);
+    getLessons(pageNumber);
   };
 
   const handleSearch = (value) => {
@@ -172,6 +95,14 @@ function UpcomingLessons() {
     });
   };
 
+  
+  const handleTypeChange = (value) => {
+    setFilter({
+      ...filter,
+      type: value,
+    });
+  };
+
   const resetFilter = () => {
     setFilter({
       status: null,
@@ -179,7 +110,7 @@ function UpcomingLessons() {
       from: null,
       to: null,
     });
-    getUsers(paginationConfig.pageNumber, paginationConfig.limit, "", true);
+    getLessons(paginationConfig.pageNumber, paginationConfig.limit, "", true);
   };
 
   const handleOpenChange = (newOpen) => {
@@ -207,36 +138,15 @@ function UpcomingLessons() {
       current: 1,
     });
 
-    getUsers(1, pageSize);
+    getLessons(1, pageSize);
   };
 
-  const handleStatus = async () => {
-    try {
-      const index = users.findIndex((user) => user._id == selectedUser._id);
-
-      console.log(index)
-      const response = await Get(USERS.toggleStatus + "/" + selectedUser._id , token,{});
-      const newUsers = [...users];
-      
-      console.log(">>>>",newUsers[index].isActive)
-      console.log(">>>>",selectedUser.isActive)
-      newUsers[index].isActive = !selectedUser.isActive;
-      setModalOpen(false);
-      setUsers(newUsers);
-    } catch (error) {
-      console.log(error.message);
-    }  
-    
-  };
-  
-
-  console.log("users", users.map(item => item.isActive))
 
 
-  const getUsers = async (pageNumber, pageSize, search, reset = false) => {
+  const getLessons = async (pageNumber, pageSize, search, reset = false) => {
     setLoading(true);
     try {
-      const response = await Get(USERS.get, token, {
+      const response = await Get(LESSON.getUpcomingLessons, token, {
         page: pageNumber
           ? pageNumber.toString()
           : paginationConfig.pageNumber.toString(),
@@ -244,22 +154,23 @@ function UpcomingLessons() {
           ? pageSize.toString()
           : paginationConfig.limit.toString(),
         status: reset ? "" : filter.status || null,
+        type: reset ? "" : filter.type || null,
         keyword: search ? search : null,
         from: reset ? "" : filter?.from ? filter?.from.toISOString() : "",
         to: reset ? "" : filter?.to ? filter?.to.toISOString() : "",
       });
       setLoading(false);
       console.log("response", response);
-      if (response?.docs) {
-        setUsers(response?.docs);
+      if (response?.status) {
+        setLessons(response?.data?.docs);
         setPaginationConfig({
-          pageNumber: response?.page,
-          limit: response?.limit,
-          totalDocs: response?.totalDocs,
-          totalPages: response?.totalPages,
+          pageNumber: response?.data?.page,
+          limit: response?.data?.limit,
+          totalDocs: response?.data?.totalDocs,
+          totalPages: response?.data?.totalPages,
         });
       } else {
-        message.error("Something went wrong!");
+        message.error(response.message);
         console.log("error====>", response);
       }
     } catch (error) {
@@ -295,8 +206,9 @@ function UpcomingLessons() {
     },
     {
       title: "Tutor/Coach Name",
-      dataIndex: "tutor",
-      key: "tutor",
+      dataIndex: "coach",
+      key: "coach",
+      render: (item) => <span>{item.firstName + " " + item.lastName}</span>,
     },
     {
       title: "Lesson Date",
@@ -306,14 +218,25 @@ function UpcomingLessons() {
     },
     {
       title: "Lesson Charge",
-      dataIndex: "charge",
-      key: "charge",
+      dataIndex: "charges",
+      key: "charges",
       render: (item) => <span>${item}</span>,
     },
     {
       title: "Lesson Type",
-      dataIndex: "type",
-      key: "type",
+      dataIndex: "lessonType",
+      key: "lessonType",
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+    },
+    {
+      title: "Payment",
+      dataIndex: "isPaid",
+      key: "isPaid",
+      render: (item) => <span style={{color:item ? "#76ba53" : "red"}}>{item ? "Paid" : "Pending"}</span>,
     },
     {
       title: "Action",
@@ -322,7 +245,7 @@ function UpcomingLessons() {
       render: (item) => (
         <AiOutlineEye
           style={{ fontSize: "18px", color: "grey",  cursor: "pointer" }}
-             onClick={() => navigate("/lesson-detail/" )}
+             onClick={() => navigate("/lesson-detail/"+item )}
         />
       ),
     },
@@ -357,19 +280,39 @@ function UpcomingLessons() {
         <Select
           size={"large"}
           className="filterSelectBox"
-          placeholder="Select Status"
-          value={filter.status}
-          onChange={(e) => handleStatusChange(e)}
+          placeholder="Select Lesson Type"
+          value={filter.type}
+          onChange={(e) => handleTypeChange(e)}
           style={{
             width: "100%",
             marginBottom: "10px",
             textAlign: "left",
           }}
           options={[
-            { value: "active", label: "Active" },
-            { value: "inactive", label: "Inactive" },
+            { value: "TUTORING", label: "Tutoring" },
+            { value: "COACHING", label: "Coaching" },
           ]}
         />
+
+<p className="mainLabel">Status:</p>
+
+<Select
+  size={"large"}
+  className="filterSelectBox"
+  placeholder="Select Status"
+  value={filter.status}
+  onChange={(e) => handleStatusChange(e)}
+  style={{
+    width: "100%",
+    marginBottom: "10px",
+    textAlign: "left",
+  }}
+  options={[
+    { value: "PENDING", label: "Pending" },
+    { value: "UPCOMING", label: "Upcoming" },
+  ]}
+/>
+
 
         <Button
           type="primary"
@@ -378,7 +321,7 @@ function UpcomingLessons() {
           size={"large"}
           style={{ marginBottom: "10px" }}
           className="loginButton"
-          onClick={() => getUsers()}
+          onClick={() => getLessons()}
         >
           Apply
         </Button>
@@ -488,12 +431,12 @@ function UpcomingLessons() {
                     cursor: "pointer",
                   }}
                   onClick={() =>
-                    getUsers(1, paginationConfig.limit, filter.keyword)
+                    getLessons(1, paginationConfig.limit, filter.keyword)
                   }
                 />
               }
               onPressEnter={(e) =>
-                getUsers(1, paginationConfig.limit, filter.keyword)
+                getLessons(1, paginationConfig.limit, filter.keyword)
               }
             />
            
@@ -517,7 +460,7 @@ function UpcomingLessons() {
           ) : (
             <Table
               className="styledTable"
-              dataSource={users}
+              dataSource={lessons}
               columns={columns}
               pagination={false}
             />
@@ -554,58 +497,7 @@ function UpcomingLessons() {
         </Col>
       </Row>
 
-      
-      <Modal
-        visible={modalOpen}
-        onOk={() => handleStatus()}
-        onCancel={() => setModalOpen(false)}
-        okText="Yes"
-        className="StyledModal"
-        style={{
-          left: 0,
-          right: 0,
-          marginLeft: "auto",
-          marginRight: "auto",
-          textAlign: "center",
-        }}
-        cancelText="No"
-        cancelButtonProps={{
-          style: {
-            border: "2px solid #385790",
-            color: "#385790",
-            height: "auto",
-            padding: "6px 35px",
-            borderRadius: "50px",
-            fontSize: "16px",
-            marginTop: "15px",
-          },
-        }}
-        okButtonProps={{
-          style: {
-            backgroundColor: "#385790",
-            color: "white",
-            marginTop: "15px",
-            height: "auto",
-            padding: "5px 35px",
-            borderRadius: "50px",
-            fontSize: "16px",
-            border: "2px solid #385790",
-          },
-        }}
-      >
-        <Image
-          src="./images/question.png"
-          preview={false}
-          width={100}
-          height={120}
-        />
-        <Typography.Title level={4} style={{ fontSize: "25px" }}>
-          {selectedUser?.isActive ? "Deactivate" : "Activate"}
-        </Typography.Title>
-        <Typography.Text style={{ fontSize: 16 }}>
-        Do You Want To  {selectedUser?.isActive ? "Deactivate" : "Activate"} This User?
-        </Typography.Text>
-      </Modal>
+    
     </Layout>
   );
 }

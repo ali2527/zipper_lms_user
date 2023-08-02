@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import React, { useEffect, useState } from "react";
 import {
   Form,
   Slider,
@@ -12,7 +12,7 @@ import {
   Tag,Space,Table,
   Button,
   Progress,
-  Checkbox,
+  message,
   Avatar,
   Image,
 } from "antd";
@@ -21,8 +21,9 @@ import { useSelector, useDispatch } from "react-redux";
 import { Post } from "../../config/api/post";
 import { addUser, removeUser } from "../../redux/slice/authSlice";
 import swal from "sweetalert";
+import { Get } from "../../config/api/get";
 import ReactPaginate from "react-paginate";
-import { UPLOADS_URL,AUTH } from "../../config/constants/api";
+import { UPLOADS_URL,AUTH,LESSON, STUDENT } from "../../config/constants/api";
 import dayjs from "dayjs";
 import {AiOutlineEye} from "react-icons/ai";
 import {BiSolidMessageAltDetail} from "react-icons/bi"
@@ -37,10 +38,20 @@ function Dashboard() {
   const navigate = useNavigate();
   const user = useSelector((state) => state.user.userData);
   const token = useSelector((state) => state.user.userToken);
+  const [upcomingLessons,setUpcomingLessons] = useState([]);
+  const [liveLessons,setLiveLessons] = useState([]);
+  const [tutors,setTutors] = useState([]);
   const { Search } = Input;
   const [loading, setLoading] = useState(false);
   const [range, setRange] = useState([10, 200]);
   const item = { rating: 4 };
+
+
+  useEffect(()=>{
+    getUpcomingLessons()
+    getLiveLessons()
+    getMyTutors()
+  },[])
 
 
   const columns = [
@@ -58,8 +69,9 @@ function Dashboard() {
     },
     {
       title: "Tutor/Coach Name",
-      dataIndex: "tutor",
-      key: "tutor",
+      dataIndex: "coach",
+      key: "coach",
+      render: (item) => <span>{item.firstName + " " + item.lastName}</span>,
     },
     {
       title: "Lesson Date",
@@ -69,14 +81,14 @@ function Dashboard() {
     },
     {
       title: "Lesson Charge",
-      dataIndex: "charge",
-      key: "charge",
+      dataIndex: "charges",
+      key: "charges",
       render: (item) => <span>${item}</span>,
     },
     {
       title: "Lesson Type",
-      dataIndex: "type",
-      key: "type",
+      dataIndex: "lessonType",
+      key: "lessonType",
     },
     {
       title: "Action",
@@ -85,67 +97,139 @@ function Dashboard() {
       render: (item) => (
         <AiOutlineEye
           style={{ fontSize: "18px", color: "grey",  cursor: "pointer" }}
-             onClick={() => navigate("/lesson-detail/" )}
+             onClick={() => navigate("/lesson-detail/"+item )}
         />
       ),
     },
   ];
-  const data = [
+
+
+
+  const columns2 = [
     {
-      key: '1',
-      lessonId: '#123456',
-      tutor: "Jhon",
-      lessonDate: new Date(),
-      charge: 50,
-      type:"tutoring"
+      title: "S. No.	",
+      dataIndex: "key",
+      key: "key",
+      width: 100,
+      render: (value, item, index) => (index < 9 && "0") + (index + 1),
     },
     {
-      key: '2',
-      lessonId: '#123456',
-      tutor: "Jhon",
-      lessonDate: new Date(),
-      charge: 50,
-      type:"tutoring"
+      title: "Lesson ID",
+      dataIndex: "lessonId",
+      key: "lessonId",
     },
-   
+    {
+      title: "Tutor/Coach Name",
+      dataIndex: "coach",
+      key: "coach",
+      render: (item) => <span>{item.firstName + " " + item.lastName}</span>,
+    },
+    {
+      title: "Lesson Date",
+      dataIndex: "lessonDate",
+      key: "lessonDate",
+      render: (item) => <span>{dayjs(item).format("M/D/YYYY")}</span>,
+    },
+    {
+      title: "Lesson Charge",
+      dataIndex: "charges",
+      key: "charges",
+      render: (item) => <span>${item}</span>,
+    },
+    {
+      title: "Lesson Type",
+      dataIndex: "lessonType",
+      key: "lessonType",
+    },
+    {
+      title: "Status",
+      dataIndex: "status",
+      key: "status",
+    },
+    {
+      title: "Payment",
+      dataIndex: "isPaid",
+      key: "isPaid",
+      render: (item) => <span style={{color:item ? "#76ba53" : "red"}}>{item ? "Paid" : "Pending"}</span>,
+    },
+    {
+      title: "Action",
+      dataIndex: "_id",
+      key: "_id",
+      render: (item) => (
+        <AiOutlineEye
+          style={{ fontSize: "18px", color: "grey",  cursor: "pointer" }}
+             onClick={() => navigate("/lesson-detail/"+item )}
+        />
+      ),
+    },
   ];
 
-  const data2 = [
-    {
-      key: '1',
-      lessonId: '#123456',
-      tutor: "Jhon",
-      lessonDate: new Date(),
-      charge: 50,
-      type:"tutoring"
-    },
-    {
-      key: '2',
-      lessonId: '#123456',
-      tutor: "Jhon",
-      lessonDate: new Date(),
-      charge: 50,
-      type:"tutoring"
-    },
-    {
-      key: '3',
-      lessonId: '#123456',
-      tutor: "Jhon",
-      lessonDate: new Date(),
-      charge: 50,
-      type:"tutoring"
-    },
-    {
-      key: '4',
-      lessonId: '#123456',
-      tutor: "Jhon",
-      lessonDate: new Date(),
-      charge: 50,
-      type:"tutoring"
-    },
-   
-   
-  ];
+
+  const getMyTutors = async (pageNumber, pageSize, search, reset = false) => {
+    setLoading(true);
+    try {
+      const response = await Get(STUDENT.getMyCoaches, token, {
+        page: "1",
+        limit: 5
+      });
+      setLoading(false);
+      console.log("response", response);
+      if (response?.status) {
+        setTutors(response?.data);
+      } else {
+        // message.error(response.message);
+        console.log("error====>", response);
+      }
+    } catch (error) {
+      console.log(error.message);
+      setLoading(false);
+    }
+  };
+
+
+  const getUpcomingLessons = async (pageNumber, pageSize, search, reset = false) => {
+    setLoading(true);
+    try {
+      const response = await Get(LESSON.getUpcomingLessons, token, {
+        page:"1",
+        limit: 5,
+      });
+      setLoading(false);
+      console.log("response", response);
+      if (response?.status) {
+        setUpcomingLessons(response?.data?.docs);
+      } else {
+        // message.error(response.message);
+        console.log("error====>", response);
+      }
+    } catch (error) {
+      console.log(error.message);
+      setLoading(false);
+    }
+  };
+
+  const getLiveLessons = async (pageNumber, pageSize, search, reset = false) => {
+    setLoading(true);
+    try {
+      const response = await Get(LESSON.getLiveLessons, token, {
+        page: "1",
+        limit: 5
+      });
+      setLoading(false);
+      console.log("response", response);
+      if (response?.status) {
+        setLiveLessons(response?.data?.docs);
+      } else {
+        // message.error(response.message);
+        console.log("error====>", response);
+      }
+    } catch (error) {
+      console.log(error.message);
+      setLoading(false);
+    }
+  };
+
 
 
   const onSearch = (value) => console.log(value);
@@ -367,7 +451,7 @@ function Dashboard() {
                     Live Lesson
                   </Typography.Title>
 
-                  <Table pagination={false} className="styledTable2" columns={columns} dataSource={data} />
+                  <Table pagination={false} className="styledTable2" columns={columns} dataSource={liveLessons} />
                 </Row>
 
                 <Row
@@ -391,7 +475,7 @@ function Dashboard() {
                     Upcoming Lessons
                   </Typography.Title>
 
-                  <Table pagination={false} className="styledTable2" columns={columns} dataSource={data2} />
+                  <Table pagination={false} className="styledTable2" columns={columns2} dataSource={upcomingLessons} />
                 </Row>
 
                 <Row
@@ -414,276 +498,89 @@ function Dashboard() {
                    My Tutors/Coaches
                   </Typography.Title>
 
-                  <Row gutter={20} justify="center" style={{ margin: "50px 0" }}>
-              <Col >
-                <Card
-                  className="coachCard1"
-                  bordered={false}
+                  <Row gutter={20} justify="flex-start" style={{ margin: "20px 0" }}>
+           {tutors.length > 0 && tutors.map(item => {
+            return(<Col >
+              <Card
+                bordered={false}
+                style={{
+                  background:`Url(${UPLOADS_URL + "/" + item.image})`,
+                  backgroundSize:"cover",
+                  backgroundPosition:"center",
+                  width: "185px",
+                  filter:"gray saturate(0%) brightness(70%) contrast(1000%)",
+                  height: "250px",
+                  borderRadius: "25px",
+                  display: "flex",
+                  padding:"20px 5px",
+                  flexDirection: "column",
+                  justifyContent: "flex-end",
+                }}
+              >
+                 <div
+      style={{
+        position: "absolute",
+        top: 0,
+        left: 0,
+        width: "100%",
+        height: "100%",
+        backgroundColor: "rgba(0, 0, 0, 0.3)", // You can adjust the opacity here
+        zIndex: 1,
+        borderRadius: "25px",
+        display: "flex",
+        padding:"20px 5px",
+        flexDirection:"column",
+        justifyContent: "flex-end",
+      }}
+    >
+ <Row
                   style={{
-                    width: "185px",
-                    height: "250px",
-                    borderRadius: "25px",
                     display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "flex-end",
+                    justifyContent: "space-between",
+                    alignItems: "center",
+                    padding:"0 10px"
                   }}
                 >
-                  <Row
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      padding:"0 10px"
-                    }}
-                  >
-                    <Col span={14}>
-                      <Typography.Title
-                        className="fontFamily1"
-                        style={{
-                          fontSize: "14px",
-                          fontWeight: 600,
-                          color: "white",
-                          textAlign: "left",
-                        }}
-                      >
-                        Mathematics Course
-                      </Typography.Title>
-                    </Col>
-                    <Col
-                      span={10}
-                      style={{ display: "flex", justifyContent: "flex-end" }}
+                  <Col span={14}>
+                    <Typography.Title
+                      className="fontFamily1"
+                      style={{
+                        fontSize: "14px",
+                        fontWeight: 600,
+                        color: "white",
+                        textAlign: "left",
+                        zIndex:3
+                      }}
                     >
-                      <Button
-                        type="primary"
-                        shape="circle"
-                        style={{
-                          backgroundColor: "#7cc059",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                        icon={<FaArrowRight style={{ color: "white" }} />}
-                      />
-                    </Col>
-                  </Row>
-                </Card>
-              </Col>
-              <Col >
-                <Card
-                  bordered={false}
-                  className="coachCard2"
-                  style={{
-                    width: "185px",
-                    height: "250px",
-                    borderRadius: "25px",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "flex-end",
-                  }}
-                >
-                  {" "}
-                  <Row
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      padding:"0 10px"
-                    }}
+                     {item.firstName + " " + item.lastName}
+                    </Typography.Title>
+                  </Col>
+                  <Col
+                    span={10}
+                    style={{ display: "flex", justifyContent: "flex-end" }}
                   >
-                    <Col span={14}>
-                      <Typography.Title
-                        className="fontFamily1"
-                        style={{
-                          fontSize: "14px",
-                          fontWeight: 600,
-                          color: "white",
-                          textAlign: "left",
-                        }}
-                      >
-                        Mathematics Course
-                      </Typography.Title>
-                    </Col>
-                    <Col
-                      span={10}
-                      style={{ display: "flex", justifyContent: "flex-end" }}
-                    >
-                      <Button
-                        type="primary"
-                        shape="circle"
-                        style={{
-                          backgroundColor: "#7cc059",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                        icon={<FaArrowRight style={{ color: "white" }} />}
-                      />
-                    </Col>
-                  </Row>
-                </Card>
-              </Col>
-              <Col >
-                <Card
-                  bordered={false}
-                  className="coachCard3"
-                  style={{
-                    width: "185px",
-                    height: "250px",
-                    borderRadius: "25px",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "flex-end",
-                  }}
-                >
-                  {" "}
-                  <Row
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      padding:"0 10px"
-                    }}
-                  >
-                    <Col span={14}>
-                      <Typography.Title
-                        className="fontFamily1"
-                        style={{
-                          fontSize: "14px",
-                          fontWeight: 600,
-                          color: "white",
-                          textAlign: "left",
-                        }}
-                      >
-                        Mathematics Course
-                      </Typography.Title>
-                    </Col>
-                    <Col
-                      span={10}
-                      style={{ display: "flex", justifyContent: "flex-end" }}
-                    >
-                      <Button
-                        type="primary"
-                        shape="circle"
-                        style={{
-                          backgroundColor: "#7cc059",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                        icon={<FaArrowRight style={{ color: "white" }} />}
-                      />
-                    </Col>
-                  </Row>
-                </Card>
-              </Col>
-              <Col >
-                <Card
-                  bordered={false}
-                  className="coachCard4"
-                  style={{
-                    width: "185px",
-                    height: "250px",
-                    borderRadius: "25px",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "flex-end",
-                  }}
-                >
-                  {" "}
-                  <Row
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      padding:"0 10px"
-                    }}
-                  >
-                    <Col span={14}>
-                      <Typography.Title
-                        className="fontFamily1"
-                        style={{
-                          fontSize: "14px",
-                          fontWeight: 600,
-                          color: "white",
-                          textAlign: "left",
-                        }}
-                      >
-                        Mathematics Course
-                      </Typography.Title>
-                    </Col>
-                    <Col
-                      span={10}
-                      style={{ display: "flex", justifyContent: "flex-end" }}
-                    >
-                      <Button
-                        type="primary"
-                        shape="circle"
-                        style={{
-                          backgroundColor: "#7cc059",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                        icon={<FaArrowRight style={{ color: "white" }} />}
-                      />
-                    </Col>
-                  </Row>
-                </Card>
-              </Col>
-              <Col >
-                <Card
-                  bordered={false}
-                  className="coachCard5"
-                  style={{
-                    width: "185px",
-                    height: "250px",
-                    borderRadius: "25px",
-                    display: "flex",
-                    flexDirection: "column",
-                    justifyContent: "flex-end",
-                  }}
-                >
-                  {" "}
-                  <Row
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                      padding:"0 10px"
-                    }}
-                  >
-                    <Col span={14}>
-                      <Typography.Title
-                        className="fontFamily1"
-                        style={{
-                          fontSize: "14px",
-                          fontWeight: 600,
-                          color: "white",
-                          textAlign: "left",
-                        }}
-                      >
-                        Mathematics Course
-                      </Typography.Title>
-                    </Col>
-                    <Col
-                      span={10}
-                      style={{ display: "flex", justifyContent: "flex-end" }}
-                    >
-                      <Button
-                        type="primary"
-                        shape="circle"
-                        style={{
-                          backgroundColor: "#7cc059",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                        icon={<FaArrowRight style={{ color: "white" }} />}
-                      />
-                    </Col>
-                  </Row>
-                </Card>
-              </Col>
+                    <Button
+                      type="primary"
+                      shape="circle"
+                      style={{
+                        backgroundColor: "#7cc059",
+                        display: "flex",
+                        justifyContent: "center",
+                        alignItems: "center",
+                      }}
+                      onClick={()=> {(item.applicationType == "COACHING" || item.applicationType == "BOTH")  ? navigate("/coach-details/"+item._id) : navigate("/tutor-details/"+item._id)}}
+                      icon={<FaArrowRight style={{ color: "white" }} />}
+                    />
+                  </Col>
+                </Row>
+    </div>
+               
+              </Card>
+            </Col>);
+           })}
+           
+              
+           
             </Row>
             {/* <Row style={{ justifyContent: "center" }}>
               <Button type="primary" htmlType="submit" className="loginButton">

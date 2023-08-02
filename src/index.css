@@ -375,13 +375,17 @@ font-family: 'Poppins', sans-serif!important;
 font-weight: auto;
 font-size: 14px!important;
 }
-
+.letterSpacing *{
+letter-spacing: 10px;
+}
 .ContactFormInput2{
   border-radius: 10px!important;
   background: #efefef9a!important;
   color:grey!important;
   height: auto!important;
-  border:none
+  border:none;
+  padding:5px 10px!important;
+  height: 49px!important;
 }
 
 

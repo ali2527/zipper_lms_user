@@ -1,76 +1,145 @@
-import React, { useState } from "react";
+import React, { useEffect, useState, useRef } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import {
-  Form,
-  Slider,
-  Input,
   Col,
+  Button,
   Row,
+  Avatar,
   Typography,
   Layout,
-  Rate,
-  Card,
-  Button,
-  Progress,
   Checkbox,
-  Select,
+  Rate,
+  Progress,
   Image,
+  Card,
+  Form,
+  message,
+  Input,
+  Spin,
+  InputNumber,
+  TimePicker,
 } from "antd";
-import { useNavigate } from "react-router";
-import { useSelector, useDispatch } from "react-redux";
+import { useNavigate,useParams } from "react-router";
+import { CloseCircleOutlined, PlusOutlined } from "@ant-design/icons";
+import { REVIEWS,UPLOADS_URL, USERS } from "../../config/constants/api";
 import { Post } from "../../config/api/post";
-import { AUTH } from "../../config/constants/api";
+import { Get } from "../../config/api/get";
+import { RATES,SERVICES } from "../../config/constants/api";
 import { addUser, removeUser } from "../../redux/slice/authSlice";
+import { SUBJECTS, CONTENT_TYPE } from "../../config/constants/index";
 import swal from "sweetalert";
+import AliceCarousel from "react-alice-carousel";
+import "react-alice-carousel/lib/alice-carousel.css";
+//icons
+import { FaLongArrowAltLeft } from "react-icons/fa";
+import { TbCameraPlus } from "react-icons/tb";
+import { BsFiles } from "react-icons/bs";
+import dayjs from "dayjs";
 import ReactPaginate from "react-paginate";
-
-
-
 //icons
 import { FaArrowRight ,FaArrowLeft } from "react-icons/fa";
 import { AiFillStar } from "react-icons/ai";
 
-function TutorDetails() {
-  const dispatch = useDispatch();
+function CoachDetails() {
+  const {id} = useParams();
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const user = useSelector((state) => state.user.userData);
+  const token = useSelector((state) => state.user.userToken);
+  const [paginationConfig, setPaginationConfig] = useState({
+    pageNumber: 1,
+    limit: 10,
+    totalDocs: 0,
+    totalPages: 0,
+  });
+  const [reviews,setReviews] = useState([])
+  const [ratings,setRatings] = useState({})
+  const [coach,setCoach]= useState({})
+  const days = ["Sunday","Monday",'Tuesday',"Wednesday","Thursday","Friday","Saturday"]
   const { Search } = Input;
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [range, setRange] = useState([10, 200]);
+  const [review, setReview] = useState({
+    averageRating: 0,
+    totalReviews: 0
+  });
+  const [rates, setRates] = useState({
+    hourlyRate: 0,
+    tutoringRate: 0,
+    coachingRate: 0,
+  });
+
   const item = { rating: 4 };
 
-  const onSearch = (value) => console.log(value);
+  useEffect(()=>{
+    getCoachDetails();
+    getReviews();
+  },[])
 
-  const onFinish = (values) => {
-    console.log("Success:", values);
+
+
+  const getCoachDetails = async () =>{
+    try {
+      const response = await Get(USERS.getCoachById + id);
+      if (response?.status) {
+        setCoach(response?.data);
+      } else {
+        swal("Error", response?.message, "error");
+        
+      }
+      setLoading(false);
+    } catch (error) {
+      console.log(error.message);
+      setLoading(false);
+    }
+  }
+
+
+
+  const getReviews = async (pageNumber) => {
     setLoading(true);
-
-    let data = {
-      email: values.email,
-      password: values.password,
-      devideId: "123456789",
-    };
-    Post(AUTH.signin, data)
-      .then((response) => {
-        setLoading(false);
-        if (response?.data) {
-          console.log("response", response.data.token);
-          console.log("response", response.data.user);
-          dispatch(
-            addUser({ user: response.data.user, token: response.data.token })
-          );
-          navigate("/", { replace: true });
-        } else {
-          swal("Oops!", response.response.data.message, "error");
-        }
-      })
-      .catch((e) => {
-        console.log(":::;", e);
-        setLoading(false);
+    try {
+      const response = await Get(REVIEWS.getAll + id, {
+        page: pageNumber
+          ? pageNumber.toString()
+          : paginationConfig.pageNumber.toString(),
+        limit: "5",
       });
+      // setLoading(false);
+      console.log("response", response);
+      if (response?.status) {
+        setReviews(response?.data);
+        setRatings(response.data.ratings)
+        setPaginationConfig({
+          pageNumber: response?.data?.page,
+          limit: response?.data?.limit,
+          totalDocs: response?.data?.totalReviews,
+          totalPages: response?.data?.totalPages,
+        });
+      } else {
+        message.error("Something went wrong!");
+        console.log("error====>", response);
+      }
+    } catch (error) {
+      console.log(error.message);
+      // setLoading(false);
+    }
   };
 
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
+
+
+  const handlePageChange = (e) => {
+    setPaginationConfig({
+      ...paginationConfig,
+      pageNumber: Number(e.selected) + 1,
+    });
+
+    getReviews(Number(e.selected) + 1);
   };
+
+
+  console.log("review",reviews);
+
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
@@ -93,7 +162,7 @@ function TutorDetails() {
             marginBottom: 20,
           }}
         >
-          {<> Tutor Details</>}
+          {<> Coach Details</>}
         </Typography.Title>
       </Row>
 
@@ -118,7 +187,10 @@ function TutorDetails() {
             }}
           >
             <Card className="contactCard2" bordered={false}>
-              <Row
+            {loading && <Row style={{minHeight:"30vh"}} className="flex">
+              <Spin size="large" />
+                </Row>}
+            {!loading && <Row
                 style={{
                   width: "100%",
                   padding: "10px",
@@ -129,7 +201,7 @@ function TutorDetails() {
                 }}
               >
                 <Image
-                  src="/images/tutor.png"
+                  src={coach?.coach?.image ? UPLOADS_URL + "/"+ coach?.coach?.image :  "/images/avatar.png"}
                   height={150}
                   width={150}
 preview={false}
@@ -145,7 +217,7 @@ preview={false}
                     marginTop: 20,
                   }}
                 >
-                  Jackson (Physics)
+                  {coach?.coach?.firstName + " " + coach?.coach?.lastName}
                 </Typography.Title>
                 <Typography.Text
                   className="fontFamily1"
@@ -156,11 +228,9 @@ preview={false}
                     justifyContent: "center",
                   }}
                 >
-                  Lorem Ipsum is simply dummy text of the printing and
-                  typesetting industry. Lorem Ipsum has been the industry's
-                  standard dummy text ever since
+                 {coach?.coach?.bio}
                 </Typography.Text>
-
+                <Row>
                 <Typography.Title
                   className="fontFamily1"
                   style={{
@@ -168,54 +238,35 @@ preview={false}
                     fontWeight: "bold",
                     color: "#0FB3AF",
                     textAlign: "left",
-                    marginTop: 10,
+                    marginTop: 5,
                     marginBottom: 0,
-                  }}
+                  }}  
                 >
-                  {item.rating}{" "}
-                  <AiFillStar
-                    style={{
-                      fontSize: 16,
-                      color: item.rating >= 1 ? "#FABF35" : "#e5e5e5",
-                    }}
-                  />{" "}
-                  <AiFillStar
-                    style={{
-                      fontSize: 16,
-                      color: item.rating >= 2 ? "#FABF35" : "#e5e5e5",
-                    }}
-                  />{" "}
-                  <AiFillStar
-                    style={{
-                      fontSize: 16,
-                      color: item.rating >= 3 ? "#FABF35" : "#e5e5e5",
-                    }}
-                  />{" "}
-                  <AiFillStar
-                    style={{
-                      fontSize: 16,
-                      color: item.rating >= 4 ? "#FABF35" : "#e5e5e5",
-                    }}
-                  />{" "}
-                  <AiFillStar
-                    style={{
-                      fontSize: 16,
-                      color: item.rating >= 5 ? "#FABF35" : "#e5e5e5",
-                    }}
-                  />
+                 {coach?.review?.averageRating}
+                 
                 </Typography.Title>
+                &emsp;
+                <Rate
+                      disabled 
+                        allowHalf
+                        value={coach?.review?.averageRating}
+                        style={{ color: "#FABF35", marginTop: 0,fontSize:18 }}
+                      />
+                </Row>
+
+               
                 <Typography.Title
                   className="fontFamily1"
                   style={{
                     fontSize: "12px",
-                    fontWeight: "bold",
+                    fontWeight: "bold", 
                     color: "black",
                     textAlign: "left",
                     marginTop: 0,
                     marginBottom: 20,
                   }}
                 >
-                  33 Ratings
+                  {coach?.review?.totalReviews} Reviews
                 </Typography.Title>
 
                 <svg
@@ -238,21 +289,21 @@ preview={false}
                     fill="#FFFFFF"
                     font-size="14"
                   >
-                    Hourly Rates : $350
+                    Hourly Rates : ${coach?.rate?.hourlyRate}
                   </text>
                 </svg>
 
                 <br />
 
-                <Button
+                {token && <Button
                   type="primary"
                   htmlType="submit"
                   className="loginButton"
-                  onClick={() => navigate("/calander")}
+                  onClick={() => navigate("/calander/" + coach?.coach?._id , {state:{type:"TUTORING"}})}
                 >
                   Book Lesson
-                </Button>
-              </Row>
+                </Button>}
+              </Row>}
             </Card>
           </div>
         </Col>
@@ -271,7 +322,10 @@ preview={false}
                 style={{ width: "100%" }}
                 bordered={false}
               >
-                <Row
+ {loading && <Row style={{minHeight:"50vh"}} className="flex">
+              <Spin size="large" />
+                </Row>}
+                {!loading && <> <Row
                   style={{
                     justifyContent: "flex-start",
                     flexDirection: "column",
@@ -300,14 +354,7 @@ preview={false}
                       marginTop: 0,
                     }}
                   >
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book. It has survived not only five centuries,
-                    but also the leap into electronic typesetting, remaining
-                    essentially unchanged. It was popularised in the 1960s with
-                    the release of Letraset sheets containing.
+                   {coach?.coach?.bio}
                   </Typography.Text>
                 </Row>
 
@@ -331,86 +378,54 @@ preview={false}
                     Education
                   </Typography.Title>
 
-                  <Row gutter={50}>
-                    <Col>
-                      <Typography.Title
-                        className="fontFamily1"
-                        style={{
-                          fontSize: "16px",
-                          fontWeight: "bold",
-                          color: "black",
-                          textAlign: "left",
-                          marginTop: 0,
-                        }}
-                      >
-                        Instutation ABCD
-                      </Typography.Title>
-                      <Typography.Text
-                        className="fontFamily1"
-                        style={{
-                          fontSize: "14px",
-                          color: "rgba(0, 0, 0, 0.50)",
-                          textAlign: "left",
-                          marginTop: 0,
-                        }}
-                      >
-                        Subject ABCD
-                      </Typography.Text>
-                    </Col>
-                    <Col>
-                      <Typography.Title
-                        className="fontFamily1"
-                        style={{
-                          fontSize: "16px",
-                          fontWeight: "bold",
-                          color: "black",
-                          textAlign: "left",
-                          marginTop: 0,
-                        }}
-                      >
-                        Instutation ABCD
-                      </Typography.Title>
-                      <Typography.Text
-                        className="fontFamily1"
-                        style={{
-                          fontSize: "14px",
-                          color: "rgba(0, 0, 0, 0.50)",
-                          textAlign: "left",
-                          marginTop: 0,
-                        }}
-                      >
-                        Subject ABCD
-                      </Typography.Text>
-                    </Col>
-                    <Col>
-                      <Typography.Title
-                        className="fontFamily1"
-                        style={{
-                          fontSize: "16px",
-                          fontWeight: "bold",
-                          color: "black",
-                          textAlign: "left",
-                          marginTop: 0,
-                        }}
-                      >
-                        Instutation ABCD
-                      </Typography.Title>
-                      <Typography.Text
-                        className="fontFamily1"
-                        style={{
-                          fontSize: "14px",
-                          color: "rgba(0, 0, 0, 0.50)",
-                          textAlign: "left",
-                          marginTop: 0,
-                        }}
-                      >
-                        Subject ABCD
-                      </Typography.Text>
-                    </Col>
+                  <Row gutter={[50,50]} style={{display:'flex', height:"auto", flexDirection:'row'}}>
+                    {coach?.coach?.education.length > 0 && coach?.coach?.education.map((item,index) => {
+                      return(     <Col >
+                        <Typography.Title
+                          className="fontFamily1"
+                          style={{
+                            fontSize: "16px",
+                            fontWeight: "bold",
+                            color: "black",
+                            textAlign: "left",
+                            marginTop: 0,
+                          }}
+                        >
+                          {item.school}
+                        </Typography.Title>
+                        <Typography.Text
+                          className="fontFamily1"
+                          style={{
+                            fontSize: "14px",
+                            color: "rgba(0, 0, 0, 0.50)",
+                            textAlign: "left",
+                            marginTop: 0,
+                            marginBottom:5
+                          }}
+                        >
+                          {item.subject.join(",")}
+                        </Typography.Text>
+                        <Row>
+                        <Typography.Text
+                          className="fontFamily1"
+                          style={{
+                            fontSize: "12px",
+                            color: "rgba(0, 0, 0, 0.50)",
+                            textAlign: "left",
+                            marginTop: 0,
+                            marginBottom:0
+                          }}
+                        >
+                          {dayjs(item.start).format("MMM YYYY") + " - " + dayjs(item.end).format("MMM YYYY")}
+                        </Typography.Text>
+                        </Row>
+                      
+                      </Col>);
+                  
+                    }) }
                   </Row>
                 </Row>
 
-                <br />
 
                 <Row
                   style={{
@@ -434,162 +449,39 @@ preview={false}
                   </Typography.Title>
 
                   <Row gutter={[50, 30]}>
-                    <Col>
-                      <Typography.Title
-                        className="fontFamily1"
-                        style={{
-                          fontSize: "16px",
-                          fontWeight: "bold",
-                          color: "black",
-                          textAlign: "left",
-                          marginTop: 0,
-                        }}
-                      >
-                        Sunday:
-                      </Typography.Title>
-                      <Typography.Text
-                        className="fontFamily1"
-                        style={{
-                          fontSize: "14px",
-                          color: "rgba(0, 0, 0, 0.50)",
-                          textAlign: "left",
-                          marginTop: 0,
-                        }}
-                      >
-                        12:00 pm - 03:00 pm, 12:00 pm - 03:00 pm
-                      </Typography.Text>
-                    </Col>
+                    {coach?.schedule?.availability.length > 0 && coach?.schedule?.availability.map((item,index) => {
+                      return(   <Col>
+                        <Typography.Title
+                          className="fontFamily1"
+                          style={{
+                            fontSize: "16px",
+                            fontWeight: "bold",
+                            color: "black",
+                            textAlign: "left",
+                            marginTop: 0,
+                          }}
+                        >
+                          {days[item.day]}
+                        </Typography.Title>
+                        {item.timeSlots.map((subItem,subIndex) =>{
+                          return( <Typography.Text
+                            className="fontFamily1"
+                            style={{
+                              fontSize: "14px",
+                              color: "rgba(0, 0, 0, 0.50)",
+                              textAlign: "left",
+                              marginTop: 0,
+                            }}
+                           >
+                          {dayjs(subItem.startTime).format("hh:mm a") + " - " + dayjs(subItem.endTime).format("hh:mm a")}
+                           </Typography.Text>);
 
-                    <Col>
-                      <Typography.Title
-                        className="fontFamily1"
-                        style={{
-                          fontSize: "16px",
-                          fontWeight: "bold",
-                          color: "black",
-                          textAlign: "left",
-                          marginTop: 0,
-                        }}
-                      >
-                        Monday:
-                      </Typography.Title>
-                      <Typography.Text
-                        className="fontFamily1"
-                        style={{
-                          fontSize: "14px",
-                          color: "rgba(0, 0, 0, 0.50)",
-                          textAlign: "left",
-                          marginTop: 0,
-                        }}
-                      >
-                        12:00 pm - 03:00 pm
-                      </Typography.Text>
-                    </Col>
-
-                    <Col>
-                      <Typography.Title
-                        className="fontFamily1"
-                        style={{
-                          fontSize: "16px",
-                          fontWeight: "bold",
-                          color: "black",
-                          textAlign: "left",
-                          marginTop: 0,
-                        }}
-                      >
-                        Tuesday:
-                      </Typography.Title>
-                      <Typography.Text
-                        className="fontFamily1"
-                        style={{
-                          fontSize: "14px",
-                          color: "rgba(0, 0, 0, 0.50)",
-                          textAlign: "left",
-                          marginTop: 0,
-                        }}
-                      >
-                        12:00 pm - 03:00 pm
-                      </Typography.Text>
-                    </Col>
-
-                    <Col>
-                      <Typography.Title
-                        className="fontFamily1"
-                        style={{
-                          fontSize: "16px",
-                          fontWeight: "bold",
-                          color: "black",
-                          textAlign: "left",
-                          marginTop: 0,
-                        }}
-                      >
-                        Wednesday:
-                      </Typography.Title>
-                      <Typography.Text
-                        className="fontFamily1"
-                        style={{
-                          fontSize: "14px",
-                          color: "rgba(0, 0, 0, 0.50)",
-                          textAlign: "left",
-                          marginTop: 0,
-                        }}
-                      >
-                        12:00 pm - 03:00 pm
-                      </Typography.Text>
-                    </Col>
-
-                    <Col>
-                      <Typography.Title
-                        className="fontFamily1"
-                        style={{
-                          fontSize: "16px",
-                          fontWeight: "bold",
-                          color: "black",
-                          textAlign: "left",
-                          marginTop: 0,
-                        }}
-                      >
-                        Thursday:
-                      </Typography.Title>
-                      <Typography.Text
-                        className="fontFamily1"
-                        style={{
-                          fontSize: "14px",
-                          color: "rgba(0, 0, 0, 0.50)",
-                          textAlign: "left",
-                          marginTop: 0,
-                        }}
-                      >
-                        12:00 pm - 03:00 pm
-                      </Typography.Text>
-                    </Col>
-
-                    <Col>
-                      <Typography.Title
-                        className="fontFamily1"
-                        style={{
-                          fontSize: "16px",
-                          fontWeight: "bold",
-                          color: "black",
-                          textAlign: "left",
-                          marginTop: 0,
-                        }}
-                      >
-                        Friday:
-                      </Typography.Title>
-                      <Typography.Text
-                        className="fontFamily1"
-                        style={{
-                          fontSize: "14px",
-                          color: "rgba(0, 0, 0, 0.50)",
-                          textAlign: "left",
-                          marginTop: 0,
-                        }}
-                      >
-                        12:00 pm - 03:00 pm
-                      </Typography.Text>
-                    </Col>
-                  </Row>
+                        })}
+                       
+                      </Col>
+  );
+                    }) }
+                                   </Row>
                 </Row>
                 <br />
 
@@ -614,7 +506,7 @@ preview={false}
                   </Typography.Title>
 
                   <Row gutter={[80, 30]}>
-                    <Col>
+                    {coach?.coach?.subjects.map(item => {return(<Col>
                       <Typography.Text
                         className="fontFamily1"
                         style={{
@@ -624,65 +516,12 @@ preview={false}
                           marginTop: 0,
                         }}
                       >
-                        Subject ABCD
+                      {item[0].toUpperCase() + item.slice(1)}
                       </Typography.Text>
-                    </Col>
+                    </Col>);})}
+                    
 
-                    <Col>
-                      <Typography.Text
-                        className="fontFamily1"
-                        style={{
-                          fontSize: "14px",
-                          color: "rgba(0, 0, 0, 0.50)",
-                          textAlign: "left",
-                          marginTop: 0,
-                        }}
-                      >
-                        Subject ABCD
-                      </Typography.Text>
-                    </Col>
-
-                    <Col>
-                      <Typography.Text
-                        className="fontFamily1"
-                        style={{
-                          fontSize: "14px",
-                          color: "rgba(0, 0, 0, 0.50)",
-                          textAlign: "left",
-                          marginTop: 0,
-                        }}
-                      >
-                        Subject ABCD
-                      </Typography.Text>
-                    </Col>
-
-                    <Col>
-                      <Typography.Text
-                        className="fontFamily1"
-                        style={{
-                          fontSize: "14px",
-                          color: "rgba(0, 0, 0, 0.50)",
-                          textAlign: "left",
-                          marginTop: 0,
-                        }}
-                      >
-                        Subject ABCD
-                      </Typography.Text>
-                    </Col>
-
-                    <Col>
-                      <Typography.Text
-                        className="fontFamily1"
-                        style={{
-                          fontSize: "14px",
-                          color: "rgba(0, 0, 0, 0.50)",
-                          textAlign: "left",
-                          marginTop: 0,
-                        }}
-                      >
-                        Subject ABCD
-                      </Typography.Text>
-                    </Col>
+                   
                   </Row>
                 </Row>
 
@@ -730,6 +569,7 @@ preview={false}
                     </Col>
                     <Col>
                       <Rate
+                      disabled 
                         allowHalf
                         value={5}
                         style={{ color: "#FABF35", marginTop: -10 }}
@@ -738,7 +578,7 @@ preview={false}
                     <Col xs={18}>
                       <Progress
                         strokeLinecap="butt"
-                        percent={50}
+                        percent={ratings[5]}
                         strokeColor={{ from: "#FABF35", to: "#FABF35" }}
                         style={{ width: "100%", color: "#FABF35" }}
                       />
@@ -768,6 +608,7 @@ preview={false}
                     </Col>
                     <Col>
                       <Rate
+                      disabled 
                         allowHalf
                         value={4}
                         style={{ color: "#FABF35", marginTop: -10 }}
@@ -776,7 +617,7 @@ preview={false}
                     <Col xs={18}>
                       <Progress
                         strokeLinecap="butt"
-                        percent={40}
+                        percent={ratings[4]}
                         strokeColor={{ from: "#FABF35", to: "#FABF35" }}
                         style={{ width: "100%", color: "#FABF35" }}
                       />
@@ -806,6 +647,7 @@ preview={false}
                     </Col>
                     <Col>
                       <Rate
+                      disabled 
                         allowHalf
                         value={3}
                         style={{ color: "#FABF35", marginTop: -10 }}
@@ -814,7 +656,7 @@ preview={false}
                     <Col xs={18}>
                       <Progress
                         strokeLinecap="butt"
-                        percent={30}
+                        percent={ratings[3]}
                         strokeColor={{ from: "#FABF35", to: "#FABF35" }}
                         style={{ width: "100%", color: "#FABF35" }}
                       />
@@ -844,6 +686,7 @@ preview={false}
                     </Col>
                     <Col>
                       <Rate
+                      disabled 
                         allowHalf
                         value={2}
                         style={{ color: "#FABF35", marginTop: -10 }}
@@ -852,7 +695,7 @@ preview={false}
                     <Col xs={18}>
                       <Progress
                         strokeLinecap="butt"
-                        percent={20}
+                        percent={ratings[2]}
                         strokeColor={{ from: "#FABF35", to: "#FABF35" }}
                         style={{ width: "100%", color: "#FABF35" }}
                       />
@@ -882,6 +725,7 @@ preview={false}
                     </Col>
                     <Col>
                       <Rate
+                      disabled 
                         allowHalf
                         value={1}
                         style={{ color: "#FABF35", marginTop: -10 }}
@@ -890,216 +734,130 @@ preview={false}
                     <Col xs={18}>
                       <Progress
                         strokeLinecap="butt"
-                        percent={10}
+                        percent={ratings[1]}
                         strokeColor={{ from: "#FABF35", to: "#FABF35" }}
                         style={{ width: "100%", color: "#FABF35" }}
                       />
                     </Col>
                   </Row>
-                </Row>
 
-                <Row
-                  style={{
-                    justifyContent: "flex-start",
-                    flexDirection: "column",
-                    padding: "10px 30px",
-                    
-                  }}
-                >
-                <div style={{width:"100%",background:"#EEFDFF",borderRadius:"27px",padding:"20px"}}>
-                  <Row gutter={20}>
-                    <Col xs={4}>
-                    <Image
-                  src="/images/tutor.png"
-                  height={100}
-                  width={100}
-                  style={{ borderRadius: "100px", objectFit: "cover" }}
-                />
-                    </Col>
-                    <Col xs={20}>
-                    <Typography.Title
-                    className="fontFamily1"
-                    style={{
-                      fontSize: "16px",
-                      fontWeight: "bold",
-                      color: "black",
-                      textAlign: "left",
-                      marginTop: 0,
-                      marginBottom: 0,
-                    }}
-                  >
-                    Grace Oram
-                  </Typography.Title>
-                  <Row gutter={10} style={{display:"flex",alignItems:"center"}}>
-                    <Col>
-                    <Typography.Title
-                    className="fontFamily1"
-                    style={{
-                      fontSize: "12px",
-                      fontWeight: "bold",
-                      color: "black",
-                      textAlign: "left",
-                      marginTop: 0,
-                      marginBottom: 0,
-                    }}
-                  >
-                    4 Stars
-                  </Typography.Title>
-                    </Col>
-                    <Col>
-                    <Rate
-                        value={4}
-                        style={{ fontSize:"12px", color: "#FABF35", marginTop: "-30px" }}
-                      />
+                  <br/>
+                  <br/>
 
-                    </Col>
-                    <Col>
-                    <Typography.Title
-                    className="fontFamily1"
+                  {reviews?.reviews?.length == 0 && <div className="flex" style={{width:"100%",minHeight:"300px"}}> <Typography.Title
+                        className="fontFamily1"
+                        style={{
+                          fontSize: "25px",
+                          color: "black",
+                          textAlign: "left",
+                        }}
+                      >
+                       No Reviews Yet
+                      </Typography.Title></div>}
+                {reviews?.reviews?.length > 0 && reviews?.reviews?.map((item,index) => {
+                  return(   <Row
                     style={{
-                      fontSize: "12px",
-                      fontWeight: "bold",
-                      color: "black",
-                      textAlign: "left",
-                      marginTop: 0,
-                      marginBottom: 0,
+                      justifyContent: "flex-start",
+                      flexDirection: "column",
+                      padding: "10px 30px",
+                      
                     }}
                   >
-                   May 5, 2022
-                  </Typography.Title>
-
-                    </Col>
-                  </Row>
-                 
-                  <Typography.Text
-                    className="fontFamily1"
-                    style={{
-                      fontSize: "12px",
-                      color: "rgba(0, 0, 0, 0.50)",
-                      textAlign: "left",
-                      lineHeight:"12px",
-                      marginTop: 0,
-                    }}
-                  >
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book. It has survived not only five centuries,
-                    but also the leap into electronic typesetting, remaining
-                    essentially unchanged. It was popularised in the 1960s with
-                    the release of Letraset sheets containing.
-                  </Typography.Text>
-                    </Col>
-                  </Row>
-
-                </div>
-                </Row>
-                <Row
-                  style={{
-                    justifyContent: "flex-start",
-                    flexDirection: "column",
-                    padding: "10px 30px",
-                    
-                  }}
-                >
-                <div style={{width:"100%",background:"#EEFDFF",borderRadius:"27px",padding:"20px"}}>
-                  <Row gutter={20}>
-                    <Col xs={4}>
-                    <Image
-                  src="/images/tutor.png"
-                  height={100}
-                  width={100}
-                  style={{ borderRadius: "100px", objectFit: "cover" }}
-                />
-                    </Col>
-                    <Col xs={20}>
-                    <Typography.Title
-                    className="fontFamily1"
-                    style={{
-                      fontSize: "16px",
-                      fontWeight: "bold",
-                      color: "black",
-                      textAlign: "left",
-                      marginTop: 0,
-                      marginBottom: 0,
-                    }}
-                  >
-                    Grace Oram
-                  </Typography.Title>
-                  <Row gutter={10} style={{display:"flex",alignItems:"center"}}>
-                    <Col>
-                    <Typography.Title
-                    className="fontFamily1"
-                    style={{
-                      fontSize: "12px",
-                      fontWeight: "bold",
-                      color: "black",
-                      textAlign: "left",
-                      marginTop: 0,
-                      marginBottom: 0,
-                    }}
-                  >
-                    4 Stars
-                  </Typography.Title>
-                    </Col>
-                    <Col>
-                    <Rate
-                        value={4}
-                        style={{ fontSize:"12px", color: "#FABF35", marginTop: "-30px" }}
-                      />
-
-                    </Col>
-                    <Col>
-                    <Typography.Title
-                    className="fontFamily1"
-                    style={{
-                      fontSize: "12px",
-                      fontWeight: "bold",
-                      color: "black",
-                      textAlign: "left",
-                      marginTop: 0,
-                      marginBottom: 0,
-                    }}
-                  >
-                   May 5, 2022
-                  </Typography.Title>
-
-                    </Col>
-                  </Row>
-                 
-                  <Typography.Text
-                    className="fontFamily1"
-                    style={{
-                      fontSize: "12px",
-                      color: "rgba(0, 0, 0, 0.50)",
-                      textAlign: "left",
-                      lineHeight:"12px",
-                      marginTop: 0,
-                    }}
-                  >
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book. It has survived not only five centuries,
-                    but also the leap into electronic typesetting, remaining
-                    essentially unchanged. It was popularised in the 1960s with
-                    the release of Letraset sheets containing.
-                  </Typography.Text>
-                    </Col>
-                  </Row>
-
-                </div>
-                </Row>
+                  <div style={{width:"100%",background:"#EEFDFF",borderRadius:"27px",padding:"20px"}}>
+                    <Row gutter={20}>
+                      <Col xs={4}>
+                      <Image
+                    src={!item.student.image ? "/images/avatar.png" : UPLOADS_URL + "/" + item.student.image }
+                    height={100}
+                    width={100}
+                    preview={false}
+                    style={{ borderRadius: "100px", objectFit: "cover" }}
+                  />
+                      </Col>
+                      <Col xs={20}>
+                      <Typography.Title
+                      className="fontFamily1"
+                      style={{
+                        fontSize: "16px",
+                        fontWeight: "bold",
+                        color: "black",
+                        textAlign: "left",
+                        marginTop: 0,
+                        marginBottom: 0,
+                      }}
+                    >
+                      {item?.student?.firstName + " " + item?.student?.lastName}
+                    </Typography.Title>
+                    <Row gutter={10} style={{display:"flex",alignItems:"center"}}>
+                      <Col>
+                      <Typography.Title
+                      className="fontFamily1"
+                      style={{
+                        fontSize: "12px",
+                        fontWeight: "bold",
+                        color: "black",
+                        textAlign: "left",
+                        marginTop: 0,
+                        marginBottom: 0,
+                      }}
+                    >
+                      {item?.rating || 1} Stars
+                    </Typography.Title>
+                      </Col>
+                      <Col>
+                      <Rate
+                      disabled 
+                          value={item?.rating || 1}
+                          style={{ fontSize:"12px", color: "#FABF35", marginTop: "-30px" }}
+                        />
+  
+                      </Col>
+                      <Col>
+                      <Typography.Title
+                      className="fontFamily1"
+                      style={{
+                        fontSize: "12px",
+                        fontWeight: "bold",
+                        color: "black",
+                        textAlign: "left",
+                        marginTop: 0,
+                        marginBottom: 0,
+                      }}
+                    >
+                      {dayjs(item?.createdAt).format("DD MMMM, YYYY")}
+                    </Typography.Title>
+  
+                      </Col>
+                    </Row>
+                   
+                    <Typography.Text
+                      className="fontFamily1"
+                      style={{
+                        fontSize: "12px",
+                        color: "rgba(0, 0, 0, 0.50)",
+                        textAlign: "left",
+                        lineHeight:"12px",
+                        marginTop: 0,
+                      }}
+                    >
+                      {item?.comment}
+                    </Typography.Text>
+                      </Col>
+                    </Row>
+  
+                  </div>
+                  </Row>);
+                })}
+             
 
                 <ReactPaginate
               breakLabel="..."
               nextLabel={<FaArrowRight style={{ color: "grey" }} />}
               pageRangeDisplayed={window.innerWidth > 500 ? 4 : 1}
               marginPagesDisplayed={window.innerWidth > 500 ? 4 : 1} //handle Pa
-              pageCount={3}
-              forcePage={1}
+              onPageChange={handlePageChange}
+              pageCount={paginationConfig?.totalPages}
+              forcePage={paginationConfig?.pageNumber - 1}
               previousLabel={<FaArrowLeft style={{ color: "grey" }} />}
               renderOnZeroPageCount={null}
               pageClassName="page-item" //m
@@ -1114,6 +872,10 @@ preview={false}
               activeClassName="active"
             />
 
+                </Row></>}
+               
+
+            
                 <br/>
                 <br/>
 
@@ -1129,4 +891,4 @@ preview={false}
   );
 }
 
-export default TutorDetails;
+export default CoachDetails;

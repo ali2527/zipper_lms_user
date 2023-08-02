@@ -1,10 +1,10 @@
-// export const BASE_URL = "https://secure.demo243.webhostlabs.net:3002/api/"
-// export const UPLOADS_URL = "https://secure.demo243.webhostlabs.net:3002/Uploads/"
+export const BASE_URL = "https://secure.demo243.webhostlabs.net:3002/api/"
+export const UPLOADS_URL = "https://secure.demo243.webhostlabs.net:3002/Uploads/"
 
-import ChangePassword from "../../views/change-password"
+// import ChangePassword from "../../views/change-password"
 
-export const BASE_URL = "http://localhost:3002/api"
-export const UPLOADS_URL = "http://localhost:3002/Uploads"
+// export const BASE_URL = "http://localhost:3002/api"
+// export const UPLOADS_URL = "http://localhost:3002/Uploads"
 
 
 export const AUTH = {
@@ -19,7 +19,8 @@ export const AUTH = {
 
 export const STUDENT = {
     updateProfile : "/profile/updateProfile",
-    changePassword:"/profile/changePassword"
+    changePassword:"/profile/changePassword",
+    getMyCoaches:"/profile/getMyCoaches",
 }
 
 export const USERS = {
@@ -57,6 +58,20 @@ export const SCHEDULE = {
 export const REVIEWS={
     getAll:"/review/getAllReviewsByCoachId/",
     getCoachRatings:"/review/getCoachRatings/"
+}
+
+
+
+export const LESSON={
+    bookLesson:"/lesson/addLesson",
+    getUpcomingLessons:"/lesson/getAllUpcomingLessons",
+    getCompletedLessons:"/lesson/getAllCompletedLessons",
+    getLiveLessons:"/lesson/getAllLiveLessons",
+    getLessonById:"/lesson/getLessonById/",
+}
+
+export const PAYMENT={
+    lessonPayment:"/payment/lessonPayment",
 }
 
 

@@ -527,7 +527,7 @@ const handleClear = () => {
                                 justifyContent: "center",
                                 alignItems: "center",
                               }}
-                              onClick={() => navigate("/coach-details/"+item._id)}
+                              onClick={() => navigate("/tutor-details/"+item._id)}
                               icon={<FaArrowRight style={{ color: "white" }} />}
                             />
                           </Col>

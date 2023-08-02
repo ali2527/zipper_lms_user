@@ -27,15 +27,15 @@ import Calander from "../../views/calander"
 import MyCalander from "../../views/myCalander"
 import Profile from "../../views/profile"
 import ChangePassword from "../../views/change-password";
-
+import Payment from "../../views/payment"
 
 const MyRouter = () => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename="/zipperlms/zipperlmsstudent">
       <Routes>
         <Route
           path="/signin"
-          index
+          
           element={
             <ClientLayout
               head={{ title: "Dashboard", description: "Some Description." }}
@@ -49,7 +49,7 @@ const MyRouter = () => {
 
 <Route
           path="/signup"
-          index
+          
           element={
             <ClientLayout
               head={{ title: "Signup", description: "Some Description." }}
@@ -63,7 +63,7 @@ const MyRouter = () => {
 
 <Route
           path="/profile"
-          index
+          
           element={
             <ClientLayout
               head={{ title: "Profile", description: "Some Description." }}
@@ -79,7 +79,7 @@ const MyRouter = () => {
 
         <Route
           path="/forgot-password"
-          index
+          
           element={
             <ClientLayout
               head={{ title: "Dashboard", description: "Some Description." }}
@@ -92,7 +92,7 @@ const MyRouter = () => {
         />
         <Route
           path="/forgot-password-2"
-          index
+          
           element={
             <ClientLayout
               head={{ title: "Dashboard", description: "Some Description." }}
@@ -106,7 +106,7 @@ const MyRouter = () => {
 
         <Route
           path="/forgot-password-3"
-          index
+          
           element={
             <ClientLayout
               head={{ title: "Dashboard", description: "Some Description." }}
@@ -132,7 +132,7 @@ const MyRouter = () => {
 
 <Route
           path="/change-password"
-          index
+          
           element={
             <ClientLayout
               head={{ title: "Change Password", description: "Some Description." }}
@@ -145,7 +145,7 @@ const MyRouter = () => {
 
 <Route
           path="/about-us"
-          index
+          
           element={
             <ClientLayout
               head={{ title: "About Us", description: "Some Description." }}
@@ -158,7 +158,7 @@ const MyRouter = () => {
 
 <Route
           path="/contact-us"
-          index
+          
           element={
             <ClientLayout
               head={{ title: "Contact Us", description: "Some Description." }}
@@ -171,7 +171,7 @@ const MyRouter = () => {
 
 <Route
           path="/tutor"
-          index
+          
           element={
             <ClientLayout
               head={{ title: "Tutor", description: "Some Description." }}
@@ -184,7 +184,7 @@ const MyRouter = () => {
 
 <Route
           path="/coach"
-          index
+          
           element={
             <ClientLayout
               head={{ title: "Coach", description: "Some Description." }}
@@ -196,8 +196,8 @@ const MyRouter = () => {
         />
 
 <Route
-          path="/tutor-details"
-          index
+          path="/tutor-details/:id"
+          
           element={
             <ClientLayout
               head={{ title: "Tutor Details", description: "Some Description." }}
@@ -210,7 +210,7 @@ const MyRouter = () => {
 
 <Route
           path="/coach-details/:id"
-          index
+          
           element={
             <ClientLayout
               head={{ title: "Coach Details", description: "Some Description." }}
@@ -224,7 +224,7 @@ const MyRouter = () => {
 
 <Route
           path="/dashboard"
-          index
+          
           element={
             <ClientLayout
               head={{ title: "Dashboard", description: "Some Description." }}
@@ -237,7 +237,7 @@ const MyRouter = () => {
 
 <Route
           path="/upcoming-lessons"
-          index
+          
           element={
             <ClientLayout
               head={{ title: "Upcoming Lessons", description: "Some Description." }}
@@ -250,7 +250,7 @@ const MyRouter = () => {
 
 <Route
           path="/completed-lessons"
-          index
+          
           element={
             <ClientLayout
               head={{ title: "Completed Lessons", description: "Some Description." }}
@@ -263,7 +263,20 @@ const MyRouter = () => {
 
 <Route
           path="/booking-logs"
-          index
+          
+          element={
+            <ClientLayout
+              head={{ title: "Completed Lessons", description: "Some Description." }}
+              headerStyle={{ height: { base: "40px", md: 14 } }}
+            >
+              <BookingLogs/>
+            </ClientLayout>
+          }
+        />
+        
+<Route
+          path="/booking-logs"
+          
           element={
             <ClientLayout
               head={{ title: "Completed Lessons", description: "Some Description." }}
@@ -276,7 +289,7 @@ const MyRouter = () => {
 
 <Route
           path="/payment-logs"
-          index
+          
           element={
             <ClientLayout
               head={{ title: "Completed Lessons", description: "Some Description." }}
@@ -288,8 +301,22 @@ const MyRouter = () => {
         />
 
 <Route
-          path="/lesson-detail"
-          index
+          path="/payment/:id"
+          exact
+          element={
+            <ClientLayout
+              head={{ title: "Payment", description: "Some Description." }}
+              headerStyle={{ height: { base: "40px", md: 14 } }}
+            >
+              <Payment/>
+            </ClientLayout>
+          }
+        />
+
+
+<Route
+          path="/lesson-detail/:id"
+          
           element={
             <ClientLayout
               head={{ title: "Upcoming Lessons", description: "Some Description." }}
@@ -302,7 +329,7 @@ const MyRouter = () => {
 
 <Route
           path="/chat"
-          index
+          
           element={
             <ClientLayout
               head={{ title: "chat", description: "Some Description." }}
@@ -315,7 +342,7 @@ const MyRouter = () => {
 
 <Route
           path="/calander/:id"
-          index
+          
           element={
             <ClientLayout
               head={{ title: "chat", description: "Some Description." }}
@@ -328,7 +355,7 @@ const MyRouter = () => {
 
 <Route
           path="/my-calander"
-          index
+          
           element={
             <ClientLayout
               head={{ title: "chat", description: "Some Description." }}

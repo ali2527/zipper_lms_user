@@ -12,7 +12,7 @@ import {
   Progress,
   Image,
   Card,
-  Form,
+  Spin,
   message,
   Input,
   Select,
@@ -57,7 +57,7 @@ function CoachDetails() {
   const [coach,setCoach]= useState({})
   const days = ["Sunday","Monday",'Tuesday',"Wednesday","Thursday","Friday","Saturday"]
   const { Search } = Input;
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [range, setRange] = useState([10, 200]);
   const [review, setReview] = useState({
     averageRating: 0,
@@ -85,8 +85,9 @@ function CoachDetails() {
         setCoach(response?.data);
       } else {
         swal("Error", response?.message, "error");
-        setLoading(false);
+       
       }
+      setLoading(false);
     } catch (error) {
       console.log(error.message);
       setLoading(false);
@@ -104,7 +105,7 @@ function CoachDetails() {
           : paginationConfig.pageNumber.toString(),
         limit: "5",
       });
-      setLoading(false);
+     
       console.log("response", response);
       if (response?.status) {
         setReviews(response?.data);
@@ -121,7 +122,7 @@ function CoachDetails() {
       }
     } catch (error) {
       console.log(error.message);
-      setLoading(false);
+      
     }
   };
 
@@ -186,7 +187,10 @@ function CoachDetails() {
             }}
           >
             <Card className="contactCard2" bordered={false}>
-              <Row
+            {loading && <Row style={{minHeight:"30vh"}} className="flex">
+              <Spin size="large" />
+                </Row>}
+             {!loading && <Row
                 style={{
                   width: "100%",
                   padding: "10px",
@@ -295,11 +299,11 @@ preview={false}
                   type="primary"
                   htmlType="submit"
                   className="loginButton"
-                  onClick={() => navigate("/calander/" + coach?.coach?._id)}
+                  onClick={() => navigate("/calander/" + coach?.coach?._id , {state:{type:"COACHING"}})}
                 >
                   Book Lesson
                 </Button>}
-              </Row>
+              </Row>}
             </Card>
           </div>
         </Col>
@@ -318,7 +322,10 @@ preview={false}
                 style={{ width: "100%" }}
                 bordered={false}
               >
-                <Row
+                 {loading && <Row style={{minHeight:"50vh"}} className="flex">
+              <Spin size="large" />
+                </Row>}
+                {!loading && <><Row
                   style={{
                     justifyContent: "flex-start",
                     flexDirection: "column",
@@ -763,6 +770,7 @@ preview={false}
                     src={!item.student.image ? "/images/avatar.png" : UPLOADS_URL + "/" + item.student.image }
                     height={100}
                     width={100}
+                    preview={false}
                     style={{ borderRadius: "100px", objectFit: "cover" }}
                   />
                       </Col>
@@ -864,7 +872,7 @@ preview={false}
               activeClassName="active"
             />
 
-                </Row>
+                </Row></>}
 
             
                 <br/>

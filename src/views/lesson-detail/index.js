@@ -40,7 +40,6 @@ import ReactPaginate from "react-paginate";
 import { FaArrowRight ,FaArrowLeft } from "react-icons/fa";
 import { AiFillStar } from "react-icons/ai";
 
-
 function LessonDetail() {
   const {id} = useParams();
   const navigate = useNavigate();

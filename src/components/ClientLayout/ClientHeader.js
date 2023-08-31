@@ -304,7 +304,8 @@ const ClientHeader = () => {
                   fontSize: 14,
                   fontWeight: 500,
                   backgroundColor: "transparent",
-                  minWidth:"fit-content"
+                  width:"100%",
+                  justifyContent:'flex-end'
                 }}
                 mode="horizontal"
                 className="header-menu"
@@ -384,6 +385,7 @@ const ClientHeader = () => {
                 </Badge>
               </Popover>
               &emsp; &emsp;
+              <div style={{minWidth:'200px',display:'flex',alignItems:"center"}}>
               <Avatar
                 size={40}
                 src={
@@ -408,7 +410,7 @@ const ClientHeader = () => {
                   {user?.firstName} <AiFillCaretDown fontSize={12} />{" "}
                 </p>
               </Dropdown>
-
+              </div>
               </div>}
             </Col>
 

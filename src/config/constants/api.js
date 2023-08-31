@@ -1,10 +1,10 @@
-export const BASE_URL = "https://secure.demo243.webhostlabs.net:3002/api/"
-export const UPLOADS_URL = "https://secure.demo243.webhostlabs.net:3002/Uploads/"
+// export const BASE_URL = "https://secure.demo243.webhostlabs.net:3002/api/"
+// export const UPLOADS_URL = "https://secure.demo243.webhostlabs.net:3002/Uploads/"
 
 // import ChangePassword from "../../views/change-password"
 
-// export const BASE_URL = "http://localhost:3002/api"
-// export const UPLOADS_URL = "http://localhost:3002/Uploads"
+export const BASE_URL = "http://localhost:3002/api"
+export const UPLOADS_URL = "http://localhost:3002/Uploads"
 
 
 export const AUTH = {
@@ -53,6 +53,18 @@ export const SCHEDULE = {
     getMySchedule:"/schedule/getMySchedule",
     getScheduleByCoachId:"/schedule/getScheduleByCoachId/"
 }
+
+export const CHAT = {
+    createChat: "/chat/createChat",
+    getMyChats:"/chat/getMyChats",
+}
+
+
+export const MESSAGE = {
+    createMessage: "/message/createMessage",
+    getChatMessages:"/message/getChatMessages/",
+}
+
 
 
 export const REVIEWS={

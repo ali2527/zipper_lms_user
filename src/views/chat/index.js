@@ -1,156 +1,123 @@
-import React from "react";
-
+import React, { useEffect } from "react";
+import { useSelector, useDispatch } from "react-redux";
 import { Col, Input, Image, Button, Row, Typography, Layout, Card } from "antd";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaTelegramPlane } from "react-icons/fa";
 import dayjs from "dayjs";
+import { CHAT, MESSAGE, UPLOADS_URL } from "../../config/constants/api";
+import { Get } from "../../config/api/get";
+import { Post } from "../../config/api/post";
+
 
 function Chat() {
-  const [data, setData] = React.useState([
-    {
-      name: "Richard David",
-      lastMessage: "Lorem ipsum dolor sit amet, consetetur",
-      image: "/images/chat1.jpg",
-      messages: [
-        {
-          align: "right",
-          name: "You",
-          text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor",
-          image: "/images/chat5.jpg",
-        },
-        {
-          align: "left",
-          name: "Richard David",
-          text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor",
-          image: "/images/chat1.jpg",
-        },
-        {
-          align: "right",
-          name: "You",
-          text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor",
-          image: "/images/chat5.jpg",
-        },
-        {
-          align: "left",
-          name: "Richard David",
-          text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor",
-          image: "/images/chat1.jpg",
-        },
-      ],
-    },
-    {
-      name: "John Doed",
-      lastMessage: "Lorem ipsum dolor sit amet, consetetur",
-      image: "/images/chat2.jpg",
-      messages: [
-        {
-          align: "right",
-          name: "You",
-          text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor",
-          image: "/images/chat5.jpg",
-        },
-        {
-          align: "left",
-          name: "John Doed",
-          text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor",
-          image: "/images/chat2.jpg",
-        },
-        {
-          align: "right",
-          name: "You",
-          text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor",
-          image: "/images/chat5.jpg",
-        },
-        {
-          align: "left",
-          name: "John Doed",
-          text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor",
-          image: "/images/chat2.jpg",
-        },
-      ],
-    },
-    {
-      name: "Alex Parker",
-      lastMessage: "Lorem ipsum dolor sit amet, consetetur",
-      image: "/images/chat3.jpg",
-      messages: [
-        {
-          align: "right",
-          name: "You",
-          text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor",
-          image: "/images/chat5.jpg",
-        },
-        {
-          align: "left",
-          name: "Alex Parker",
-          text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor",
-          image: "/images/chat3.jpg",
-        },
-        {
-          align: "right",
-          name: "You",
-          text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor",
-          image: "/images/chat5.jpg",
-        },
-        {
-          align: "left",
-          name: "Alex Parker",
-          text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor",
-          image: "/images/chat3.jpg",
-        },
-      ],
-    },
-    {
-      name: "Mark",
-      lastMessage: "Lorem ipsum dolor sit amet, consetetur",
-      image: "/images/chat4.jpg",
-      messages: [
-        {
-          align: "right",
-          name: "You",
-          text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor",
-          image: "/images/chat5.jpg",
-        },
-        {
-          align: "left",
-          name: "Mark",
-          text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor",
-          image: "/images/chat4.jpg",
-        },
-        {
-          align: "right",
-          name: "You",
-          text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor",
-          image: "/images/chat5.jpg",
-        },
-        {
-          align: "left",
-          name: "Mark",
-          text: "Lorem ipsum dolor sit amet, consetetur sadipscing elitr, sed diam nonumy eirmod tempor",
-          image: "/images/chat4.jpg",
-        },
-      ],
-    },
-  ]);
-  const [currentChat, setCurrentChat] = React.useState(data[0]);
+  const [chats,setChats]= React.useState([])
+  const [currentChat, setCurrentChat] = React.useState();
   const [search, setSearch] = React.useState("");
   const [message, setMessage] = React.useState("");
+  const [messages,setMessages] = React.useState([])
+  const user = useSelector((state) => state.user.userData);
+  const token = useSelector((state) => state.user.userToken);
+
+  useEffect(()=>{
+    getMyChats()
+  },[])
+
+
+  const getMyChats = (keyword) =>{
+    try {
+      Get(CHAT.getMyChats, token,{type:"student",keyword:keyword ? keyword : ""}).then((response) => {
+        if (response?.status) {
+          setChats(response.data?.docs)
+
+        } else {
+          console.log("response", response);
+        }
+      });
+    } catch (error) {
+      console.log("error", error);
+    }
+  }
+
+
+  const getChatMessages = (chatId) =>{
+    try {
+      Get(MESSAGE.getChatMessages + (chatId ? chatId :  currentChat._id), token).then((response) => {
+        console.log("ssss",response)
+        if (response?.status) {
+          setMessages(response?.data?.docs)
+
+        } else {
+          console.log("response", response);
+        }
+      });
+    } catch (error) {
+      console.log("error", error);
+    }
+  }
+
+  // const sendMessage = () => {
+  //   if (message !== "") {
+  //     let _currentChat = { ...currentChat };
+
+  //     _currentChat.messages.push({
+  //       align: "right",
+  //       name: "You",
+  //       text: message,
+  //       image: "/images/chat5.jpg",
+  //     });
+
+  //     setCurrentChat(_currentChat);
+  //     setMessage("")
+  //   }
+  // };
 
   const sendMessage = () => {
-    if (message !== "") {
-      let _currentChat = { ...currentChat };
-
-      _currentChat.messages.push({
-        align: "right",
-        name: "You",
-        text: message,
-        image: "/images/chat5.jpg",
-      });
-
-      setCurrentChat(_currentChat);
-      setMessage("")
+    let _chats = [...chats]
+    let data = {
+      senderType:"user",
+      content:message,
+      chatId:currentChat._id
     }
+
+    let index = _chats.findIndex(item => item._id == currentChat._id)
+    try {
+      Post(MESSAGE.createMessage,data, token).then((response) => {
+
+        console.log("responssse",response)
+        if (response?.data?.status) {
+        getChatMessages()
+        _chats[index].latestMessage = {content:message}
+          setMessage("")
+          setChats(_chats)
+        } else {
+          console.log("response", response);
+        }
+      });
+    } catch (error) {
+      console.log("error", error);
+    }
+
+
+    // if (message !== "") {
+    //   let _currentChat = { ...currentChat };
+
+    //   _currentChat.messages.push({
+    //     align: "right",
+    //     name: "You",
+    //     text: message,
+    //     image: "/images/chat5.jpg",
+    //   });
+
+    //   setCurrentChat(_currentChat);
+    //  
+    // }
   };
+
+  const selectChat = (index) =>{
+    setCurrentChat(chats[index]);
+    getChatMessages(chats[index]._id)
+  }
+
 
   return (
     <Layout style={{ minHeight: "100vh" }}>
@@ -197,7 +164,7 @@ function Chat() {
               <Row gutter={20}>
                 <Col
                   xs={0}
-                  md={6}
+                  md={8}
                   style={{ borderRight: "1px solid #dadada", padding: "30px" }}
                 >
                   <Input
@@ -211,6 +178,7 @@ function Chat() {
                         type="primary"
                         htmlType="submit"
                         className="chatButton"
+                        onClick={() => getMyChats(search)}
                       >
                         <AiOutlineSearch />
                       </Button>
@@ -219,14 +187,14 @@ function Chat() {
                   />
                   <br />
                   <br />
-                  <div style={{ height: "60vh", overflow: "auto" }}>
-                    {data.length > 0 &&
-                      data.filter((item) => item.name.toLowerCase().includes(search.toLowerCase())).map((item, index) => {
+                  <div style={{ height: "60vh", overflowY: "auto",overflowX: "hidden" }}>
+                    {chats.length > 0 &&
+                      chats.map((item, index) => {
                         return (
-                          <Row style={{ padding: "10px" }} onClick={()=>setCurrentChat(data[index])}>
-                            <Col>
-                              <Image
-                                src={item.image}
+                            <Row gutter={10} style={{ padding: "10px",cursor:"pointer", borderBottom:"1px solid #dadada" }} onClick={()=>selectChat(index)}>
+                      <Col>
+                      <Image
+                                src={item?.coach?.image ? UPLOADS_URL + "/" + item?.coach?.image: "./images/avatar.png"}
                                 height={40}
                                 width={40}
                                 style={{
@@ -235,6 +203,9 @@ function Chat() {
                                 }}
                                 preview={false}
                               />
+                      </Col>
+                              
+                              <Col>
                               <Typography.Title
                                 className="fontFamily1"
                                 style={{
@@ -242,11 +213,11 @@ function Chat() {
                                   fontWeight: 800,
                                   color: "black",
                                   textAlign: "left",
-                                  marginTop: 10,
+                                  marginTop: 0,
                                   marginBottom: 0,
                                 }}
                               >
-                                {item.name}
+                                {item?.coach?.firstName + " " + item?.coach?.lastName}
                               </Typography.Title>
                               <Typography.Text
                                 className="fontFamily1"
@@ -257,18 +228,19 @@ function Chat() {
                                   justifyContent: "center",
                                 }}
                               >
-                                {item.lastMessage}
+                                {item.latestMessage.content}
                               </Typography.Text>
-                            </Col>
+                              </Col>
                           </Row>
                         );
                       })}
                   </div>
                 </Col>
-                <Col xs={0} md={18} style={{ padding: "30px" }}>
-                  <Row>
+                <Col xs={0} md={16} style={{ padding: "30px" }}>
+                  {currentChat ? <>
+                    <Row>
                     <Image
-                      src={currentChat.image}
+                      src={currentChat?.coach?.image ? UPLOADS_URL + "/" + currentChat?.coach?.image : "./images/avatar.png"}
                       height={40}
                       width={40}
                       style={{ borderRadius: "100px", objectFit: "cover" }}
@@ -286,7 +258,7 @@ function Chat() {
                         marginBottom: 0,
                       }}
                     >
-                      {currentChat.name}
+                      {currentChat.coach?.firstName + " " + currentChat.coach?.lastName }
                     </Typography.Title>
                   </Row>
                   <br/>
@@ -295,19 +267,19 @@ function Chat() {
                       style={{
                         height: "60vh",
                         width: "100%",
-                        overflow: "auto",
+                        overflowY: "auto",overflowX: "hidden",
                      
                         justifyContent: "flex-end",
                       }}
                     >
-                      {currentChat.messages.length > 0 &&
-                        currentChat.messages.map((item, index) => {
+                      {messages.length > 0 &&
+                        messages.map((item, index) => {
                           return (
                             <Row
                               style={{
                                 margin: "10px",
                                 justifyContent:
-                                  item.align == "right"
+                                item.sender._id == user._id
                                     ? "flex-end"
                                     : "flex-start",
                               }}
@@ -316,15 +288,19 @@ function Chat() {
                                 className="chatCard"
                                 bordered={false}
                                 style={{
+                                  borderRadius:item.sender._id == user._id ? "10px 0px 10px 10px": "0px 10px 10px 10px",
                                   float: "right",
                                   maxWidth: "60%",
                                   padding: "10px",
+                                  backgroundColor:item.sender._id == user._id
+                                  ? "#d5f3d3"
+                                  : "white",
                                 }}
                               >
                                 <Row gutter={30}>
                                   <Col xs={4} md={3}>
                                     <Image
-                                      src={item.image}
+                                      src={item?.sender?.image ? UPLOADS_URL + "/" + item?.sender?.image : "./images/avatar.png" }
                                       height={30}
                                       width={30}
                                       style={{
@@ -357,7 +333,7 @@ function Chat() {
                                             marginBottom: 0,
                                           }}
                                         >
-                                          {item.name}
+                                            {item.sender._id == user._id ? "You" :item.sender.firstName + " " + item.sender.lastName  }
                                         </Typography.Title>
                                       </Col>
                                       <Col>
@@ -371,7 +347,7 @@ function Chat() {
                                             margin: 0,
                                           }}
                                         >
-                                          {dayjs().format(
+                                          {dayjs(item.createdAt).format(
                                             "h:m A  |  MM/DD/YYYY"
                                           )}
                                         </Typography.Text>
@@ -387,7 +363,7 @@ function Chat() {
                                         justifyContent: "center",
                                       }}
                                     >
-                                      {item.text}
+                                      {item.content}
                                     </Typography.Text>
                                   </Col>
                                 </Row>
@@ -418,6 +394,32 @@ function Chat() {
                       size="large"
                     />
                   </Row>
+                  </> : <>
+                  <div style={{width:"100%",height:"100%",display:'flex',justifyContent:"center", alignItems:"center",flexDirection:"column"}}>
+                    <Image
+                      src={"./images/noChats.png"}
+                      height={100}
+                      width={100}
+                      style={{ borderRadius: "100px", objectFit: "cover" }}
+                      preview={false}
+                    />
+                    &emsp;
+                    <Typography.Title
+                      className="fontFamily1"
+                      style={{
+                        fontSize: "20px",
+                        fontWeight: 800,
+                        color: "#7cc059",
+                        textAlign: "left",
+                        marginTop: 10,
+                        marginBottom: 0,
+                      }}
+                    >
+                     No Chats Selected
+                    </Typography.Title>
+                    </div>
+                  </>}
+                 
                 </Col>
               </Row>
             </Card>

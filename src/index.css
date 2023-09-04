@@ -677,3 +677,25 @@ box-shadow: 0px 4px 22px 0px rgba(0, 0, 0, 0.16)!important;
     border-radius: 0;
   }
 }
+
+
+.custom-scrollbar::-webkit-scrollbar {
+  width: 10px;
+}
+
+/* Track */
+.custom-scrollbar::-webkit-scrollbar-track {
+  background-color: transparent;
+  border-radius: 10px;
+}
+ 
+/* Handle */
+.custom-scrollbar::-webkit-scrollbar-thumb {
+  background: rgb(56, 87, 144); 
+  border-radius: 10px;
+}
+
+/* Handle on hover */
+.custom-scrollbar::-webkit-scrollbar-thumb:hover {
+  background: #213758; 
+}

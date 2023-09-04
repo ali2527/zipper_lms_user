@@ -2,7 +2,7 @@
   "name": "zipper_lms_user",
   "version": "0.1.0",
   "private": true,
-  "homepage":"https://secure.demo243.webhostlabs.net/zipperlms/zipperlmsstudent",
+  "homepage": "https://secure.demo243.webhostlabs.net/zipperlms/zipperlmsstudent",
   "dependencies": {
     "@ant-design/icons": "^5.1.4",
     "@reduxjs/toolkit": "^1.9.5",
@@ -24,6 +24,7 @@
     "react-router-dom": "^6.14.1",
     "react-scripts": "5.0.1",
     "redux-persist": "^6.0.0",
+    "socket.io-client": "^4.7.2",
     "stripe": "^12.13.0",
     "surge": "^0.23.1",
     "sweetalert": "^2.1.2",

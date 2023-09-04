@@ -30,6 +30,7 @@ import ChangePassword from "../../views/change-password";
 import Payment from "../../views/payment"
 
 const MyRouter = () => {
+
   return (
     <BrowserRouter basename="/zipperlms/zipperlmsstudent">
       <Routes>

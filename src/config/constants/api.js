@@ -5,6 +5,7 @@
 
 export const BASE_URL = "http://localhost:3002/api"
 export const UPLOADS_URL = "http://localhost:3002/Uploads"
+export const SOCKET_URL = "http://localhost:3002"
 
 
 export const AUTH = {

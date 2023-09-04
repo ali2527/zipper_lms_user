@@ -1,26 +1,90 @@
-import React, { useEffect } from "react";
+import React, { useEffect,useState,useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
 import { Col, Input, Image, Button, Row, Typography, Layout, Card } from "antd";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaTelegramPlane } from "react-icons/fa";
 import dayjs from "dayjs";
-import { CHAT, MESSAGE, UPLOADS_URL } from "../../config/constants/api";
+import { CHAT, MESSAGE,SOCKET_URL, UPLOADS_URL } from "../../config/constants/api";
 import { Get } from "../../config/api/get";
 import { Post } from "../../config/api/post";
+import socket from "../../config/socket"
 
+
+var selectedChatCompare;
 
 function Chat() {
+  const chatContainerRef = useRef(null);
   const [chats,setChats]= React.useState([])
   const [currentChat, setCurrentChat] = React.useState();
   const [search, setSearch] = React.useState("");
   const [message, setMessage] = React.useState("");
   const [messages,setMessages] = React.useState([])
+  const [socketConnected,setSocketConnected] = React.useState(false)
   const user = useSelector((state) => state.user.userData);
   const token = useSelector((state) => state.user.userToken);
+  const [paginationConfig, setPaginationConfig] = useState({
+    pageNumber: 1,
+    limit: 10,
+    totalDocs: 0,
+    totalPages: 0,
+  });
+
+
+
+
+  // Function to scroll to the bottom of the chat container
+  const scrollToBottom = () => {
+    if (chatContainerRef.current) {
+      chatContainerRef.current.scrollTop = chatContainerRef.current.scrollHeight;
+    }
+  };
+
+  // Scroll to the bottom when component mounts or when new messages arrive
+  useEffect(() => {
+    scrollToBottom();
+  }, [messages]);
+
 
   useEffect(()=>{
     getMyChats()
-  },[])
+  },[user])
+
+  useEffect(() => {
+    socket.on("message", (newMessageRecieved) => {
+     
+      let _chats = [...chats]
+      let index = _chats.findIndex(item => item._id == newMessageRecieved.chatId);
+
+      console.log("index",index)
+
+      if(index > -1){
+        _chats[index].latestMessage = {content:newMessageRecieved.content}
+      }
+
+
+      setChats(_chats)
+      if (
+        !selectedChatCompare || // if chat is not selected or doesn't match current chat
+        selectedChatCompare !== newMessageRecieved.chatId
+      ) {
+        // if (!notification.includes(newMessageRecieved)) {
+        //   setNotification([newMessageRecieved, ...notification]);
+        //   setFetchAgain(!fetchAgain);
+        // }
+      } else {
+        setMessages([...messages, newMessageRecieved]);
+      }
+    });
+  });
+
+
+  const handleScroll = () => {
+    if (chatContainerRef.current.scrollTop === 0 && messages.length < paginationConfig.totalDocs) {
+
+      getMoreChatMessages()
+    }
+  };
+
 
 
   const getMyChats = (keyword) =>{
@@ -44,7 +108,15 @@ function Chat() {
       Get(MESSAGE.getChatMessages + (chatId ? chatId :  currentChat._id), token).then((response) => {
         console.log("ssss",response)
         if (response?.status) {
-          setMessages(response?.data?.docs)
+          const reversedMessages = [...response?.data?.docs].reverse();
+          setMessages(reversedMessages)
+           setPaginationConfig({
+            pageNumber: response?.data?.page,
+            limit: response?.data?.limit,
+            totalDocs: response?.data?.total,
+            totalPages: response?.data?.pages,
+        });
+      
 
         } else {
           console.log("response", response);
@@ -55,21 +127,28 @@ function Chat() {
     }
   }
 
-  // const sendMessage = () => {
-  //   if (message !== "") {
-  //     let _currentChat = { ...currentChat };
+  const getMoreChatMessages= () =>{
+    try {
+      Get(MESSAGE.getChatMessages + currentChat._id , token,{page:(paginationConfig.pageNumber + 1).toString()}).then((response) => {
+        console.log("ssss",response)
+        if (response?.status) {
+          const reversedMessages = [...response?.data?.docs].reverse();
+          setMessages([ ...reversedMessages,...messages ])
+           setPaginationConfig({
+          pageNumber: response?.data?.page,
+          limit: response?.data?.limit,
+          totalDocs: response?.data?.total,
+          totalPages: response?.data?.pages,
+        });
 
-  //     _currentChat.messages.push({
-  //       align: "right",
-  //       name: "You",
-  //       text: message,
-  //       image: "/images/chat5.jpg",
-  //     });
-
-  //     setCurrentChat(_currentChat);
-  //     setMessage("")
-  //   }
-  // };
+        } else {
+          console.log("response", response);
+        }
+      });
+    } catch (error) {
+      console.log("error", error);
+    }
+  }
 
   const sendMessage = () => {
     let _chats = [...chats]
@@ -78,6 +157,7 @@ function Chat() {
       content:message,
       chatId:currentChat._id
     }
+    let _messages = [...messages]
 
     let index = _chats.findIndex(item => item._id == currentChat._id)
     try {
@@ -85,8 +165,11 @@ function Chat() {
 
         console.log("responssse",response)
         if (response?.data?.status) {
-        getChatMessages()
+          socket.emit("new message",{...data,sender:user._id,reciever:currentChat?.coach._id})
+          _messages.push({...data,sender:user,reciever:currentChat?.coach})
+          
         _chats[index].latestMessage = {content:message}
+        setMessages(_messages)
           setMessage("")
           setChats(_chats)
         } else {
@@ -115,7 +198,10 @@ function Chat() {
 
   const selectChat = (index) =>{
     setCurrentChat(chats[index]);
-    getChatMessages(chats[index]._id)
+    getChatMessages(chats[index]._id);
+    socket.emit("join chat",chats[index]._id);
+    selectedChatCompare = chats[index]._id;
+    
   }
 
 
@@ -228,7 +314,7 @@ function Chat() {
                                   justifyContent: "center",
                                 }}
                               >
-                                {item.latestMessage.content}
+                                {item?.latestMessage?.content}
                               </Typography.Text>
                               </Col>
                           </Row>
@@ -264,6 +350,9 @@ function Chat() {
                   <br/>
                   <Row>
                     <div
+                    className="custom-scrollbar"
+                    ref={chatContainerRef}
+                    onScroll={handleScroll}
                       style={{
                         height: "60vh",
                         width: "100%",
@@ -363,7 +452,7 @@ function Chat() {
                                         justifyContent: "center",
                                       }}
                                     >
-                                      {item.content}
+                                      {item?.content}
                                     </Typography.Text>
                                   </Col>
                                 </Row>

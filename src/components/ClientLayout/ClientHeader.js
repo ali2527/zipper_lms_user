@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import { Image } from "antd";
 import {IoIosChatbubbles} from "react-icons/io";
 import { CaretDownOutlined } from "@ant-design/icons";
@@ -14,6 +14,7 @@ import { useSelector, useDispatch } from "react-redux";
 import MainButton from "../MainButton";
 import { AiFillCaretDown, AiFillApple } from "react-icons/ai"
 import { removeUser } from "../../redux/slice/authSlice";
+import socket from "../../config/socket"
 // import Link from 'next/link'
 
 const { Header } = Layout;
@@ -26,6 +27,23 @@ const ClientHeader = () => {
   const [logoutModal, setLogoutModal] = useState(false);
   
   const [visible, setVisible] = useState(false);
+
+  console.log("user101",token)
+
+  useEffect(() => {
+    if(token){
+      socket.connect();
+
+      socket.emit("setup", user);
+
+      socket.on("connected", () => {
+        console.log("Connected to socket");
+      });
+    }
+    return () => {
+      socket.disconnect();
+    };
+  }, [token]);
 
   const items = [
     {
@@ -240,6 +258,7 @@ const ClientHeader = () => {
 
     dispatch(removeUser());
     navigate("/signin");
+    socket.disconnect();
   };
 
 

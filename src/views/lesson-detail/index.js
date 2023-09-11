@@ -21,7 +21,7 @@ import {
 } from "antd";
 import { useNavigate,useParams } from "react-router";
 import { CloseCircleOutlined, PlusOutlined } from "@ant-design/icons";
-import { LESSON,UPLOADS_URL, USERS } from "../../config/constants/api";
+import { LESSON,UPLOADS_URL, CHAT } from "../../config/constants/api";
 import { Post } from "../../config/api/post";
 import { Get } from "../../config/api/get";
 import { RATES,SERVICES } from "../../config/constants/api";
@@ -53,6 +53,27 @@ function LessonDetail() {
   useEffect(()=>{
     getLessonDetails();
   },[])
+
+
+  const createChat = () => {
+    try {
+      Post(CHAT.createChat,{ student:user._id,
+      coach:lesson?.coach?._id},token)
+      .then((response) => {
+        if (response?.data?.status) { 
+          navigate('/chat')
+        } else {
+          swal("Oops!", response.data.message, "error");
+        }
+      })
+      .catch((e) => {
+        setLoading(false);
+      });
+    
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
 
 
@@ -388,7 +409,7 @@ function LessonDetail() {
                         type="primary"
                         htmlType="submit"
                         className="loginButton"
-                        // onClick={() => navigate("/chat")}
+                        onClick={() => createChat()}
                       >
                         View Chat
                       </Button>

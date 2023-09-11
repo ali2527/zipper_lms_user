@@ -1,6 +1,6 @@
 import React, { useEffect,useState,useRef } from "react";
 import { useSelector, useDispatch } from "react-redux";
-import { Col, Input, Image, Button, Row, Typography, Layout, Card } from "antd";
+import { Col,Badge, Input, Image, Button, Row, Typography, Layout, Card } from "antd";
 import { AiOutlineSearch } from "react-icons/ai";
 import { FaTelegramPlane } from "react-icons/fa";
 import dayjs from "dayjs";
@@ -50,30 +50,37 @@ function Chat() {
   },[user])
 
   useEffect(() => {
+    
     socket.on("message", (newMessageRecieved) => {
+      console.log("newMessageRecieved",newMessageRecieved)
      
-      let _chats = [...chats]
-      let index = _chats.findIndex(item => item._id == newMessageRecieved.chatId);
+      let _chats = [...chats];
+      let index = _chats.findIndex(
+        (item) => item._id.toString() == newMessageRecieved.chatId.toString()
+      );
 
-      console.log("index",index)
-
-      if(index > -1){
-        _chats[index].latestMessage = {content:newMessageRecieved.content}
+      if (index > -1) {
+        _chats[index] = { ..._chats[index] }; // Create a new object for the item
+        _chats[index].latestMessage = { content: newMessageRecieved.content };
+      } else {
+        return;
       }
 
 
-      setChats(_chats)
+   
+
+      console.log(currentChat)
       if (
-        !selectedChatCompare || // if chat is not selected or doesn't match current chat
-        selectedChatCompare !== newMessageRecieved.chatId
+        // !selectedChatCompare || selectedChatCompare !== newMessageRecieved.chatId
+        !currentChat || currentChat._id !== newMessageRecieved.chatId
       ) {
-        // if (!notification.includes(newMessageRecieved)) {
-        //   setNotification([newMessageRecieved, ...notification]);
-        //   setFetchAgain(!fetchAgain);
-        // }
+        _chats[index].unreadMessage += 1;
       } else {
         setMessages([...messages, newMessageRecieved]);
       }
+
+      setChats(_chats)
+
     });
   });
 
@@ -179,21 +186,6 @@ function Chat() {
     } catch (error) {
       console.log("error", error);
     }
-
-
-    // if (message !== "") {
-    //   let _currentChat = { ...currentChat };
-
-    //   _currentChat.messages.push({
-    //     align: "right",
-    //     name: "You",
-    //     text: message,
-    //     image: "/images/chat5.jpg",
-    //   });
-
-    //   setCurrentChat(_currentChat);
-    //  
-    // }
   };
 
   const selectChat = (index) =>{
@@ -277,8 +269,9 @@ function Chat() {
                     {chats.length > 0 &&
                       chats.map((item, index) => {
                         return (
-                            <Row gutter={10} style={{ padding: "10px",cursor:"pointer", borderBottom:"1px solid #dadada" }} onClick={()=>selectChat(index)}>
-                      <Col>
+                            <Row gutter={10} style={{ padding: "10px",cursor:"pointer", borderBottom:"1px solid #dadada",position:"relative"}} onClick={()=>selectChat(index)}>
+                      
+              <Col>
                       <Image
                                 src={item?.coach?.image ? UPLOADS_URL + "/" + item?.coach?.image: "./images/avatar.png"}
                                 height={40}
@@ -289,9 +282,11 @@ function Chat() {
                                 }}
                                 preview={false}
                               />
+                               
                       </Col>
                               
                               <Col>
+                             
                               <Typography.Title
                                 className="fontFamily1"
                                 style={{
@@ -310,13 +305,14 @@ function Chat() {
                                 style={{
                                   fontSize: "10px",
                                   color: "grey",
-                                  textAlign: "center",
+                                  textAlign: "left",
                                   justifyContent: "center",
                                 }}
                               >
                                 {item?.latestMessage?.content}
                               </Typography.Text>
                               </Col>
+                            
                           </Row>
                         );
                       })}

@@ -3,7 +3,7 @@ import {Form,Checkbox,Input, Col, Row, Typography, Layout, Card,Button } from "a
 import { useNavigate } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { Post } from "../../config/api/post";
-import { AUTH } from "../../config/constants/api";
+import { QUERY } from "../../config/constants/api";
 import { addUser, removeUser } from "../../redux/slice/authSlice";
 import swal from "sweetalert";
 
@@ -18,6 +18,8 @@ function ContactUs() {
   const dispatch = useDispatch();
   const navigate = useNavigate();
   const [loading, setLoading] = React.useState(false);
+  const [form] = Form.useForm();
+
 
 
 
@@ -25,23 +27,13 @@ function ContactUs() {
     console.log("Success:", values);
     setLoading(true);
 
-    let data = {
-      email: values.email,
-      password: values.password,
-      devideId: "123456789",
-    };
-    Post(AUTH.signin, data)
+    Post(QUERY.addQuery, values)
       .then((response) => {
+        console.log("response",response)
         setLoading(false);
-        if (response?.data) {
-          console.log("response", response.data.token);
-          console.log("response", response.data.user);
-          dispatch(
-            addUser({ user: response.data.user, token: response.data.token })
-          );
-          navigate("/", { replace: true });
-        } else {
-          swal("Oops!", response.response.data.message, "error");
+        if (response?.data?.status) {
+          swal("Success!", "Thankyou for your message. Our team will get back to you soon", "success");
+          form.resetFields()
         }
       })
       .catch((e) => {
@@ -109,6 +101,7 @@ function ContactUs() {
                  <Form
                   layout="vertical"
                   name="basic"
+                  form={form}
                   className="contactForm"
                   labelCol={{
                     span: 0,
@@ -194,7 +187,7 @@ function ContactUs() {
                   <Input.TextArea
                       size="large"
                       placeholder="Enter Message"
-                      className="ContactFormInput2"
+                      className="ContactFormTextField"
                       rows={4}
                     
                     />

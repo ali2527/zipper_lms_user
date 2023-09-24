@@ -48,6 +48,9 @@ function Dashboard() {
 
 
   useEffect(()=>{
+    if(!token){
+      navigate("/")
+    }
     getUpcomingLessons()
     getLiveLessons()
     getMyTutors()

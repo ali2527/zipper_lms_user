@@ -44,7 +44,7 @@ async function Get(path, token, queryObj, abortController = {}) {
       if (error.response.status === 401) {
         localStorage.clear()
         // dispatch( removeUser() )
-        window.location.href = "/signin"
+        window.location.href = "/zipperlms/zipperlmsstudent/signin"
       }
     }
     return error

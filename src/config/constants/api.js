@@ -88,5 +88,15 @@ export const PAYMENT={
 }
 
 
+export const NOTIFICATION={
+    getAllMyNotifications:"/notification/getAllMyNotifications",
+    getUnreadNotifications:"/notification/getUnreadNotifications",
+    toggleNotification:"/notification/toggleNotification/"
+}
+
+
+export const QUERY={
+    addQuery:"/query/addQuery"
+}
 
 

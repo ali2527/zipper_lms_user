@@ -28,6 +28,7 @@ import MyCalander from "../../views/myCalander"
 import Profile from "../../views/profile"
 import ChangePassword from "../../views/change-password";
 import Payment from "../../views/payment"
+import Notifications from "../../views/notifications";
 
 const MyRouter = () => {
 
@@ -76,7 +77,19 @@ const MyRouter = () => {
           }
         />
 
-
+<Route
+          path="/notifications"
+          
+          element={
+            <ClientLayout
+              head={{ title: "Notifications", description: "Some Description." }}
+              headerStyle={{ height: { base: "40px", md: 14 } }}
+              
+            >
+              <Notifications />{" "}
+            </ClientLayout>
+          }
+        />
 
         <Route
           path="/forgot-password"

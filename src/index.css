@@ -366,6 +366,13 @@ height: 49px!important;
 border:none
 }
 
+.ContactFormTextField{
+  border-radius: 10px!important;
+  background: #efefef9a!important;
+  color:grey!important;
+  border:none
+}
+
 .signupFormInput{
   border-radius: 10px!important;
 background: #efefef9a!important;

@@ -16,6 +16,8 @@ import { AiFillCaretDown, AiFillApple } from "react-icons/ai"
 import { removeUser } from "../../redux/slice/authSlice";
 import socket from "../../config/socket"
 // import Link from 'next/link'
+import { fetchNotifications } from '../../redux/slice/notificationSlice';
+import { incrementCount,addLatestNotification  } from "../../redux/slice/notificationSlice";
 
 const { Header } = Layout;
 
@@ -24,26 +26,48 @@ const ClientHeader = () => {
   const navigate = useNavigate()
   const user = useSelector((state) => state.user.userData);
   const token = useSelector((state) => state.user.userToken);
+  const notificationsCount = useSelector((state) => state.notification.count);
+  const latestNotifications = useSelector((state) => state.notification.latestNotifications);
   const [logoutModal, setLogoutModal] = useState(false);
-  
   const [visible, setVisible] = useState(false);
-
-  console.log("user101",token)
 
   useEffect(() => {
     if(token){
+      
       socket.connect();
 
       socket.emit("setup", user);
-
-      socket.on("connected", () => {
-        console.log("Connected to socket");
-      });
+      dispatch(fetchNotifications(token));
+      // socket.on("connected", () => {
+      //   console.log("Connected to socket");
+      // });
     }
     return () => {
       socket.disconnect();
     };
   }, [token]);
+
+
+  useEffect(() => {
+    socket.on("notification", (notification) => {
+      console.log("New Notification", notification);
+
+      // Assuming your notification object contains data to determine if you should increment the count
+      const shouldIncrement = true; // You should replace this with your logic
+
+      if (shouldIncrement) {
+        dispatch(incrementCount());
+      }
+      
+
+      dispatch(addLatestNotification(notification));
+    });
+
+    // Don't forget to remove the event listener when the component unmounts
+    return () => {
+      socket.off("notification");
+    };
+  }, [dispatch]);
 
   const items = [
     {
@@ -95,7 +119,7 @@ const ClientHeader = () => {
       >
         <h3>Notifications</h3>
         <Alert
-          message="5 New"
+          message={`${notificationsCount} New`}
           type="success"
           style={{ fontSize: "12px", padding: "2px 10px", color: "green" }}
         />
@@ -109,126 +133,50 @@ const ClientHeader = () => {
         }}
       />
       <div style={{ height: "250px", overflow: "auto" }}>
-        <div style={{ padding: 10 }}>
-          <Row
-            style={{ flexDirection: "row", justifyContent: "space-between" }}
-          >
-            <Col xs={2}>
-              <div
-                style={{
-                  padding: "10px 10px 10px 10px",
-                  width: "16px",
-                  display: "flex",
-                  backgroundColor: "#385790",
-                  borderRadius: "5px",
-                }}
-              >
-                <FiBell
-                  style={{ fontSize: "16px", margin: 0, color: "white" }}
-                />
-              </div>
-            </Col>
-            <Col xs={20}>
-            <Typography.Title
-                  className="fontFamily1"
-                  style={{ fontSize: "14px", color: "black",margin:0 }}
+        {latestNotifications && latestNotifications.length > 0 && latestNotifications.map(item => {
+          return(<div style={{ padding: 10,minHeight:"100px", borderBottom:"1px solid #dadada", marginBottom:"5px" }}>
+            <Row
+              style={{ flexDirection: "row", justifyContent: "space-between" }}
+            >
+              <Col xs={4}>
+                <div
+                  style={{
+                    // padding: "10px 10px 10px 10px",
+                                    
+                    display: "flex",
+                    width:'40px',
+                    justifyContent:'center',
+                    alignItems:"center",
+                    height:'40px',
+                    backgroundColor: "#385790",
+                    borderRadius: "5px",
+                  }}
                 >
-                  New Notification
-                </Typography.Title>
+                 <GoBellFill style={{ fontSize: "20px",color:"white", }} />
+                </div>
+              </Col>
+              <Col xs={18}>
+              <Typography.Title
+                    className="fontFamily1"
+                    style={{ fontSize: "14px", color: "black",margin:0 }}
+                  >
+                   {item.title}
+                  </Typography.Title>
+  
+                  <Typography.Text
+                    className="fontFamily1"
+                    style={{ fontSize: "12px", color: "black",margin:0 }}
+                  >
+                   {item?.content?.slice(0,100)} {item.content.length > 100 && "..."}
+                  </Typography.Text>
+               
+              </Col>
+            </Row>
+          </div>);
+        }) }
+        
 
-                <Typography.Text
-                  className="fontFamily1"
-                  style={{ fontSize: "12px", color: "black",margin:0 }}
-                >
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id nam
-                veniam aperiam eveniet mollitia quos nemo! Officiis voluptates
-                illo delectus.
-                </Typography.Text>
-             
-            </Col>
-          </Row>
-        </div>
-
-        <div style={{ padding: 10 }}>
-          <Row
-            style={{ flexDirection: "row", justifyContent: "space-between" }}
-          >
-            <Col xs={2}>
-              <div
-                style={{
-                  padding: "10px 10px 10px 10px",
-                  width: "16px",
-                  display: "flex",
-                  backgroundColor: "#385790",
-                  borderRadius: "5px",
-                }}
-              >
-                <FiBell
-                  style={{ fontSize: "16px", margin: 0, color: "white" }}
-                />
-              </div>
-            </Col>
-            <Col xs={20}>
-            <Typography.Title
-                  className="fontFamily1"
-                  style={{ fontSize: "14px", color: "black",margin:0 }}
-                >
-                  New Notification
-                </Typography.Title>
-
-                <Typography.Text
-                  className="fontFamily1"
-                  style={{ fontSize: "12px", color: "black",margin:0 }}
-                >
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id nam
-                veniam aperiam eveniet mollitia quos nemo! Officiis voluptates
-                illo delectus.
-                </Typography.Text>
-             
-            </Col>
-          </Row>
-        </div>
-
-        <div style={{ padding: 10 }}>
-          <Row
-            style={{ flexDirection: "row", justifyContent: "space-between" }}
-          >
-            <Col xs={2}>
-              <div
-                style={{
-                  padding: "10px 10px 10px 10px",
-                  width: "16px",
-                  display: "flex",
-                  backgroundColor: "#385790",
-                  borderRadius: "5px",
-                }}
-              >
-                <FiBell
-                  style={{ fontSize: "16px", margin: 0, color: "white" }}
-                />
-              </div>
-            </Col>
-            <Col xs={20}>
-            <Typography.Title
-                  className="fontFamily1"
-                  style={{ fontSize: "14px", color: "black",margin:0 }}
-                >
-                  New Notification
-                </Typography.Title>
-
-                <Typography.Text
-                  className="fontFamily1"
-                  style={{ fontSize: "12px", color: "black",margin:0 }}
-                >
-                  Lorem, ipsum dolor sit amet consectetur adipisicing elit. Id nam
-                veniam aperiam eveniet mollitia quos nemo! Officiis voluptates
-                illo delectus.
-                </Typography.Text>
-             
-            </Col>
-          </Row>
-        </div>
-
+       
       </div>
 
       <hr
@@ -248,7 +196,7 @@ const ClientHeader = () => {
           alignItems: "center",
         }}
       >
-        <Button type="link">View All</Button>
+        <Button onClick={()=> navigate("/notifications")} type="link">View All</Button>
       </div>
     </div>
   );
@@ -399,7 +347,7 @@ const ClientHeader = () => {
                 arrow={false}
                 className="headerPopover"
               >
-                <Badge count={0} style={{ backgroundColor: "#385790" }}>
+              <Badge count={notificationsCount} style={{ backgroundColor: "red" }}>
                   <GoBellFill style={{ fontSize: "25px",color:"white", }} />
                 </Badge>
               </Popover>

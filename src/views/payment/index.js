@@ -36,10 +36,13 @@ import { TbCameraPlus } from "react-icons/tb";
 import { BsFiles } from "react-icons/bs";
 import dayjs from "dayjs";
 import ReactPaginate from "react-paginate";
+import PaymentComp from "../../components/Payment"
 //icons
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import { AiFillStar } from "react-icons/ai";
 const stripe = require('stripe')('pk_test_51NhUrwFeDykiEFxY7ncpmL4062rAfvJLDdd3ivWlsOqkFsurQW2ZYnmAq6fInVnipvLA29PQ6ER2gPjyyrICYH9y00MpGGCR2G');
+
+
 
 
 
@@ -55,7 +58,6 @@ function Payment() {
   useEffect(() => {
     getLessonDetails();
   }, []);
-
 
   const onFinish =async (values) => {
     console.log("Success:", values);
@@ -162,158 +164,7 @@ function Payment() {
               }}
             >
          
-            
-                <Form
-                  layout="vertical"
-                  name="basic"
-                  className="contactForm"
-                  labelCol={{
-                    span: 0,
-                  }}
-                  wrapperCol={{
-                    span: 24,
-                  }}
-                  initialValues={{
-                    remember: true,
-                  }}
-                  onFinish={onFinish}
-                  onFinishFailed={onFinishFailed}
-                  autoComplete="off"
-                >
-                  <Row gutter={20}>
-                    <Col xs={24} md={12}>
-                      <Form.Item
-                        label="Cardholder Name*"
-                        name="name"
-                        rules={[
-                          {
-                            required: true,
-                            message: "Please input your cardholder name!",
-                          },
-                        ]}
-                      >
-                        <Input
-                          size="large"
-                          placeholder="Enter Cardholder Name"
-                          className="ContactFormInput"
-                        />
-                      </Form.Item>
-                    </Col>
-                    <Col xs={24} md={12}>
-                      <Form.Item
-                        label="Credit / Debit Card No*"
-                        name="cardNumber"
-                        rules={[
-                          {
-                            required: true,
-                            message: "Please input your card number!",
-                          },
-                        ]}
-                      >
-                        <InputNumber
-                          style={{ width: "100%" }}
-                          size="large"
-                          maxLength={16}
-                          placeholder="Enter your card number"
-                          className="ContactFormInput2 "
-                        />
-                      </Form.Item>
-                    </Col>
-                  </Row>
-                  <Row gutter={20}>
-                    <Col xs={24} md={12}>
-                      <Form.Item
-                        label="Expiry Date*"
-                        name="month"
-                        rules={[
-                          {
-                            required: true,
-                            message: "Please select expiry month",
-                          },
-                        ]}
-                      >
-                        <Select
-                          size="large"
-                          className="signupSelectBox"
-                          placeholder="Month"
-                        >
-                          <option value={1}>01</option>
-                          <option value={2}>02</option>
-                          <option value={3}>03</option>
-                          <option value={4}>04</option>
-                          <option value={5}>05</option>
-                          <option value={6}>06</option>
-                          <option value={7}>07</option>
-                          <option value={8}>08</option>
-                          <option value={9}>09</option>
-                          <option value={10}>10</option>
-                          <option value={11}>11</option>
-                          <option value={12}>12</option>
-                        </Select>
-                      </Form.Item>
-                    </Col>
-
-                    <Col xs={24} md={12}>
-                      <Form.Item
-                        label="Expiry Date*"
-                        name="year"
-                        rules={[
-                          {
-                            required: true,
-                            message: "Please select Expiry Year",
-                          },
-                        ]}
-                      >
-                        <Select
-                          size="large"
-                          className="signupSelectBox"
-                          placeholder="Year"
-                        >
-                          {Array.from({ length: 50 }, (_, index) => (
-                            <option key={index} value={2023 + index}>
-                              {2023 + index}
-                            </option>
-                          ))}
-                        </Select>
-                      </Form.Item>
-                    </Col>
-                  </Row>
-
-                  <Row gutter={20}>
-                    <Col xs={24} md={12}>
-                      <Form.Item
-                        label="CVV*"
-                        name="cvv"
-                        rules={[
-                          {
-                            required: true,
-                            message: "Please input your CVV!",
-                          },
-                        ]}
-                      >
-                        <Input.Password
-                          maxLength={3}
-                          size="large"
-                          placeholder="Enter CVV Number"
-                          className="signupFormInput "
-                        />
-                      </Form.Item>
-                    </Col>
-                  </Row>
-
-                  <br />
-
-                  <Form.Item>
-                    <Button
-                      type="primary"
-                      htmlType="submit"
-                      className="loginButton"
-                    >
-                      {loading ? "Loading..." : "Proceed"}
-                    </Button>
-                  </Form.Item>
-                </Form>
-              
+         <PaymentComp/>              
             </Card>
           </div>
         </Col>

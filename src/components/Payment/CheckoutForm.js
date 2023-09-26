@@ -107,18 +107,19 @@ const CheckoutForm = () => {
     <form onSubmit={handleSubmit}>
         <Row gutter={20}>
             <Col xs={24} md={12}>
-            <Typography.Title
-          level={3}
-            style={{
-              color: "black",
-              fontSize: 12,
-              fontWeight: 600,
-              marginBottom: 5,
-              textAlign:'left'
-            }}
-          >
-          Card Number
-          </Typography.Title>
+
+          <Typography.Title
+                        className="fontFamily1"
+                        style={{
+                          fontSize: "16px",
+                          fontWeight: 600,
+                          color: "black",
+                          textAlign: "left",
+                          marginTop: 0,
+                        }}
+                      >
+                       Card Number
+                      </Typography.Title>
             <label>
           <CardNumberElement />
         </label>
@@ -126,13 +127,14 @@ const CheckoutForm = () => {
             <Col xs={24} md={12}>
             <Typography.Title
           level={3}
-            style={{
-              color: "black",
-              fontSize: 12,
-              fontWeight: 600,
-              marginBottom: 5,
-              textAlign:'left'
-            }}
+          className="fontFamily1"
+          style={{
+            fontSize: "16px",
+            fontWeight: 600,
+            color: "black",
+            textAlign: "left",
+            marginTop: 0,
+          }}
           >
           Card Expiry
           </Typography.Title>
@@ -146,15 +148,16 @@ const CheckoutForm = () => {
             <Col xs={24} md={12}>
             <Typography.Title
           level={3}
-            style={{
-              color: "black",
-              fontSize: 12,
-              fontWeight: 600,
-              marginBottom: 5,
-              textAlign:'left'
-            }}
+          className="fontFamily1"
+          style={{
+            fontSize: "16px",
+            fontWeight: 600,
+            color: "black",
+            textAlign: "left",
+            marginTop: 0,
+          }}
           >
-          Cvc
+          CVC
           </Typography.Title>
             <label>
           <CardCvcElement />

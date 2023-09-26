@@ -40,7 +40,6 @@ import PaymentComp from "../../components/Payment"
 //icons
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import { AiFillStar } from "react-icons/ai";
-const stripe = require('stripe')('pk_test_51NhUrwFeDykiEFxY7ncpmL4062rAfvJLDdd3ivWlsOqkFsurQW2ZYnmAq6fInVnipvLA29PQ6ER2gPjyyrICYH9y00MpGGCR2G');
 
 
 
@@ -59,50 +58,7 @@ function Payment() {
     getLessonDetails();
   }, []);
 
-  const onFinish =async (values) => {
-    console.log("Success:", values);
-    setLoading(true);
 
-    let stripeToken = "";
-  
-
-    try {
-      stripeToken = await stripe.tokens.create({
-        card: {
-          number: values.cardNumber,
-          exp_month: values.month,
-          exp_year: values.year,
-          cvc: values.cvv,
-        },
-      });
-    } catch (error) {
-      swal("Error!",error.message, "error");
-      return;
-    }
-
-    let data={lesson:id,stripeToken}
-
-    Post(PAYMENT.lessonPayment, data,token)
-      .then((response) => {
-        setLoading(false);
-        console.log("response", response.data);
-        if (response?.data?.status) {
-
-         swal("Success!", response?.data?.message ||  response?.response?.data?.message, "success");
-         navigate("/dashboard")
-        } else {
-          swal("Oops!", response?.data?.message ||  response?.response?.data?.message, "error");
-        }
-      })
-      .catch((e) => {
-        console.log(":::;", e);
-        setLoading(false);
-      });
-  };
-
-  const onFinishFailed = (errorInfo) => {
-    console.log("Failed:", errorInfo);
-  };
 
   const getLessonDetails = async () => {
     try {

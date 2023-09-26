@@ -43,8 +43,6 @@ const stripe = require('stripe')('pk_test_51NhUrwFeDykiEFxY7ncpmL4062rAfvJLDdd3i
 
 
 
-
-
 function Payment() {
   const { id } = useParams();
   const navigate = useNavigate();
@@ -57,6 +55,7 @@ function Payment() {
   useEffect(() => {
     getLessonDetails();
   }, []);
+
 
   const onFinish =async (values) => {
     console.log("Success:", values);

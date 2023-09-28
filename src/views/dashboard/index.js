@@ -11,7 +11,7 @@ import {
   Card,
   Tag,Space,Table,
   Button,
-  Progress,
+  Skeleton,
   message,
   Avatar,
   Image,
@@ -43,6 +43,7 @@ function Dashboard() {
   const [tutors,setTutors] = useState([]);
   const { Search } = Input;
   const [loading, setLoading] = useState(false);
+  const [loading2, setLoading2] = useState(false);
   const [range, setRange] = useState([10, 200]);
   const item = { rating: 4 };
 
@@ -192,13 +193,13 @@ function Dashboard() {
 
 
   const getUpcomingLessons = async (pageNumber, pageSize, search, reset = false) => {
-    setLoading(true);
+    setLoading2(true);
     try {
       const response = await Get(LESSON.getUpcomingLessons, token, {
         page:"1",
         limit: 5,
       });
-      setLoading(false);
+      setLoading2(false);
       console.log("response", response);
       if (response?.status) {
         setUpcomingLessons(response?.data?.docs);
@@ -208,7 +209,7 @@ function Dashboard() {
       }
     } catch (error) {
       console.log(error.message);
-      setLoading(false);
+      setLoading2(false);
     }
   };
 
@@ -231,39 +232,6 @@ function Dashboard() {
       console.log(error.message);
       setLoading(false);
     }
-  };
-
-
-
-  const onSearch = (value) => console.log(value);
-
-  const onFinish = (values) => {
-    console.log("Success:", values);
-    setLoading(true);
-
-    let data = {
-      email: values.email,
-      password: values.password,
-      devideId: "123456789",
-    };
-    Post(AUTH.signin, data)
-      .then((response) => {
-        setLoading(false);
-        if (response?.data) {
-          console.log("response", response.data.token);
-          console.log("response", response.data.user);
-          dispatch(
-            addUser({ user: response.data.user, token: response.data.token })
-          );
-          navigate("/", { replace: true });
-        } else {
-          swal("Oops!", response.response.data.message, "error");
-        }
-      })
-      .catch((e) => {
-        console.log(":::;", e);
-        setLoading(false);
-      });
   };
 
   const onFinishFailed = (errorInfo) => {
@@ -453,8 +421,19 @@ function Dashboard() {
                   >
                     Live Lesson
                   </Typography.Title>
-
-                  <Table pagination={false} className="styledTable2" columns={columns} dataSource={liveLessons} />
+                  {loading ? (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+              }}
+            >
+              <Skeleton active />
+              <br />
+            </div>) :(
+                  <Table pagination={false} className="styledTable2" columns={columns} dataSource={liveLessons} />)}
                 </Row>
 
                 <Row
@@ -477,8 +456,19 @@ function Dashboard() {
                   >
                     Upcoming Lessons
                   </Typography.Title>
-
-                  <Table pagination={false} className="styledTable2" columns={columns2} dataSource={upcomingLessons} />
+                  {loading2 ? (
+            <div
+              style={{
+                display: "flex",
+                justifyContent: "center",
+                alignItems: "center",
+                width: "100%",
+              }}
+            >
+              <Skeleton active />
+              <br />
+            </div>) :(
+                  <Table pagination={false} className="styledTable2" columns={columns2} dataSource={upcomingLessons} />)}
                 </Row>
 
                 <Row
@@ -502,6 +492,19 @@ function Dashboard() {
                   </Typography.Title>
 
                   <Row gutter={20} justify="flex-start" style={{ margin: "20px 0" }}>
+                  {tutors.length == 0 && <Row style={{width:'100%',padding:20, display:'flex',justifyContent:"center", textAlign:'center',alignItems:"center"}}> <Typography.Title
+                    className="fontFamily1"
+                    style={{
+                      fontSize: "16px",
+                      fontWeight: "bold",
+                      color: "grey",
+                      textAlign: "center",
+                      marginTop: 0,
+                    }}
+                  >
+                   No Tutors Found
+                  </Typography.Title></Row>}
+
            {tutors.length > 0 && tutors.map(item => {
             return(<Col >
               <Card

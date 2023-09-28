@@ -70,6 +70,7 @@ export const MESSAGE = {
 
 export const REVIEWS={
     getAll:"/review/getAllReviewsByCoachId/",
+    addReview:"/review/addReview",
     getCoachRatings:"/review/getCoachRatings/"
 }
 

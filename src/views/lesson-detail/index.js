@@ -10,9 +10,8 @@ import {
   Checkbox,
   Rate,
   Progress,
-  Image,
   Card,
-  Form,
+  Modal,
   Spin,
   Input,
   Select,
@@ -24,7 +23,7 @@ import { CloseCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { LESSON,UPLOADS_URL, CHAT } from "../../config/constants/api";
 import { Post } from "../../config/api/post";
 import { Get } from "../../config/api/get";
-import { RATES,SERVICES } from "../../config/constants/api";
+import { REVIEWS,SERVICES } from "../../config/constants/api";
 import { addUser, removeUser } from "../../redux/slice/authSlice";
 import { SUBJECTS, CONTENT_TYPE } from "../../config/constants/index";
 import swal from "sweetalert";
@@ -46,6 +45,10 @@ function LessonDetail() {
   const dispatch = useDispatch();
   const [lesson,setLesson]= useState({});
   const [loading, setLoading] = useState(true);
+  const [review, setReview] = useState({
+    rating:0, comment:"" 
+  });
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const user = useSelector((state) => state.user.userData);
   const token = useSelector((state) => state.user.userToken);
 
@@ -75,7 +78,46 @@ function LessonDetail() {
     }
   }
 
+  const addReview = () => {
+    try {
+      if(!review.comment){
+        swal("Error", "Review comment is required", "error");
+        return;
+      }
+      Post(REVIEWS.addReview,{ student:user._id,
+      coach:lesson?.coach?._id,lesson:id,...review},token)
+      .then((response) => {
+        if (response?.data?.status) { 
+          swal("Success", "Review added successfully", "success");
+          navigate('/dashboard')
+        } else {
+          swal("Oops!", response.data.message, "error");
+        }
+      })
+      .catch((e) => {
+        setLoading(false);
+      });
+    
+    } catch (err) {
+      console.log(err);
+    }
+  }
 
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleChange = (item,value) => {
+    let _review = {...review}
+    _review[item] = value;
+    setReview(_review)
+  }
 
   const getLessonDetails = async () =>{
 
@@ -401,6 +443,19 @@ function LessonDetail() {
                     >
                       View Profile
                     </Button>
+                    &emsp;
+
+                    {(lesson.status == "COMPLETED") && (!lesson.isReviewed ) && 
+                  <Button
+                        type="primary"
+                        htmlType="submit"
+                        className="loginButton"
+                        onClick={() => showModal()}
+                      >
+                        Review Coach Lesson
+                      </Button>
+                 }
+
                   </Row>
 
                  {(lesson.status == "UPCOMING") &&  <Row style={{ marginTop: 30 }}>
@@ -425,6 +480,8 @@ function LessonDetail() {
                     )}
                     &emsp;
                   </Row>}
+
+                  
                 </Col>
                 <Col xs={0} md={2}>
                   <Typography.Title
@@ -449,6 +506,36 @@ function LessonDetail() {
           </div>
         </Col>
       </Row>
+      <Modal centered footer={false} open={isModalOpen} onOk={handleOk} onCancel={handleCancel}>
+        <div style={{padding:"20px 0",display:'flex',justifyContent:'center',flexDirection:"column", alignItems:"center"}}>
+
+      <Rate value={review.rating} onChange={(e)=> handleChange("rating",e)} style={{
+                                        color: "#FABF35",
+                                        marginTop: 0,
+                                        fontSize: "30px",
+                                      }} />
+                                      <br/>
+
+<Input.TextArea
+onChange={(e)=> handleChange("comment",e.target.value)}
+                      size="large"
+                      placeholder="Enter Comments"
+                      className="ContactFormTextField"
+                      rows={4}
+                      value={review.comment}
+                    />
+<br/>
+<Button
+                        type="primary"
+                        htmlType="submit"
+                        className="loginButton"
+                        onClick={() => addReview()}
+                      >
+                        Submit
+                      </Button>
+        </div>
+       
+      </Modal>
     </Layout>
   );
 }

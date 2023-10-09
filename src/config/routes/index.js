@@ -14,6 +14,8 @@ import AboutUs from "../../views/about-us";
 import ContactUs from "../../views/contact-us"
 import Tutor from "../../views/tutor"
 import Coach from "../../views/coach"
+import Course from "../../views/course"
+import MyCourse from "../../views/my-course"
 import TutorDetails from "../../views/tutor-details"
 import CoachDetails from "../../views/coach-details"
 import Dashboard from "../../views/dashboard"
@@ -29,6 +31,11 @@ import Profile from "../../views/profile"
 import ChangePassword from "../../views/change-password";
 import Payment from "../../views/payment"
 import Notifications from "../../views/notifications";
+import CourseDetails from "../../views/course-details";
+import MyCourseDetails from "../../views/my-course-details";
+import LectureDetails from "../../views/lecture-details";
+
+
 
 const MyRouter = () => {
 
@@ -208,6 +215,74 @@ const MyRouter = () => {
             </ClientLayout>
           }
         />
+
+<Route
+          path="/course"
+          
+          element={
+            <ClientLayout
+              head={{ title: "Course", description: "Some Description." }}
+              headerStyle={{ height: { base: "40px", md: 14 } }}
+            >
+              <Course/>
+            </ClientLayout>
+          }
+        />
+
+
+<Route
+          path="/my-courses"
+          
+          element={
+            <ClientLayout
+              head={{ title: "My Courses", description: "Some Description." }}
+              headerStyle={{ height: { base: "40px", md: 14 } }}
+            >
+              <MyCourse/>
+            </ClientLayout>
+          }
+        />
+
+
+<Route
+          path="/course-details/:id"
+          
+          element={
+            <ClientLayout
+              head={{ title: "Course Details", description: "Some Description." }}
+              headerStyle={{ height: { base: "40px", md: 14 } }}
+            >
+              <CourseDetails/>
+            </ClientLayout>
+          }
+        />
+
+<Route
+          path="/lecture-details/:id"
+          
+          element={
+            <ClientLayout
+              head={{ title: "Lecture Details", description: "Some Description." }}
+              headerStyle={{ height: { base: "40px", md: 14 } }}
+            >
+              <LectureDetails/>
+            </ClientLayout>
+          }
+        />
+
+<Route
+          path="/my-course-details/:id"
+          
+          element={
+            <ClientLayout
+              head={{ title: "My Course Details", description: "Some Description." }}
+              headerStyle={{ height: { base: "40px", md: 14 } }}
+            >
+              <MyCourseDetails/>
+            </ClientLayout>
+          }
+        />
+
 
 <Route
           path="/tutor-details/:id"

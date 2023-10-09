@@ -16,6 +16,14 @@ export const AUTH = {
     resetPassword:"/auth/resetPassword",
 }
 
+export const CATEGORIES = {
+    getAllcategories: "/category/getAllcategories",
+    addCategory: "/category/addCategory",
+    updateCategory: "/category/updateCategory/",
+    toggleStatus: "/category/toggleStatus/",
+    edit:"/category/edit/",
+  };
+
 
 
 export const STUDENT = {
@@ -48,6 +56,20 @@ export const RATES = {
 export const COMISSSION = {
     getComission : "/comission/getComission"
 }
+
+export const COURSE = {
+    addCourse:"/course/addCourse",
+    getAllCourses: "/course/getAllCourses",
+    getMyCourses: "/course/getMyCourses",
+    getCourseById: "/course/getCourseById/",
+    updateCourse:"/course/updateCourse/"
+  };
+
+
+  export const LECTURE = {
+    getAllLecturesByCourse:"/lecture/getAllLecturesByCourse/",
+    getLectureById:"/lecture/getLectureById/"
+  };
 
 export const SCHEDULE = {
     addSchedule: "/schedule/addSchedule",
@@ -86,6 +108,7 @@ export const LESSON={
 
 export const PAYMENT={
     lessonPayment:"/payment/lessonPayment",
+    coursePayment:"/payment/coursePayment",
 }
 
 

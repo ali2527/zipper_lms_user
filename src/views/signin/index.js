@@ -33,11 +33,11 @@ function Signin() {
   const [loading, setLoading] = React.useState(false);
 
   // useEffect if user is already logged in
-  React.useEffect(() => {
-    if (user && token) {
-      navigate("/", { replace: true });
-    }
-  }, [user, token]);
+  // React.useEffect(() => {
+  //   if (user && token) {
+  //     navigate("/", { replace: true });
+  //   }
+  // }, [user, token]);
 
   const onFinish = (values) => {
     console.log("Success:", values);

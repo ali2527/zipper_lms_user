@@ -6,13 +6,13 @@ import CheckoutForm from "./CheckoutForm";
 const stripePromise = loadStripe("pk_test_51KHXNgEhqLqdrjwEMCtqcPEVdCls1PEMjiH6V2Z6l336NrNm9A8GxyMlPj152oaKK16Fx3pd0GoveWrXsBLjMX4L00SybxLypM");
 
 
-export default function Payment() {
+export default function Payment({type}) {
 
 
   return (
     <div className="App">
       <Elements stripe={stripePromise}>
-          <CheckoutForm />
+          <CheckoutForm type={type}/>
         </Elements>
     </div>
   );

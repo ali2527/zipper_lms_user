@@ -19,7 +19,7 @@ import {
   InputNumber,
   TimePicker,
 } from "antd";
-import { useNavigate, useParams } from "react-router";
+import { useNavigate, useParams,useLocation } from "react-router";
 import { CloseCircleOutlined, PlusOutlined } from "@ant-design/icons";
 import { LESSON, PAYMENT, USERS } from "../../config/constants/api";
 import { Post } from "../../config/api/post";
@@ -53,11 +53,15 @@ function Payment() {
   const [loading, setLoading] = useState(true);
   const user = useSelector((state) => state.user.userData);
   const token = useSelector((state) => state.user.userToken);
+  const {state} = useLocation();
+
 
   useEffect(() => {
     getLessonDetails();
   }, []);
 
+
+  console.log("LLLL",state)
 
 
   const getLessonDetails = async () => {
@@ -120,7 +124,7 @@ function Payment() {
               }}
             >
          
-         <PaymentComp/>              
+         <PaymentComp type={state.type} />              
             </Card>
           </div>
         </Col>

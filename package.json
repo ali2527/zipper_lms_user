@@ -24,6 +24,7 @@
     "react-router-dom": "^6.14.1",
     "react-scripts": "5.0.1",
     "react-stripe-elements": "^6.1.2",
+    "react-tuby": "^0.1.24",
     "redux-persist": "^6.0.0",
     "socket.io-client": "^4.7.2",
     "stripe": "^12.13.0",

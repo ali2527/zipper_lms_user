@@ -293,6 +293,9 @@ const ClientHeader = () => {
                 <Menu.Item key="coaches" className="hover"   onClick={()=> navigate("/coach")}>
                   Coaches
                 </Menu.Item>
+                <Menu.Item key="courses" className="hover"   onClick={()=> navigate("/course")}>
+                  Courses
+                </Menu.Item>
                 <Menu.Item key="contact_us" className="hover"   onClick={()=> navigate("/contact-us")}>
                   Contact Us
                 </Menu.Item>

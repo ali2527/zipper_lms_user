@@ -369,17 +369,18 @@ function Dashboard() {
                 Message
                 </Button>
                 <br/>
-                {/* <Button
+                <Button
                   type="primary"
                   htmlType="submit"
-                  className="tutorButton"
+                  className="courseButton"
+                  onClick={() => navigate("/my-courses")}
                   icon={<div style={{backgroundColor:"white",borderRadius:"20px",padding:7}}>
                    <FaUsers style={{fontSize:'12px',color:"#649BAB"}}/>
 
                   </div>}
                 >
-                My Tutors/Coaches
-                </Button> */}
+                My Courses
+                </Button>
                 <br/>
 
 

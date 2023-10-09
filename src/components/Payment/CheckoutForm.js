@@ -28,35 +28,16 @@ import { useSelector, useDispatch } from "react-redux";
 
 
 
-const CheckoutForm = () => {
+const CheckoutForm = ({type}) => {
     const { id } = useParams();
     const navigate = useNavigate();
   const stripe = useStripe();
   const authToken = useSelector((state) => state.user.userToken);
   const elements = useElements();
-  const [lesson, setLesson] = useState({});
   const [isLoading, setIsLoading] = useState(false);
   const [loading, setLoading] = useState(false);
 
-  useEffect(() => {
-    getLessonDetails();
-  }, []);
 
-  const getLessonDetails = async () => {
-    try {
-      const response = await Get(LESSON.getLessonById + id, authToken);
-
-      console.log("response", response);
-      if (response?.status) {
-        setLesson(response?.data?.lesson);
-      } else {
-        swal("Error", response?.data?.message, "error");
-      }
-    } catch (error) {
-      console.log(error.message);
-     
-    }
-  };
 
 
 
@@ -76,31 +57,53 @@ const CheckoutForm = () => {
        swal("Error",error.message,"error")
         // Handle the error (e.g., display an error message to the user).
       } else {
-        let data={lesson:id,stripeToken:token}
-        
-    Post(PAYMENT.lessonPayment, data,authToken)
-    .then((response) => {
-      setLoading(false);
-      console.log("response", response.data);
-      if (response?.data?.status) {
 
-       swal("Success!", response?.data?.message ||  response?.response?.data?.message, "success");
-       navigate("/dashboard")
-      } else {
-        swal("Oops!", response?.data?.message ||  response?.response?.data?.message, "error");
-      }
-    })
-    .catch((e) => {
-      console.log(":::;", e);
-      setLoading(false);
-    });
+        if(type == "COURSE") {
+          let data={course:id,stripeToken:token}
+        
+          Post(PAYMENT.coursePayment, data,authToken)
+          .then((response) => {
+            
+            console.log("response", response.data);
+            if (response?.data?.status) {
+              setIsLoading(false);
+      
+             swal("Success!", response?.data?.message ||  response?.response?.data?.message, "success");
+             navigate("/dashboard")
+            } else {
+              swal("Oops!", response?.data?.message ||  response?.response?.data?.message, "error");
+            }
+          })
+          .catch((e) => {
+            console.log(":::;", e);
+            setIsLoading(false);
+          });
+        }else{
+          let data={lesson:id,stripeToken:token}
+        
+          Post(PAYMENT.lessonPayment, data,authToken)
+          .then((response) => {
+            
+            console.log("response", response.data);
+            if (response?.data?.status) {
+              setIsLoading(false);
+             swal("Success!", response?.data?.message ||  response?.response?.data?.message, "success");
+             navigate("/dashboard")
+            } else {
+              swal("Oops!", response?.data?.message ||  response?.response?.data?.message, "error");
+            }
+          })
+          .catch((e) => {
+            console.log(":::;", e);
+            setIsLoading(false);
+          });
+        }
+       
 
       }
     } catch (error) {
       console.error("An error occurred:", error);
     }
-
-    setIsLoading(false);
   };
 
   return (

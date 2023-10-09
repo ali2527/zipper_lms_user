@@ -280,7 +280,15 @@ font-weight: normal!important;
   color:black!important;
   font-weight: normal!important;
 }
-
+.courseButton{
+  min-width: 250px;
+  height: 50px;
+  border-radius: 8px!important;
+  background: #BBF2F9!important;
+  font-family: 'Visby', sans-serif!important;
+  color:black!important;
+  font-weight: normal!important;
+}
 .scheduleButton{  min-width: 250px;
   height: 50px;
   border-radius: 8px!important;
@@ -532,6 +540,25 @@ box-shadow: 0px 4px 22px 0px rgba(0, 0, 0, 0.07)!important;
 .tutorCard .ant-card-body{
   padding: 20px;
 }
+
+
+.categoryTab .ant-tabs-tab{
+  font-size: 20px;
+
+  padding:10px 20px;
+  font-family: 'Poppins', sans-serif!important;
+}
+
+.categoryTab  .ant-tabs-tab-active *{
+color:#7CC059!important;
+}
+
+
+.categoryTab  .ant-tabs-ink-bar{
+  background:#7CC059!important;
+  }
+
+
 
 .authImage1{
   width:100%;

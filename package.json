@@ -2,7 +2,7 @@
   "name": "zipper_lms_user",
   "version": "0.1.0",
   "private": true,
-  "homepage": "https://secure.demo243.webhostlabs.net/zipperlms/zipperlmsstudent",
+  "homepage": "https://zipperlearning.com",
   "dependencies": {
     "@ant-design/icons": "^5.1.4",
     "@reduxjs/toolkit": "^1.9.5",

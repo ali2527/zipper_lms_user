@@ -13,7 +13,7 @@ import {
   Tabs,
   Skeleton,
 } from "antd";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { useSelector, useDispatch } from "react-redux";
 import { Post } from "../../config/api/post";
 import { addUser, removeUser } from "../../redux/slice/authSlice";
@@ -39,6 +39,7 @@ const { CheckableTag } = Tag;
 function Course() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
+  const { id } = useParams();
   const user = useSelector((state) => state.user.userData);
   const token = useSelector((state) => state.user.userToken);
   const tagsData = ['Movies', 'Books', 'Music', 'Sports'];
@@ -76,34 +77,19 @@ function Course() {
     subjects:null,
     })
 
-
-    const onChange = (key) => {
-      getAllCourses("1",searchFilter.keyword,key)
-      setSelectedCategory(key)
-      console.log(key);
-    };
-
-
-  const onSearch = (value) => {
-    setSearchFilter({...searchFilter,keyword:value})
-    getAllCourses(1,value)
-  };
-
   useEffect(() => {
-    getCategories();
     getAllCourses();
   }, []);
 
   const getAllCourses = async (pageNumber, keyword, category) => {
     setLoading(true);
     try {
-      const response = await Get(COURSE.getAllCourses,null, {
+      const response = await Get(COURSE.getAllCoachCourses + id,null, {
         page: pageNumber
           ? pageNumber.toString()
           : paginationConfig.pageNumber.toString(),
         limit: "9",
         keyword: keyword ? keyword : "",
-        category: category ? category : "",
       });
       setLoading(false);
       console.log("response", response);
@@ -127,20 +113,6 @@ function Course() {
   };
 
 
-  const getCategories = async () => {
-    setLoading(true);
-    const res = await Get(
-      `${CATEGORIES.getAllcategories}`,
-      token,{
-        limit:"100"
-      }
-    );
-
-    console.log("<<<<>>>>>",res)
-
-    setCategories(res?.data?.docs);
-    setLoading(false);
-  };
 
   const handlePageChange = (e) => {
     setPaginationConfig({
@@ -173,16 +145,9 @@ function Course() {
             marginBottom: 20,
           }}
         >
-          {<> Courses</>}
+          {<>Coach Courses</>}
         </Typography.Title>
-        <Search
-          size="large"
-          className="searchBar"
-          style={{ width: "350px", color: "green" }}
-          placeholder="Search Course"
-          onSearch={onSearch}
-          enterButton
-        />
+    
       </Row>
 
       {/* section 2 */}
@@ -205,12 +170,7 @@ function Course() {
               padding: "10px",
             }}
           >
-              <Row style={{justifyContent:"center"}}>
-              <Tabs className="categoryTab"   activeKey={selectedCategory} items={categories?.map(item => {return({key:item._id,label:item.title})})} onChange={onChange} />
-       
-            </Row>
-            <br/>
-            <br/>
+        
 
             {loading && 
             <div

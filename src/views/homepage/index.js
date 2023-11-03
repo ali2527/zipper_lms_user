@@ -904,6 +904,7 @@ function Homepage() {
                   </Row>
                   <br/>
                   <Row>
+                  <a href="https://tutor.zipperlearning.com/">
                 <Button
                         style={{
                           marginTop: "10px",
@@ -912,12 +913,13 @@ function Homepage() {
                           height:"auto",
                           borderWidth:"2px"
                         }}
-                        onClick={()=> navigate("/")}
+                      
                         ghost
                         size="large"
                       >
                         Apply Now
                       </Button>
+                      </a>
                 </Row>
              
                 </Card>
@@ -976,6 +978,7 @@ function Homepage() {
                   </Row>
                   <br/>
                   <Row>
+                 
                 <Button
                         style={{
                           marginTop: "10px",
@@ -990,6 +993,7 @@ function Homepage() {
                       >
                         Register Now
                       </Button>
+                     
                 </Row>
              
                 </Card>

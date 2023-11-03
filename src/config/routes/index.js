@@ -34,13 +34,13 @@ import Notifications from "../../views/notifications";
 import CourseDetails from "../../views/course-details";
 import MyCourseDetails from "../../views/my-course-details";
 import LectureDetails from "../../views/lecture-details";
-
+import CoachCourses from "../../views/coach-courses"
 
 
 const MyRouter = () => {
 
   return (
-    <BrowserRouter basename="/zipperlms/zipperlmsstudent">
+    <BrowserRouter >
       <Routes>
         <Route
           path="/signin"
@@ -225,6 +225,19 @@ const MyRouter = () => {
               headerStyle={{ height: { base: "40px", md: 14 } }}
             >
               <Course/>
+            </ClientLayout>
+          }
+        />
+        
+<Route
+          path="/courses/:id"
+          
+          element={
+            <ClientLayout
+              head={{ title: "Coach Courses", description: "Some Description." }}
+              headerStyle={{ height: { base: "40px", md: 14 } }}
+            >
+              <CoachCourses/>
             </ClientLayout>
           }
         />

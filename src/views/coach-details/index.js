@@ -303,6 +303,16 @@ preview={false}
                 >
                   Book Lesson
                 </Button>}
+                <br/>
+
+                {token && <Button
+                  type="primary"
+                  htmlType="submit"
+                  className="loginButton"
+                  onClick={() => navigate("/courses/" + coach?.coach?._id)}
+                >
+                  View Courses
+                </Button>}
               </Row>}
             </Card>
           </div>

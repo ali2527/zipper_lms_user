@@ -3,9 +3,13 @@
 
 // import ChangePassword from "../../views/change-password"
 
-export const BASE_URL = "http://localhost:3002/api"
-export const UPLOADS_URL = "http://localhost:3002/Uploads"
-export const SOCKET_URL = "http://localhost:3002"
+// export const BASE_URL = "http://localhost:3002/api"
+// export const UPLOADS_URL = "http://localhost:3002/Uploads"
+// export const SOCKET_URL = "http://localhost:3002"
+
+export const BASE_URL = "https://api.zipperlearning.com/api"
+export const UPLOADS_URL = "https://api.zipperlearning.com/Uploads"
+export const SOCKET_URL = "https://api.zipperlearning.com"
 
 
 export const AUTH = {
@@ -60,6 +64,7 @@ export const COMISSSION = {
 export const COURSE = {
     addCourse:"/course/addCourse",
     getAllCourses: "/course/getAllCourses",
+    getAllCoachCourses: "/course/getAllCoachCourses/",
     getMyCourses: "/course/getMyCourses",
     getCourseById: "/course/getCourseById/",
     updateCourse:"/course/updateCourse/"

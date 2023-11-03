@@ -87,6 +87,7 @@ const ClientFooter = () => {
                     </Row>
                     <br />
                     <Row>
+                 
                       <Button
                         style={{
                           marginTop: "10px",
@@ -99,7 +100,9 @@ const ClientFooter = () => {
                       >
                         Register Now
                       </Button>
+              
                       &emsp;
+                      <a href="https://tutor.zipperlearning.com/">
                       <Button
                         style={{
                           marginTop: "10px",
@@ -111,6 +114,7 @@ const ClientFooter = () => {
                       >
                         Apply Now
                       </Button>
+                      </a>
                     </Row>
                   </div>
                 </Col>

@@ -224,7 +224,7 @@ preview={false}
                 <br />
                 <br />
 
-                {token && courses.includes(course?.course?._id) && <Button
+                {token && !courses.includes(course?.course?._id) && <Button
                   type="primary"
                   htmlType="submit"
                   className="loginButton"

@@ -59,7 +59,7 @@ export default function CheckoutForm() {
     const { error } = await stripe.confirmPayment({
       elements,
       confirmParams: {
-        return_url: "http://localhost:3001/zipperlms/zipperlmsstudent/",
+        return_url: "https://zipperlearning.com",
       },
     });
 

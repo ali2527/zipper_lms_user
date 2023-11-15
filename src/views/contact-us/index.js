@@ -52,7 +52,7 @@ function ContactUs() {
       <Row
         className="blueBackground"
         style={{
-          height: "45vh",
+          height: "50vh",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -69,7 +69,7 @@ function ContactUs() {
           className="fontFamily1"
           style={{ fontSize: "18px", color: "white",margin:10 }}
         >
-          {<> Please let us know how we can improve your experience</>}
+                {<> We'd love to hear from you</>}
         </Typography.Text>
       </Row>
 
@@ -245,7 +245,7 @@ function ContactUs() {
               >
                 {
                   <>
-                   Get in touch with us
+                   Get in touch with us today.
                   </>
                 }
               </Typography.Title>
@@ -253,43 +253,8 @@ function ContactUs() {
                 className="fontFamily1"
                 style={{ fontSize: "14px", color: "grey", textAlign: "center",justifyContent:"center" }}
               >
-                  Let us know what you want to know. We want to help people learn, grow and achieve more in life.
-              </Typography.Text>
-              
-              <Button
-                      type="primary"
-                      shape="circle"
-                      style={{
-                        backgroundColor: "#86D6E0",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        width: "50px",
-                        height: "50px",
-                        marginTop:"30px"
-                      }}
-                      icon={
-                        <IoMdPin
-                          style={{ color: "white", fontSize: "20px" }}
-                        />
-                      }
-                    />
-                    <Typography.Text
-                className="fontFamily1"
-                style={{
-                  fontSize: "14px",
-                  fontWeight: 600,
-                  color: "black",
-                  textAlign: "center",
-                  marginTop: 10,
-                }}
-              >
-                {
-                  <>
-                  70-80 Upper St Norwich NR2 1LT
-                  </>
-                }
-              </Typography.Text>
+We're here to serve and support our learners.              </Typography.Text>
+
 
               <Button
                       type="primary"
@@ -321,45 +286,11 @@ function ContactUs() {
               >
                 {
                   <>
-               info@support.com
+               info@zipperlearning.com
                   </>
                 }
               </Typography.Text>
 
-              <Button
-                      type="primary"
-                      shape="circle"
-                      style={{
-                        backgroundColor: "#86D6E0",
-                        display: "flex",
-                        justifyContent: "center",
-                        alignItems: "center",
-                        width: "50px",
-                        height: "50px",
-                        marginTop:"30px"
-                      }}
-                      icon={
-                        <BsFillTelephoneFill
-                          style={{ color: "white", fontSize: "20px" }}
-                        />
-                      }
-                    />
-                    <Typography.Text
-                className="fontFamily1"
-                style={{
-                  fontSize: "14px",
-                  fontWeight: 600,
-                  color: "black",
-                  textAlign: "center",
-                  marginTop: 10,
-                }}
-              >
-                {
-                  <>
-                 +03601 885399
-                  </>
-                }
-              </Typography.Text>
               </Row>
               <br/>
               <br/>

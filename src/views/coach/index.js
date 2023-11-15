@@ -27,7 +27,7 @@ import {
   REVIEWS,
   UPLOADS_URL,
 } from "../../config/constants/api";
-import { SUBJECTS } from "../../config/constants";
+import { COACHINGSUBJECTS } from "../../config/constants";
 //icons
 import { FaArrowRight, FaArrowLeft } from "react-icons/fa";
 import { AiFillStar } from "react-icons/ai";
@@ -165,7 +165,7 @@ const handleClear = () => {
       <Row
         className="blueBackground"
         style={{
-          height: "45vh",
+          height: "50vh",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -247,7 +247,7 @@ const handleClear = () => {
                     marginBottom: 10,
                   }}
                 >
-                  Hourly Rates:
+                  Session Rates:
                 </Typography.Text>
 
                 <Typography.Text
@@ -337,7 +337,7 @@ const handleClear = () => {
                   }}
                   size="large"
                   //   onChange={handleChange}
-                  options={SUBJECTS.map(item => { return({
+                  options={COACHINGSUBJECTS.map(item => { return({
                     value:item,
                     label:item[0].toUpperCase() + item.slice(1)
                   })} )}

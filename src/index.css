@@ -562,24 +562,24 @@ color:#7CC059!important;
 
 .authImage1{
   width:100%;
-  height:65vh;
-  border-radius: 53px;
+  height:60vh;
+  border-radius: 40px;
 background: url(/public/images/Rectangle_1.png);
 background-position: center;
 background-size: cover;
 }
 .authImage2{
   width:100%;
-  height:65vh;
-  border-radius: 53px;
+  height:60vh;
+  border-radius: 40px;
 background: url(/public/images/Rectangle_2.png);
 background-size: cover;
 background-position: center;
 }
 .authImage3{
   width:100%;
-  height:65vh;
-  border-radius: 53px;
+  height:60vh;
+  border-radius: 40px;
 background: url(/public/images/Rectangle_3.png);
 background-size: cover;
 background-position: center;

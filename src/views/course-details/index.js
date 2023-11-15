@@ -106,7 +106,7 @@ function CourseDetails() {
       <Row
         className="blueBackground"
         style={{
-          height: "45vh",
+          height: "50vh",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",

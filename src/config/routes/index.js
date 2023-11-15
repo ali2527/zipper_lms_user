@@ -35,7 +35,8 @@ import CourseDetails from "../../views/course-details";
 import MyCourseDetails from "../../views/my-course-details";
 import LectureDetails from "../../views/lecture-details";
 import CoachCourses from "../../views/coach-courses"
-
+import PrivacyPolicy from "../../views/privacy-policy"
+import TermsAndConditions from "../../views/terms-conditions"
 
 const MyRouter = () => {
 
@@ -173,6 +174,32 @@ const MyRouter = () => {
               headerStyle={{ height: { base: "40px", md: 14 } }}
             >
               <AboutUs />
+            </ClientLayout>
+          }
+        />
+
+<Route
+          path="/privacy-policy"
+          
+          element={
+            <ClientLayout
+              head={{ title: "Privacy Policy", description: "Some Description." }}
+              headerStyle={{ height: { base: "40px", md: 14 } }}
+            >
+              <PrivacyPolicy />
+            </ClientLayout>
+          }
+        />
+
+<Route
+          path="/terms-and-conditions"
+          
+          element={
+            <ClientLayout
+              head={{ title: "Terms and Conditions", description: "Some Description." }}
+              headerStyle={{ height: { base: "40px", md: 14 } }}
+            >
+              <TermsAndConditions />
             </ClientLayout>
           }
         />

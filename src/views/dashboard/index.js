@@ -243,7 +243,7 @@ function Dashboard() {
       <Row
         className="blueBackground"
         style={{
-          height: "45vh",
+          height: "50vh",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -283,7 +283,7 @@ function Dashboard() {
               padding: "10px",
             }}
           >
-            <Card className="contactCard2" bordered={false}>
+            <Card className="contactCard2" style={{display:'flex',justifyContent:"center"}} bordered={false}>
               <Row
                 style={{
                   width: "100%",

@@ -8,7 +8,7 @@ function AboutUs() {
       <Row
         className="blueBackground"
         style={{
-          height: "45vh",
+          height: "50vh",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -45,6 +45,7 @@ function AboutUs() {
                 padding: "20px",
               }}
             >
+              <Row>
               <Typography.Title
                 className="fontFamily1"
                 style={{
@@ -57,28 +58,36 @@ function AboutUs() {
               >
                 {
                   <>
-                    We are Turitor.
-                    <br /> An online learning community
+                    Our Mission
                   </>
                 }
               </Typography.Title>
+              </Row>
+              <Row style={{marginBottom:"10px"}}>
               <Typography.Text
                 className="fontFamily1"
                 style={{ fontSize: "16px", color: "grey", textAlign: "left" }}
               >
-                {
-                  <>
-                    Lorem Ipsum is simply dummy text of the printing and
-                    typesetting industry. Lorem Ipsum has been the industry's
-                    standard dummy text ever since the 1500s, when an unknown
-                    printer took a galley of type and scrambled it to make a
-                    type specimen book. It has survived not only five centuries,
-                    but also the leap into electronic typesetting, remaining
-                    essentially unchanged. It was popularised in the 1960s with
-                    the release of Letraset sheets containing.
-                  </>
-                }
+
+Our Mission is to provide exceptional online tutoring and coaching services for K-12 and adult
+learners, empowering them to thrive in a rapidly evolving world.
               </Typography.Text>
+              </Row>
+
+              <Row style={{marginBottom:"10px"}}>
+              <Typography.Text
+                className="fontFamily1"
+                style={{ fontSize: "16px", color: "grey", textAlign: "left" }}
+              >
+
+We've handpicked a diverse team of experts who share a passion for transforming how people
+learn. With their diverse backgrounds, extensive experience, and unwavering dedication, they'll
+help you develop a growth mindset, embrace continuous learning, and unlock new levels of
+achievement and personal growth.
+              </Typography.Text>
+              </Row>
+
+           
               <br /> <br />
               <Card
                 className="aboutCard1"

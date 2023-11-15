@@ -146,7 +146,7 @@ function CoachDetails() {
       <Row
         className="blueBackground"
         style={{
-          height: "45vh",
+          height: "50vh",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -289,7 +289,7 @@ preview={false}
                     fill="#FFFFFF"
                     font-size="14"
                   >
-                    Hourly Rates : ${coach?.rate?.hourlyRate}
+                    Session Rates : ${coach?.rate?.hourlyRate}
                   </text>
                 </svg>
 

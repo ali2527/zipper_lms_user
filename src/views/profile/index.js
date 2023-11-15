@@ -90,7 +90,7 @@ function Profile() {
       <Row
         className="blueBackground"
         style={{
-          height: "45vh",
+          height: "50vh",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -193,13 +193,13 @@ function Profile() {
                     <Row gutter={20}>
                   <Col xs={24} md={12}>
                     <Form.Item
-                      label="First Name*"
+                      label="Full Name*"
                       name="firstName"
                       initialValue={user?.firstName}
                       rules={[
                         {
                           required: true,
-                          message: "Please input your first name",
+                          message: "Please input your full name",
                         },
                       ]}
                     >
@@ -210,28 +210,6 @@ function Profile() {
                       />
                     </Form.Item>
                   </Col>
-                  <Col xs={24} md={12}>
-                    <Form.Item
-                      label="Last Name*"
-                      name="lastName"
-                      rules={[
-                        {
-                          required: true,
-                          message: "Please input your last name",
-                        },
-                      ]}
-                      initialValue={user?.lastName}
-                    >
-                      <Input
-                        size="large"
-                        placeholder="Enter LastName"
-                        className="signupFormInput"
-                      />
-                    </Form.Item>
-                  </Col>
-                </Row>
-
-                <Row gutter={20}>
                   <Col xs={24} md={12}>
                   <Form.Item
                     label="Parent / Guardian Name*"
@@ -253,6 +231,10 @@ function Profile() {
                       
                     </Form.Item>
                   </Col>
+                </Row>
+
+                <Row gutter={20}>
+                 
                   <Col xs={24} md={12}>
                     <Form.Item
                       label="Email*"
@@ -276,30 +258,7 @@ function Profile() {
                       
                     </Form.Item>
                   </Col>
-                  <Col xs={24} md={12}>
-                    <Form.Item
-                      label="Birhtday*"
-                      name="birthday"
-                      
-                      rules={[
-                        {
-                          required: true,
-                          message: "Please input your birthday",
-                        },
-                      ]}
-                      initialValue={dayjs(user?.birthday)}
-                    >
-                     <DatePicker
-                                  style={{ width: "100%" }}
-                                  // defaultValue={dayjs(user?.birthday)}
-                                  size="large"
-                                  placeholder="Enter Birthday"
-                                  className="signupFormInput"
-                                />
-
-                      
-                    </Form.Item>
-                  </Col>
+                 
                   <Col xs={24} md={12}>
                     <Form.Item
                       label="Phone Number*"
@@ -489,7 +448,7 @@ function Profile() {
                           marginTop: 0,
                         }}
                       >
-                        Last Name
+                        Age
                       </Typography.Title>
                       <Typography.Text
                         className="fontFamily1"
@@ -499,34 +458,10 @@ function Profile() {
                           textAlign: "left",
                         }}
                       >
-                        {user?.lastName}
+                        {user?.age}
                       </Typography.Text>
                     </Col>
 
-                    <Col xs={12} sm={6}>
-                      <Typography.Title
-                        className="fontFamily1"
-                        style={{
-                          fontSize: "16px",
-                          fontWeight: 600,
-                          color: "black",
-                          textAlign: "left",
-                          marginTop: 0,
-                        }}
-                      >
-                      Date of Birth
-                      </Typography.Title>
-                      <Typography.Text
-                        className="fontFamily1"
-                        style={{
-                          fontSize: "14px",
-                          color: "grey",
-                          textAlign: "left",
-                        }}
-                      >
-                        {dayjs(user?.birthday).format("MM/DD/YYYY")}
-                      </Typography.Text>
-                    </Col>
                   </Row>
 
                   <Row style={{ marginTop: 40 }}>

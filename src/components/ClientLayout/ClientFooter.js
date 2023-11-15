@@ -98,11 +98,11 @@ const ClientFooter = () => {
                         ghost
                         size="large"
                       >
-                        Register Now
+                        Join Us
                       </Button>
               
                       &emsp;
-                      <a href="https://tutor.zipperlearning.com/">
+                      <a href="https://tutor.zipperlearning.com/signup">
                       <Button
                         style={{
                           marginTop: "10px",
@@ -202,6 +202,9 @@ const ClientFooter = () => {
                   <List.Item key="focus_coaching" className="footerLink">
                     Focus Coaching
                   </List.Item>
+                  <List.Item key="focus_coaching" className="footerLink">
+                    HomeSchool Coaching
+                  </List.Item>
                 </List>
               </div>
             </Col>
@@ -223,19 +226,22 @@ const ClientFooter = () => {
                   size="small"
                   style={{ fontSize: 18 }}
                 >
-                  <List.Item key="home" className="footerLink">
+                  <List.Item key="home" className="footerLink" onClick={() => navigate("/")}>
                     Home
                   </List.Item>
-                  <List.Item key="about" className="footerLink">
+                  <List.Item key="about" className="footerLink" onClick={() => navigate("/about-us")} >
                     About
                   </List.Item>
-                  <List.Item key="services" className="footerLink">
-                    Services
+                  <List.Item key="services" className="footerLink" onClick={() => navigate("/tutor")}>
+                    Tutors
                   </List.Item>
-                  <List.Item key="book_online" className="footerLink">
-                    Book Online
+                  <List.Item key="book_online" className="footerLink" onClick={() => navigate("/coach")}>
+                    Coaches
                   </List.Item>
-                  <List.Item key="contact_us" className="footerLink">
+                  <List.Item key="contact_us" className="footerLink" onClick={() => navigate("/course")}>
+                    Courses
+                  </List.Item>
+                  <List.Item key="contact_us" className="footerLink" onClick={() => navigate("/contact-us")}>
                     Contact Us
                   </List.Item>
                 </List>
@@ -271,9 +277,9 @@ const ClientFooter = () => {
                   placeContent: "center",
                 }}
               >
-                <p className="footerLink">Terms & Conditions</p>
+                <p className="footerLink" onClick={() => navigate("/terms-and-conditions")}>Terms & Conditions</p>
                 &emsp;
-                <p className="footerLink">Privacy Policy</p>
+                <p className="footerLink" onClick={() => navigate("/privacy-policy")}>Privacy Policy</p>
               </div>
             </Col>
           </Row>

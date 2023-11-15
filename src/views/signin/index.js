@@ -215,7 +215,7 @@ function Signin() {
                       htmlType="submit"
                       className="loginButton"
                     >
-                      {loading ? "Loading..." : "Login"}
+                      {loading ? "Loading..." : "Log In"}
                     </Button>
                   </Form.Item>
                 </Form>
@@ -230,7 +230,7 @@ function Signin() {
                     marginBottom: 30,
                   }}
                 >
-                  <>Not a User? <span onClick={()=> navigate("/signup")} style={{cursor:'pointer',fontWeight:'bold',textDecoration:"underline"}}>Register Now</span></>
+                  <>Not a User? <span onClick={()=> navigate("/signup")} style={{cursor:'pointer',fontWeight:'bold',textDecoration:"underline"}}>Register</span></>
                 </Typography.Text>
 
               </Col>

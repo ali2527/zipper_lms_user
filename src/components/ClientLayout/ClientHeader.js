@@ -201,6 +201,41 @@ const ClientHeader = () => {
     </div>
   );
 
+  
+  const content2 = (
+    <div >
+     <div
+          className="headerDropdown"
+          style={{
+            fontSize: "16px",
+            display: "flex",
+            alignItems: "center",
+            padding: "5px 12px",
+            cursor:'pointer'
+          }}
+          onClick={() => navigate("/signup")}
+        >
+         Learner
+        </div>
+        <a href="https://tutor.zipperlearning.com/signup">
+        <div
+          className="headerDropdown"
+          style={{
+            fontSize: "16px",
+            display: "flex",
+            alignItems: "center",
+            padding: "5px 12px",
+            cursor:'pointer',
+            color:"black"
+          }}
+         
+        >
+          Tutor/Coach
+        </div>
+        </a>
+    </div>
+  );
+
   const logout = () => {
     setLogoutModal(false);
 
@@ -319,21 +354,29 @@ const ClientHeader = () => {
                   ghost
                   size="large"
                 >
-                  Login
+                  Log In
                 </Button>
                 &emsp; &emsp;
-                <Button
+            
+                <Popover
+                content={content2}
+                placement="bottomRight"
+                arrow={false}
+                className="headerPopover"
+              >
+                  <Button
                   style={{
                     padding: "0px 30px",
                     cursor: "pointer",
                   }}
-                  onClick={()=> navigate("/signup")}
+                 
                   
                   ghost
                   size="large"
                 >
-                  Register
+                  Join Us 
                 </Button>
+              </Popover>
               </div> : <div
                 style={{
                   display: "flex",
@@ -430,25 +473,28 @@ const ClientHeader = () => {
           mode="inline"
           className="header-menu-mobile "
         >
-    <Menu.Item key="home" className="hover fontFamily1" >
+    <Menu.Item key="home" className="hover fontFamily1"    onClick={()=> {navigate("/"); setVisible(false)}}>
                   Home
                 </Menu.Item>
-                <Menu.Item key="about" className="hover fontFamily1">
+                <Menu.Item key="about" className="hover fontFamily1"    onClick={()=> {navigate("/about-us"); setVisible(false)}}>
                   About
                 </Menu.Item>
-                <Menu.Item key="tutors" className="hover fontFamily1">
+                <Menu.Item key="tutors" className="hover fontFamily1"    onClick={()=> {navigate("/tutor"); setVisible(false)}}>
                   Tutors
                 </Menu.Item>
-                <Menu.Item key="coaches" className="hover fontFamily1">
+                <Menu.Item key="coaches" className="hover fontFamily1"    onClick={()=> {navigate("/coach"); setVisible(false)}}>
                   Coaches
                 </Menu.Item>
-                <Menu.Item key="contact_us" className="hover fontFamily1">
+                <Menu.Item key="courses" className="hover fontFamily1"    onClick={()=> {navigate("/course"); setVisible(false)}}>
+                  Course
+                </Menu.Item>
+                <Menu.Item key="contact_us" className="hover fontFamily1"    onClick={()=> {navigate("/contact-us"); setVisible(false)}}>
                   Contact Us
                 </Menu.Item>
         </Menu>
         <br/><br/>
-        <Row gutter={20}>
-          <Col span={12}>
+        <Row gutter={[20,20]}>
+          <Col span={24}>
           <Button
           block
                   style={{
@@ -459,10 +505,10 @@ const ClientHeader = () => {
                   ghost
                   size="large"
                 >
-                  Login
+                  Log In
                 </Button>
           </Col>
-          <Col span={12}>
+          <Col span={24}>
           <Button
                   style={{
                     padding: "0px 30px",
@@ -471,9 +517,27 @@ const ClientHeader = () => {
                   block
                   ghost
                   size="large"
+                  onClick={()=> navigate("/signup")}
                 >
-                  Register
+                  Register as Learner
                 </Button>
+                </Col>
+                <Col span={24}>
+
+                <a href="https://tutor.zipperlearning.com/signup">
+                <Button
+                  style={{
+                    padding: "0px 30px",
+                    cursor: "pointer",
+                  }}
+                  block
+                  ghost
+                  size="large"
+                >
+                  Register as Tutor/Coach
+                </Button>
+                </a>
+               
           </Col>
         </Row>
       </Drawer>

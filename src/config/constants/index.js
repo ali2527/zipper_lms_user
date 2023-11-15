@@ -235,34 +235,35 @@ export const countries = [
 
 
 export const SUBJECTS =[
-    "maths",
-    "science",
-    "english",
-    "history",
-    "physics",
-    "chemistry",
-    "biology",
-    "geography",
-    "computer-science",    
-    "economics",
-    "art",
-    "music",
-    "physical-education",
-    "foreign-language",   
-    "psychology",
-    "philosophy",
-    "sociology",
-    "literature",
-    "business-studies",
-    "environmental-science",
-    "political-science",
-    "health-education",
-    "agriculture",
-    "architecture",
-    "film-studies",
-    "law",
-    "astronomy",
-    "other",
+    "Elementary Tutoring",
+"Middle School Tutoring",
+"High School Tutoring",
+"Adult Tutoring",
+"Academic Coaching",
+"Career Coaching",
+"Mindset Coaching",
+"Conflict Coaching",
+"Goal Achievement Coaching",
+"Focus Coaching",
+"Homeschool Coaching"
+]
+
+export const TUTORINGSUBJECTS =[
+    "Elementary Tutoring",
+"Middle School Tutoring",
+"High School Tutoring",
+"Adult Tutoring",
+
+]
+
+export const COACHINGSUBJECTS =[
+"Academic Coaching",
+"Career Coaching",
+"Mindset Coaching",
+"Conflict Coaching",
+"Goal Achievement Coaching",
+"Focus Coaching",
+"Homeschool Coaching"
 ]
 
 // libnumber

@@ -192,7 +192,7 @@ function ForgotPassword3() {
                         onClick={() => navigate("/signin")}
                       >
                         <p className="fontFamily1" style={{ margin: 0 }}>
-                          Back to Login
+                          Back to Log In
                         </p>
                       </Button>
                     </Col>

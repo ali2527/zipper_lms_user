@@ -35,6 +35,8 @@ function Homepage() {
   const user = useSelector((state) => state.user.userData);
   const token = useSelector((state) => state.user.userToken);
   const [loading, setLoading] = React.useState(false);
+  const [keyword, setKeyword] = React.useState("");
+
 
   // useEffect if user is already logged in
   React.useEffect(() => {
@@ -79,14 +81,14 @@ function Homepage() {
 
   return (
     <Layout className="AuthBackground" style={{ minHeight: "100vh" }}>
-      <Row>
+      <Row className="AuthBackground">
         <Col xs={24} md={10}>
           <div className="heroSection">
             <Row style={{ width: "100%", justifyContent: "center" }}>
               <Col xs={20} md={20} className="formWrap">
                 <Typography.Title
                   className="fontFamily1"
-                  style={{ fontSize: "55px", color: "white" }}
+                  style={{ fontSize: "45px", color: "white" }}
                 >
                   {
                     <>
@@ -98,25 +100,28 @@ function Homepage() {
 
                 <Typography.Text
                   className="fontFamily1"
-                  style={{ fontSize: "20px", color: "white" }}
+                  style={{ fontSize: "18px", color: "white" }}
                 >
                   Achieve Your Goals and Thrive in Today's Fast-Paced World.
-                  This is Youy Gateway to Success.
+                  This is Your Gateway to Success.
                 </Typography.Text>
                 <br />
                 <br />
                 <br />
                 <Input
                   className="heroSerch"
-                  placeholder="Find You tutor & coach"
+                  placeholder="Find your tutor or coach"
                   suffix={
+                    <a href="https://zipperlearning.com/tutor">
                     <Button
                       type="primary"
                       htmlType="submit"
                       className="heroButton"
+                      onClick={() => navigate()}
                     >
                       Search
                     </Button>
+                    </a>
                   }
                   size="large"
                 />
@@ -127,14 +132,14 @@ function Homepage() {
 
         <Col xs={0} sm={0} md={14}>
           <div className="authImageBox">
-            <Row style={{ width: "100%", paddingRight: "20px" }} gutter={40}>
-              <Col xs={0} sm={6} md={6}>
+            <Row style={{ width: "100%", paddingRight: "20px",display:"flex",justifyContent:"flex-end" }} gutter={40}>
+              <Col xs={0} sm={8} md={8} lg={8} xl={7}>
                 <div className="authImage3 " />
               </Col>
-              <Col xs={0} sm={6} md={6}>
+              <Col xs={0} sm={8} md={8} lg={8} xl={7}>
                 <div className="authImage2" />
               </Col>
-              <Col xs={0} sm={12} md={12}>
+              <Col xs={0} sm={8} md={8} lg={8} xl={7}>
                 <div className="authImage1" />
               </Col>
             </Row>
@@ -166,7 +171,7 @@ function Homepage() {
                 textAlign: "center",
               }}
             >
-              Discover Your Ideal Tutor or Coach.
+              Discover Your Ideal Tutor or Coach
             </Typography.Title>
 
             <Typography.Text
@@ -175,8 +180,8 @@ function Homepage() {
             >
               {
                 <>
-                  We provide top-notch online tutoring and coaching services for{" "}
-                  <br /> K-12 and adult learners like you
+                 We're here to instill a love of lifelong learning. We prioritize building long term <br/>and strong connections with  our learners.
+                 
                 </>
               }
             </Typography.Text>
@@ -194,43 +199,7 @@ function Homepage() {
                     justifyContent: "flex-end",
                   }}
                 >
-                  <Row
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Col span={14}>
-                      <Typography.Title
-                        className="fontFamily1"
-                        style={{
-                          fontSize: "15px",
-                          fontWeight: 600,
-                          color: "white",
-                          textAlign: "left",
-                        }}
-                      >
-                        Mathematics Course
-                      </Typography.Title>
-                    </Col>
-                    <Col
-                      span={10}
-                      style={{ display: "flex", justifyContent: "flex-end" }}
-                    >
-                      <Button
-                        type="primary"
-                        shape="circle"
-                        style={{
-                          backgroundColor: "#7cc059",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                        icon={<FaArrowRight style={{ color: "white" }} />}
-                      />
-                    </Col>
-                  </Row>
+                  
                 </Card>
               </Col>
               <Col xs={22} sm={12} md={4}>
@@ -247,43 +216,7 @@ function Homepage() {
                   }}
                 >
                   {" "}
-                  <Row
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Col span={14}>
-                      <Typography.Title
-                        className="fontFamily1"
-                        style={{
-                          fontSize: "15px",
-                          fontWeight: 600,
-                          color: "white",
-                          textAlign: "left",
-                        }}
-                      >
-                        Mathematics Course
-                      </Typography.Title>
-                    </Col>
-                    <Col
-                      span={10}
-                      style={{ display: "flex", justifyContent: "flex-end" }}
-                    >
-                      <Button
-                        type="primary"
-                        shape="circle"
-                        style={{
-                          backgroundColor: "#7cc059",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                        icon={<FaArrowRight style={{ color: "white" }} />}
-                      />
-                    </Col>
-                  </Row>
+                  
                 </Card>
               </Col>
               <Col xs={22} sm={12} md={4}>
@@ -300,43 +233,7 @@ function Homepage() {
                   }}
                 >
                   {" "}
-                  <Row
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Col span={14}>
-                      <Typography.Title
-                        className="fontFamily1"
-                        style={{
-                          fontSize: "15px",
-                          fontWeight: 600,
-                          color: "white",
-                          textAlign: "left",
-                        }}
-                      >
-                        Mathematics Course
-                      </Typography.Title>
-                    </Col>
-                    <Col
-                      span={10}
-                      style={{ display: "flex", justifyContent: "flex-end" }}
-                    >
-                      <Button
-                        type="primary"
-                        shape="circle"
-                        style={{
-                          backgroundColor: "#7cc059",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                        icon={<FaArrowRight style={{ color: "white" }} />}
-                      />
-                    </Col>
-                  </Row>
+                  
                 </Card>
               </Col>
               <Col xs={22} sm={12} md={4}>
@@ -353,43 +250,7 @@ function Homepage() {
                   }}
                 >
                   {" "}
-                  <Row
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Col span={14}>
-                      <Typography.Title
-                        className="fontFamily1"
-                        style={{
-                          fontSize: "15px",
-                          fontWeight: 600,
-                          color: "white",
-                          textAlign: "left",
-                        }}
-                      >
-                        Mathematics Course
-                      </Typography.Title>
-                    </Col>
-                    <Col
-                      span={10}
-                      style={{ display: "flex", justifyContent: "flex-end" }}
-                    >
-                      <Button
-                        type="primary"
-                        shape="circle"
-                        style={{
-                          backgroundColor: "#7cc059",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                        icon={<FaArrowRight style={{ color: "white" }} />}
-                      />
-                    </Col>
-                  </Row>
+                  
                 </Card>
               </Col>
               <Col xs={22} sm={12} md={4}>
@@ -406,43 +267,7 @@ function Homepage() {
                   }}
                 >
                   {" "}
-                  <Row
-                    style={{
-                      display: "flex",
-                      justifyContent: "space-between",
-                      alignItems: "center",
-                    }}
-                  >
-                    <Col span={14}>
-                      <Typography.Title
-                        className="fontFamily1"
-                        style={{
-                          fontSize: "15px",
-                          fontWeight: 600,
-                          color: "white",
-                          textAlign: "left",
-                        }}
-                      >
-                        Mathematics Course
-                      </Typography.Title>
-                    </Col>
-                    <Col
-                      span={10}
-                      style={{ display: "flex", justifyContent: "flex-end" }}
-                    >
-                      <Button
-                        type="primary"
-                        shape="circle"
-                        style={{
-                          backgroundColor: "#7cc059",
-                          display: "flex",
-                          justifyContent: "center",
-                          alignItems: "center",
-                        }}
-                        icon={<FaArrowRight style={{ color: "white" }} />}
-                      />
-                    </Col>
-                  </Row>
+                  
                 </Card>
               </Col>
             </Row>
@@ -468,7 +293,7 @@ function Homepage() {
               padding: "20px",
             }}
           >
-            <Row style={{ justifyContent: "center", alignItems: "center" }}>
+              <Row gutter={50} style={{ justifyContent: "center", alignItems: "center" }}>
               <Col xs={24} sm={12}>
                 <Typography.Title
                   className="fontFamily1"
@@ -483,7 +308,7 @@ function Homepage() {
                   {
                     <>
                       Ignite Your Passion
-                      <br /> for Knowledge.
+                      <br /> for Learning
                     </>
                   }
                 </Typography.Title>
@@ -495,11 +320,9 @@ function Homepage() {
                 >
                   {
                     <>
-                      We are not just here to help you pass exams- we want to
-                      instill a <br /> genuine love for learning that lasts a
-                      lifetime. We're all about <br /> building strong , long
-                      lasting connetions between learners, turors <br /> and
-                      coaches{" "}
+                      We’re here to instill a genuine love for learning that lasts a lifetime. We
+prioritize building long-term, reciprocal connections between learners, tutors, and
+coaches
                     </>
                   }
                 </Typography.Text>
@@ -509,7 +332,7 @@ function Homepage() {
             <br />
             <Row
               gutter={50}
-              style={{ justifyContent: "center", alignItems: "center" }}
+              style={{ justifyContent: "space-between", alignItems: "center" }}
             >
               <Col xs={24} sm={10}>
                 <Row>
@@ -553,8 +376,7 @@ function Homepage() {
                     >
                       {
                         <>
-                          More than just Tutoring
-                          <br /> or Coaching
+                          Tutors & Coaches
                         </>
                       }
                     </Typography.Title>
@@ -568,8 +390,7 @@ function Homepage() {
                     >
                       {
                         <>
-                          With our supportive tutor and coaches by your side.
-                          you'll gain the confidence to tackel any challange
+                          Our Experts will help you gain the knowledge, skill and confidence to tackle any challange and achieve your goals.
                         </>
                       }
                     </Typography.Text>
@@ -616,7 +437,7 @@ function Homepage() {
                         margin: "10px 0",
                       }}
                     >
-                      {<>Adaptable Learning</>}
+                      {<>Personalized Learning</>}
                     </Typography.Title>
                     <Typography.Text
                       className="fontFamily1"
@@ -628,8 +449,7 @@ function Homepage() {
                     >
                       {
                         <>
-                          Enjoy a learning that fits your style, and learn at
-                          your own pace
+                          We carefully design our lessons to accommodate the specific needs of each learner.
                         </>
                       }
                     </Typography.Text>
@@ -637,7 +457,7 @@ function Homepage() {
                 </Row>
                 <br />
                 <br />
-                <Row>
+                {/* <Row>
                   <Col
                     xs={24}
                     sm={6}
@@ -694,7 +514,7 @@ function Homepage() {
                       }
                     </Typography.Text>
                   </Col>
-                </Row>
+                </Row> */}
               </Col>
               <Col
                 xs={24}
@@ -719,7 +539,7 @@ function Homepage() {
                     <source src={"/images/vdo.mp4"} type="video/mp4" />
                   </video>
                 </div>
-                <div
+                {/* <div
                   style={{
                     position: "absolute",
                     height: "100px",
@@ -815,12 +635,13 @@ function Homepage() {
                       </Row>
                     </Col>
                   </Row>
-                </div>
+                </div> */}
               </Col>
             </Row>
           </div>
         </Col>
       </Row>
+
 
 {/* section 4 */}
 <Row
@@ -852,7 +673,7 @@ function Homepage() {
           
             <Row gutter={30} justify="center" style={{ margin: "50px 0" }}>
             
-              <Col xs={22} sm={10}>
+              <Col xs={24} sm={10}>
                 <Card
                   className="joinCard1"
                   bordered={false}
@@ -883,7 +704,7 @@ function Homepage() {
                  <Typography.Title
                         className="fontFamily1"
                         style={{
-                          fontSize: "35px",
+                          fontSize: window.innerWidth < 500 ? "25px" :"35px",
                           fontWeight: 600,
                           color: "white",
                           textAlign: "left",
@@ -891,20 +712,29 @@ function Homepage() {
                       >
                         {<>Become a Tutor <br/> or Coach</>}
                       </Typography.Title>
+                      {window.innerWidth < 500 ? 
                       <Typography.Text
                   className="fontFamily1"
-                  style={{ fontSize: "18px", color: "white", textAlign: "left" }}
+                  style={{fontSize: "12px", color: "white", textAlign: "left" }}
                 >
                   {
                     <>
-                    We offer a great opportunity for you <br/> to share your Knowledge and expertise<br/> in a supportive and flexible online<br/> environment</>
+                   Are you ready to make a positive <br/> impact on learner's lives?</>
                   }
-                </Typography.Text>
+                </Typography.Text> :                      <Typography.Text
+                  className="fontFamily1"
+                  style={{fontSize: "18px", color: "white", textAlign: "left" }}
+                >
+                  {
+                    <>
+                     Are you ready to make a positive <br/> impact on learner's lives?</>
+                  }
+                </Typography.Text> }
                 
                   </Row>
                   <br/>
                   <Row>
-                  <a href="https://tutor.zipperlearning.com/">
+                  <a href="https://tutor.zipperlearning.com/signup">
                 <Button
                         style={{
                           marginTop: "10px",
@@ -925,7 +755,7 @@ function Homepage() {
                 </Card>
              
               </Col>
-              <Col xs={22} sm={10}>
+              <Col xs={24} sm={10}>
                 <Card
                   bordered={false}
                   className="joinCard2"
@@ -957,7 +787,7 @@ function Homepage() {
                  <Typography.Title
                         className="fontFamily1"
                         style={{
-                          fontSize: "35px",
+                          fontSize: window.innerWidth < 500 ? "25px" :"35px",
                           fontWeight: 600,
                           color: "white",
                           textAlign: "left",
@@ -965,15 +795,25 @@ function Homepage() {
                       >
                         {<>Your Personalized <br/> Learning Path</>}
                       </Typography.Title>
+
+                {window.innerWidth < 500 ? 
                       <Typography.Text
                   className="fontFamily1"
-                  style={{ fontSize: "18px", color: "white", textAlign: "left" }}
+                  style={{fontSize: "12px", color: "white", textAlign: "left" }}
                 >
                   {
                     <>
-                     Step into a world full of opportunities where <br /> we always support and celebrate <br /> your growth and achievements.</>
+                   Step into a world full of opportunities where <br /> we always support and celebrate <br /> your growth and achievements.</>
                   }
-                </Typography.Text>
+                </Typography.Text> :                      <Typography.Text
+                  className="fontFamily1"
+                  style={{fontSize: "18px", color: "white", textAlign: "left" }}
+                >
+                  {
+                    <>
+                     Step into a world full of opportunities where we always support and celebrate your growth and achievements.</>
+                  }
+                </Typography.Text> }
                 
                   </Row>
                   <br/>
@@ -991,7 +831,7 @@ function Homepage() {
                         ghost
                         size="large"
                       >
-                        Register Now
+                        Register
                       </Button>
                      
                 </Row>

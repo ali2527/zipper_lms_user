@@ -40,14 +40,14 @@ const birthday = new Date(year, month, day);
 
     let data = {
       firstName:values.firstName,
-      lastName:values.lastName,
+      lastName:"",
       email: values.email,
       password: values.password,
       city:values.city,
-      birthday: birthday,
+      age: values.age,
       parent:values.parent,
       phoneNumber:values.phone,
-      homeNumber:values.homeNumber,
+      homeNumber:"",
       school:values.school,
       gradeLevel:values.grade,
       city:values.city,
@@ -86,7 +86,7 @@ const birthday = new Date(year, month, day);
       <Row
         className="blueBackground"
         style={{
-          height: "45vh",
+          height: "50vh",
           display: "flex",
           justifyContent: "center",
           alignItems: "center",
@@ -156,7 +156,7 @@ const birthday = new Date(year, month, day);
                   <Row gutter={20}>
                     <Col xs={24} md={12}>
                     <Form.Item
-                    label="First Name*"
+                    label="Learner's Name*"
                     name="firstName"
                     rules={[
                       {
@@ -173,7 +173,7 @@ const birthday = new Date(year, month, day);
                     />
                   </Form.Item>
                     </Col>
-                    <Col xs={24} md={12}>
+                    {/* <Col xs={24} md={12}>
                     <Form.Item
                     label="Last Name*"
                     name="lastName"
@@ -191,9 +191,29 @@ const birthday = new Date(year, month, day);
                     
                     />
                   </Form.Item>
+                    </Col> */}
+                       <Col xs={24} md={12}>
+                    <Form.Item
+                    label="Parent / Guardian Name* (Type N/A if you are the learner)"
+                    name="parent"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please input parent / Guardian name!",
+                      },
+                    ]}
+                  >
+                    <Input
+                      size="large"
+                      placeholder="Enter Parent / Guardian Name"
+                      className="signupFormInput"
+                    
+                    />
+                  </Form.Item>
                     </Col>
+                    
                   </Row>
-
+{/* 
                   <Row gutter={20}>
                     <Col xs={24} md={12}>
                     <Form.Item
@@ -294,28 +314,10 @@ const birthday = new Date(year, month, day);
                     </Row>
                    
                     </Col>
-                  </Row>
+                  </Row> */}
 
                   <Row gutter={20}>
-                    <Col xs={24} md={12}>
-                    <Form.Item
-                    label="Parent / Guardian Name*"
-                    name="parent"
-                    rules={[
-                      {
-                        required: true,
-                        message: "Please input parent / Guardian name!",
-                      },
-                    ]}
-                  >
-                    <Input
-                      size="large"
-                      placeholder="Enter Parent / Guardian Name"
-                      className="signupFormInput"
                     
-                    />
-                  </Form.Item>
-                    </Col>
                     <Col xs={24} md={12}>
                     <Form.Item
                     label="Email Address*"
@@ -330,6 +332,25 @@ const birthday = new Date(year, month, day);
                     <Input
                       size="large"
                       placeholder="Enter Email Address"
+                      className="signupFormInput"
+                    
+                    />
+                  </Form.Item>
+                    </Col>
+                    <Col xs={24} md={12}>
+                    <Form.Item
+                    label="Grade Level*"
+                    name="grade"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please input grade Level",
+                      },
+                    ]}
+                  >
+                    <Input
+                      size="large"
+                      placeholder="Enter Grade"
                       className="signupFormInput"
                     
                     />
@@ -357,7 +378,7 @@ const birthday = new Date(year, month, day);
                     />
                   </Form.Item>
                     </Col>
-                    <Col xs={24} md={12}>
+                    {/* <Col xs={24} md={12}>
                     <Form.Item
                     label="Home Number*"
                     name="homeNumber"
@@ -375,50 +396,29 @@ const birthday = new Date(year, month, day);
                     
                     />
                   </Form.Item>
+                    </Col> */}
+                    <Col xs={24} md={12}>
+                    <Form.Item
+                    label="Age"
+                    name="age"
+                    rules={[
+                      {
+                        required: true,
+                        message: "Please input Age",
+                      },
+                    ]}
+                  >
+                    <Input
+                      size="large"
+                      placeholder="Enter Age"
+                      className="signupFormInput"
+                    
+                    />
+                  </Form.Item>
                     </Col>
                   </Row>
 
-                  <Row gutter={20}>
-                    <Col xs={24} md={12}>
-                    <Form.Item
-                    label="School Name*"
-                    name="school"
-                    rules={[
-                      {
-                        required: true,
-                        message: "Please input school name",
-                      },
-                    ]}
-                   
-                  >
-                    <Input
-                      size="large"
-                      placeholder="Enter School Name"
-                      className="signupFormInput"
-                    
-                    />
-                  </Form.Item>
-                    </Col>
-                    <Col xs={24} md={12}>
-                    <Form.Item
-                    label="Grade Level*"
-                    name="grade"
-                    rules={[
-                      {
-                        required: true,
-                        message: "Please input grade Level",
-                      },
-                    ]}
-                  >
-                    <Input
-                      size="large"
-                      placeholder="Enter Grade"
-                      className="signupFormInput"
-                    
-                    />
-                  </Form.Item>
-                    </Col>
-                  </Row>
+     
 
                   <Row gutter={20}>
                     <Col xs={24} md={12}>
@@ -483,24 +483,27 @@ const birthday = new Date(year, month, day);
                     </Col>
                     <Col xs={24} md={12}>
                     <Form.Item
-                    label="Intrested Subjects*"
+                    label="Interested Subjects*"
                     name="subjects"
                     rules={[
                       {
                         required: true,
-                        message: "Enter Intrested Subjects",
+                        message: "Enter Interested Subjects",
                       },
                     ]}
                   >
                     <Input
                       size="large"
-                      placeholder="Enter Intrested Subjects (comma seperated)"
+                      placeholder="Enter Interested Subjects (comma separated)"
                       className="signupFormInput"
                     
                     />
                   </Form.Item>
                     </Col>
                   </Row>
+
+       
+
 
 <br/>
                   <Row>

@@ -5,9 +5,7 @@
 }
 
 @import url('https://fonts.cdnfonts.com/css/visby');
-
-
-body {
+@import url('https://fonts.googleapis.com/css2?family=Grenze:ital,wght@0,500;0,600;1,500&family=Signika:wght@300;400;500;600&display=swap');body {
   margin: 0;
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
     'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
@@ -57,6 +55,11 @@ code {
 
 .fontFamily2{
   font-family: 'Visby'!important;
+  font-weight: auto;
+}
+
+.fontFamily3{
+  font-family: 'Signika', sans-serif;
   font-weight: auto;
 }
 

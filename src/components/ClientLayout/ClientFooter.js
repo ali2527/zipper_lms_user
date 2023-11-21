@@ -43,7 +43,7 @@ const ClientFooter = () => {
                     >
                       We're a passionate group of educators working together to
                       create the best online learning experiences for K-12 and
-                      adult learners like you.
+                      adult learners.
                     </Typography.Text>
                     <br />
                     <br />
@@ -86,7 +86,7 @@ const ClientFooter = () => {
                       </Col>
                     </Row>
                     <br />
-                    <Row>
+                    {/* <Row>
                  
                       <Button
                         style={{
@@ -115,7 +115,7 @@ const ClientFooter = () => {
                         Apply Now
                       </Button>
                       </a>
-                    </Row>
+                    </Row> */}
                   </div>
                 </Col>
               </Row>
@@ -203,7 +203,7 @@ const ClientFooter = () => {
                     Focus Coaching
                   </List.Item>
                   <List.Item key="focus_coaching" className="footerLink">
-                    HomeSchool Coaching
+                    Homeschool Coaching
                   </List.Item>
                 </List>
               </div>
@@ -262,10 +262,8 @@ const ClientFooter = () => {
           <Row>
             <Col xs={24} md={14}>
               <p className="footerLink">
-                All Rights Reserved. Proudly Designed by{" "}
-                <a style={{ color: "white", textDecoration: "underline" }}>
-                  stategix design
-                </a>
+              © 2020 - 2023 Zipper Learning. All rights reserved
+               
               </p>
             </Col>
             <Col xs={24} md={10}>

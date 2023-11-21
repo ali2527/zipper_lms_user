@@ -87,13 +87,13 @@ function Homepage() {
             <Row style={{ width: "100%", justifyContent: "center" }}>
               <Col xs={20} md={20} className="formWrap">
                 <Typography.Title
-                  className="fontFamily1"
-                  style={{ fontSize: "45px", color: "white" }}
+                  className="fontFamily3"
+                  style={{ fontSize: "50px", color: "white",fontWeight:500 }}
                 >
                   {
                     <>
                       {" "}
-                      Unlock Your True Potential with <br /> Zipper Learning
+                      Unlock Your True Potential with Zipper Learning
                     </>
                   }
                 </Typography.Title>
@@ -180,7 +180,7 @@ function Homepage() {
             >
               {
                 <>
-                 We're here to instill a love of lifelong learning. We prioritize building long term <br/>and strong connections with  our learners.
+                 We're here to instill a love of lifelong learning. We prioritize building long-term <br/>and strong connections with  our learners.
                  
                 </>
               }
@@ -293,9 +293,13 @@ function Homepage() {
               padding: "20px",
             }}
           >
-              <Row gutter={50} style={{ justifyContent: "center", alignItems: "center" }}>
-              <Col xs={24} sm={12}>
-                <Typography.Title
+             
+            <Row
+              gutter={50}
+              style={{ justifyContent: "space-between", alignItems: "center" }}
+            >
+              <Col xs={24} sm={10}>
+              <Typography.Title
                   className="fontFamily1"
                   style={{
                     fontSize: "35px",
@@ -312,29 +316,7 @@ function Homepage() {
                     </>
                   }
                 </Typography.Title>
-              </Col>
-              <Col xs={24} sm={12}>
-                <Typography.Text
-                  className="fontFamily1"
-                  style={{ fontSize: "16px", color: "grey", textAlign: "left" }}
-                >
-                  {
-                    <>
-                      We’re here to instill a genuine love for learning that lasts a lifetime. We
-prioritize building long-term, reciprocal connections between learners, tutors, and
-coaches
-                    </>
-                  }
-                </Typography.Text>
-              </Col>
-            </Row>
-            <br />
-            <br />
-            <Row
-              gutter={50}
-              style={{ justifyContent: "space-between", alignItems: "center" }}
-            >
-              <Col xs={24} sm={10}>
+                <br/>  <br/>
                 <Row>
                   <Col
                     xs={24}
@@ -390,7 +372,7 @@ coaches
                     >
                       {
                         <>
-                          Our Experts will help you gain the knowledge, skill and confidence to tackle any challange and achieve your goals.
+                          Our experts will help you gain the knowledge, skills and confidence to tackle any challenge and achieve your goals.
                         </>
                       }
                     </Typography.Text>
@@ -449,7 +431,7 @@ coaches
                     >
                       {
                         <>
-                          We carefully design our lessons to accommodate the specific needs of each learner.
+                          We design our lessons to accommodate the specific needs of our learners.
                         </>
                       }
                     </Typography.Text>
@@ -529,7 +511,7 @@ coaches
                   className="videoBox"
                   style={{
                     width: "100%",
-                    height: "350px",
+                    height: "400px",
                     borderRadius: "50px",
                     overflow: "hidden",
                     position: "relative",
@@ -700,7 +682,8 @@ coaches
                       alignItems: "center",
                     }}
                   >
-                 
+                 <Col>
+                 <Row>
                  <Typography.Title
                         className="fontFamily1"
                         style={{
@@ -712,14 +695,17 @@ coaches
                       >
                         {<>Become a Tutor <br/> or Coach</>}
                       </Typography.Title>
-                      {window.innerWidth < 500 ? 
+                 </Row>
+
+                 <Row>
+                 {window.innerWidth < 500 ? 
                       <Typography.Text
                   className="fontFamily1"
                   style={{fontSize: "12px", color: "white", textAlign: "left" }}
                 >
                   {
                     <>
-                   Are you ready to make a positive <br/> impact on learner's lives?</>
+                   Are you ready to make a positive <br/> impact on learners' lives?</>
                   }
                 </Typography.Text> :                      <Typography.Text
                   className="fontFamily1"
@@ -727,9 +713,13 @@ coaches
                 >
                   {
                     <>
-                     Are you ready to make a positive <br/> impact on learner's lives?</>
+                     Are you ready to make a positive <br/> impact on learners' lives?</>
                   }
                 </Typography.Text> }
+                 </Row>
+                 </Col>
+              
+                    
                 
                   </Row>
                   <br/>

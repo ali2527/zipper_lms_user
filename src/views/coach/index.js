@@ -512,7 +512,7 @@ const handleClear = () => {
                                   marginTop: 20,
                                 }}
                               >
-                                ${item.hourlyRate} / Hour
+                                ${item.hourlyRate} / hour
                               </Typography.Text>
                             </Row>
                           </Col>

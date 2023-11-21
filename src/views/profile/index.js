@@ -281,7 +281,7 @@ function Profile() {
                 </Row>
 
                 <Row gutter={20}>
-                  <Col xs={24} md={12}>
+                  {/* <Col xs={24} md={12}>
                     <Form.Item
                       label="Home Number*"
                       name="homeNumber"
@@ -300,7 +300,7 @@ function Profile() {
                         className="signupFormInput"
                       />
                     </Form.Item>
-                  </Col>
+                  </Col> */}
                   <Col xs={24} md={12}>
                     <Form.Item
                       label="City*"
@@ -465,7 +465,7 @@ function Profile() {
                   </Row>
 
                   <Row style={{ marginTop: 40 }}>
-                    <Col xs={12} sm={12}>
+                    <Col xs={12} sm={6}>
                       <Typography.Title
                         className="fontFamily1"
                         style={{
@@ -514,9 +514,6 @@ function Profile() {
                         {user?.email}
                       </Typography.Text>
                     </Col>
-                  </Row>
-
-                  <Row style={{ marginTop: 40 }}>
                     <Col xs={12} sm={6}>
                       <Typography.Title
                         className="fontFamily1"
@@ -541,8 +538,12 @@ function Profile() {
                         {user?.phoneNumber}
                       </Typography.Text>
                     </Col>
+                  </Row>
 
-                    <Col xs={12} sm={6}>
+                  <Row style={{ marginTop: 40 }}>
+                   
+
+                    {/* <Col xs={12} sm={6}>
                       <Typography.Title
                         className="fontFamily1"
                         style={{
@@ -565,9 +566,9 @@ function Profile() {
                       >
                        {user?.homeNumber}
                       </Typography.Text>
-                    </Col>
+                    </Col> */}
 
-                    <Col xs={12} sm={6}>
+                    {/* <Col xs={12} sm={6}>
                       <Typography.Title
                         className="fontFamily1"
                         style={{
@@ -590,7 +591,7 @@ function Profile() {
                       >
                        {user?.school}
                       </Typography.Text>
-                    </Col>
+                    </Col> */}
                   </Row>
 
                   <Row style={{ marginTop: 40 }}>

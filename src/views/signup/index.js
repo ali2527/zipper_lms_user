@@ -515,10 +515,13 @@ const birthday = new Date(year, month, day);
                         <Checkbox style={{ marginBottom: 0, color: "grey" }}>
                           {" "}
                           <p className="fontFamily1" style={{ margin: 0 }}>
-                          By selecting this, you are confirming that you have read and agree to Zipper Learning's Terms and Conditions and Privacy Policies
+                          By checking this box, you are confirming that you have read and agree to Zipper Learning’s <span style={{cursor:'pointer', color:"#1677ff"}} onClick={() => navigate("/terms-and-conditions")}>Terms and Conditions</span> and <span style={{cursor:'pointer', color:"#1677ff"}} onClick={() => navigate("/privacy-policy")}>Privacy Policy</span>. 
                           </p>
                         </Checkbox>
                       </Form.Item>
+
+
+                      
                   </Row>
                   <br/>
 

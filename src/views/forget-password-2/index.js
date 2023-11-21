@@ -89,7 +89,7 @@ function ForgetPassword2() {
             <Col xs={0} sm={6} md={6}>
             <div className="authImage2" />
             </Col>
-            <Col xs={0} sm={12} md={12}>
+            <Col xs={0} sm={6} md={6}>
             <div className="authImage3" />
             </Col>
           </Row>

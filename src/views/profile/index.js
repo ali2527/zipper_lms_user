@@ -461,10 +461,6 @@ function Profile() {
                         {user?.age}
                       </Typography.Text>
                     </Col>
-
-                  </Row>
-
-                  <Row style={{ marginTop: 40 }}>
                     <Col xs={12} sm={6}>
                       <Typography.Title
                         className="fontFamily1"
@@ -476,7 +472,35 @@ function Profile() {
                           marginTop: 0,
                         }}
                       >
-                       Name of Parent/ Guardian
+                        Grade Level
+                      </Typography.Title>
+                      <Typography.Text
+                        className="fontFamily1"
+                        style={{
+                          fontSize: "14px",
+                          color: "grey",
+                          textAlign: "left",
+                        }}
+                      >
+                        {user?.gradeLevel}
+                      </Typography.Text>
+                    </Col>
+
+                  </Row>
+
+                  <Row style={{ marginTop: 40 }}>
+                    <Col xs={12} sm={8}>
+                      <Typography.Title
+                        className="fontFamily1"
+                        style={{
+                          fontSize: "16px",
+                          fontWeight: 600,
+                          color: "black",
+                          textAlign: "left",
+                          marginTop: 0,
+                        }}
+                      >
+                       Parent/ Guardian Name
                       </Typography.Title>
                       <Typography.Text
                         className="fontFamily1"
@@ -490,7 +514,7 @@ function Profile() {
                       </Typography.Text>
                     </Col>
 
-                    <Col xs={12} sm={6}>
+                    <Col xs={12} sm={8}>
                       <Typography.Title
                         className="fontFamily1"
                         style={{
@@ -514,36 +538,13 @@ function Profile() {
                         {user?.email}
                       </Typography.Text>
                     </Col>
-                    <Col xs={12} sm={6}>
-                      <Typography.Title
-                        className="fontFamily1"
-                        style={{
-                          fontSize: "16px",
-                          fontWeight: 600,
-                          color: "black",
-                          textAlign: "left",
-                          marginTop: 0,
-                        }}
-                      >
-                        Phone Number
-                      </Typography.Title>
-                      <Typography.Text
-                        className="fontFamily1"
-                        style={{
-                          fontSize: "14px",
-                          color: "grey",
-                          textAlign: "left",
-                        }}
-                      >
-                        {user?.phoneNumber}
-                      </Typography.Text>
-                    </Col>
+                 
                   </Row>
 
-                  <Row style={{ marginTop: 40 }}>
+                  {/* <Row style={{ marginTop: 40 }}>
                    
 
-                    {/* <Col xs={12} sm={6}>
+                    <Col xs={12} sm={6}>
                       <Typography.Title
                         className="fontFamily1"
                         style={{
@@ -566,9 +567,9 @@ function Profile() {
                       >
                        {user?.homeNumber}
                       </Typography.Text>
-                    </Col> */}
+                    </Col>
 
-                    {/* <Col xs={12} sm={6}>
+                    <Col xs={12} sm={6}>
                       <Typography.Title
                         className="fontFamily1"
                         style={{
@@ -591,11 +592,11 @@ function Profile() {
                       >
                        {user?.school}
                       </Typography.Text>
-                    </Col> */}
-                  </Row>
+                    </Col>
+                  </Row> */}
 
                   <Row style={{ marginTop: 40 }}>
-                    <Col xs={12} sm={6}>
+                  <Col xs={12} sm={6}>
                       <Typography.Title
                         className="fontFamily1"
                         style={{
@@ -606,7 +607,7 @@ function Profile() {
                           marginTop: 0,
                         }}
                       >
-                        Grade Level
+                        Phone Number
                       </Typography.Title>
                       <Typography.Text
                         className="fontFamily1"
@@ -616,7 +617,7 @@ function Profile() {
                           textAlign: "left",
                         }}
                       >
-                        {user?.gradeLevel}
+                        {user?.phoneNumber}
                       </Typography.Text>
                     </Col>
 

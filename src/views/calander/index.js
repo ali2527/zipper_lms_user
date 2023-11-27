@@ -237,7 +237,7 @@ function BookingCalander() {
                         marginBottom: 0,
                       }}
                     >
-                      Subject
+                      Subjects
                     </Typography.Title>
                     <br />
                     <Select

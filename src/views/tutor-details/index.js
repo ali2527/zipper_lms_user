@@ -162,7 +162,7 @@ function CoachDetails() {
             marginBottom: 20,
           }}
         >
-          {<> Coach Details</>}
+          {<> Tutor Details</>}
         </Typography.Title>
       </Row>
 
@@ -514,7 +514,7 @@ preview={false}
                       marginTop: 0,
                     }}
                   >
-                    Subject
+                    Subjects
                   </Typography.Title>
 
                   <Row gutter={[80, 30]}>
@@ -555,7 +555,7 @@ preview={false}
                       marginTop: 0,
                     }}
                   >
-                    Average Rating
+                    Ratings and Reviews
                   </Typography.Title>
 
                   <Row

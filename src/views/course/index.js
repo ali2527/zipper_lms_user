@@ -1,7 +1,7 @@
 import React, { useState } from "react";
 import {
   message,
-  Slider,
+  Select,
   Input,
   Col,
   Row,
@@ -206,8 +206,16 @@ function Course() {
             }}
           >
               <Row style={{justifyContent:"center"}}>
-              <Tabs className="categoryTab"   activeKey={selectedCategory} items={categories?.map(item => {return({key:item._id,label:item.title})})} onChange={onChange} />
-       
+                <Col xs={24} sm={10} md={8}>
+              {/* <Tabs className="categoryTab"   activeKey={selectedCategory} items={categories?.map(item => {return({key:item._id,label:item.title})})} onChange={onChange} /> */}
+              <Select
+              size="large"
+    placeholder="Select a Category"
+    optionFilterProp="children"
+    onChange={onChange}
+    style={{width:'100%'}}
+    options={categories?.map(item => {return({value:item._id,label:item.title})})}
+  /></Col>
             </Row>
             <br/>
             <br/>

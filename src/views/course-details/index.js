@@ -201,11 +201,11 @@ preview={false}
                     marginTop: 20,
                   }}
                 >
-                 Features
+                $ {course?.course?.price}
                 </Typography.Title>
                
 
-                {course?.course?.features.toString().split(",").map(item => {return( <Typography.Text
+                {/* {course?.course?.features.toString().split(",").map(item => {return( <Typography.Text
                   className="fontFamily1"
                   style={{
                     fontSize: "16px",
@@ -218,7 +218,7 @@ preview={false}
                   }}
                 >
                  <BsDot style={{fontSize:"30px",margin:0}}/>{item}
-                </Typography.Text>)})}
+                </Typography.Text>)})} */}
                
 
                 <br />
@@ -228,9 +228,10 @@ preview={false}
                   type="primary"
                   htmlType="submit"
                   className="loginButton"
+                  style={{backgroundColor:"#213759"}}
                   onClick={() => navigate("/payment/" + course?.course?._id , {state:{type:"COURSE"}})}
                 >
-                  Register Now
+                  Buy this course
                 </Button>}
               </Row>}
             </Card>

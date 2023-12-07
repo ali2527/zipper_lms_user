@@ -274,7 +274,8 @@ const ClientHeader = () => {
           >
             <Col
               xs={18}
-              md={4}
+              md={3}
+              xl={4}
               style={{ textAlign: "left" }}
               className="site-header-logo"
             >
@@ -292,7 +293,8 @@ const ClientHeader = () => {
             </Col>
             <Col
               xs={0}
-              md={20}
+              md={21}
+              xl={20}
               style={{
                 display: "flex",
                 justifyContent: "flex-end",
@@ -534,7 +536,7 @@ const ClientHeader = () => {
                   ghost
                   size="large"
                 >
-                  Register as Tutor/Coach
+                  Become a Tutor/Coach
                 </Button>
                 </a>
                

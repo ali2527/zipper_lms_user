@@ -128,7 +128,7 @@ function ContactUs() {
                   >
                     <Input
                       size="large"
-                      placeholder="Enter FullName"
+                      placeholder="Enter Full Name"
                       className="ContactFormInput"
                     
                     />

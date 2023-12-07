@@ -167,7 +167,7 @@ const birthday = new Date(year, month, day);
                   >
                     <Input
                       size="large"
-                      placeholder="Enter FullName"
+                      placeholder="Enter Full Name"
                       className="signupFormInput"
                     
                     />

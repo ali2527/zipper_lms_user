@@ -49,6 +49,9 @@ function LessonDetail() {
     rating:0, comment:"" 
   });
   const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isModal2Open, setIsModal2Open] = useState(false);
+  const [isModal3Open, setIsModal3Open] = useState(false);
+
   const user = useSelector((state) => state.user.userData);
   const token = useSelector((state) => state.user.userToken);
 
@@ -77,6 +80,29 @@ function LessonDetail() {
       console.log(err);
     }
   }
+
+
+  const cancelSession = () => {
+    try {
+      Post(CHAT.createChat,{ student:user._id,
+      coach:lesson?.coach?._id},token)
+      .then((response) => {
+        if (response?.data?.status) { 
+          navigate('/chat')
+        } else {
+          swal("Oops!", response.data.message, "error");
+        }
+      })
+      .catch((e) => {
+        setLoading(false);
+      });
+    
+    } catch (err) {
+      console.log(err);
+    }
+  }
+
+  
 
   const addReview = () => {
     try {
@@ -276,7 +302,7 @@ function LessonDetail() {
                           marginTop: 0,
                         }}
                       >
-                        Service/ Subject Name
+                        Service Name
                       </Typography.Title>
                       <Typography.Text
                         className="fontFamily1"
@@ -460,15 +486,15 @@ function LessonDetail() {
 
                  {(lesson.status == "UPCOMING") &&  <Row style={{ marginTop: 30 }}>
                     {lesson.isPaid ? (
-                      <Button
-                        type="primary"
-                        htmlType="submit"
-                        className="loginButton"
-                        onClick={() => createChat()}
-                      >
-                        View Chat
-                      </Button>
-                    ) : (
+                       <Button
+                       type="primary"
+                       htmlType="submit"
+                       className="loginButton"
+                       onClick={() => createChat()}
+                     >
+                       Message
+                     </Button>
+                    ) : (<>
                       <Button
                         type="primary"
                         htmlType="submit"
@@ -477,7 +503,37 @@ function LessonDetail() {
                       >
                         Make Payment
                       </Button>
-                    )}
+                      &emsp;
+                      <Button
+                        type="primary"
+                        htmlType="submit"
+                        className="loginButton"
+                        onClick={() => createChat()}
+                      >
+                        Message
+                      </Button>
+                     
+                      &emsp;
+                      <Button
+                        type="primary"
+                        htmlType="submit"
+                        className="loginButton3"
+                        onClick={() => setIsModal3Open(true)}
+                      >
+                        Reschedule
+                      </Button> 
+                      &emsp;
+                      <Button
+                        type="primary"
+                        htmlType="submit"
+                        className="loginButton2"
+
+                        onClick={() => setIsModal2Open(true)}
+                      >
+                        Cancel Session
+                      </Button>
+
+                      </>)}
                     &emsp;
                   </Row>}
 
@@ -536,6 +592,103 @@ onChange={(e)=> handleChange("comment",e.target.value)}
         </div>
        
       </Modal>
+
+
+      <Modal
+        visible={isModal2Open}
+        onOk={() => cancelSession()}
+        onCancel={() => setIsModal2Open(false)}
+        okText="Yes"
+        className="StyledModal"
+        style={{
+          left: 0,
+          right: 0,
+          marginLeft: "auto",
+          marginRight: "auto",
+          textAlign: "center",
+        }}
+        cancelText="No"
+        cancelButtonProps={{
+          style: {
+            border: "2px solid #203453",
+            color: "#203453",
+            height: "auto",
+            padding: "6px 35px",
+            borderRadius: "50px",
+            fontSize: "16px",
+            marginTop: "15px",
+          },
+        }}
+        okButtonProps={{
+          style: {
+            backgroundColor: "#203453",
+            color: "white",
+            marginTop: "15px",
+            height: "auto",
+            padding: "5px 35px",
+            borderRadius: "50px",
+            fontSize: "16px",
+            border: "2px solid #203453",
+          },
+        }}
+      >
+        
+        <Typography.Title level={4} style={{ fontSize: "25px" }}>
+          Cancel Session
+        </Typography.Title>
+        <Typography.Text style={{ fontSize: 16 }}>
+          Are You Sure You Want To Cancel This Session ?
+        </Typography.Text>
+      </Modal>
+
+      <Modal
+        visible={isModal3Open}
+        onOk={() => navigate("/calander/" + lesson.coach._id)}
+        onCancel={() => setIsModal3Open(false)}
+        okText="Yes"
+        className="StyledModal"
+        style={{
+          left: 0,
+          right: 0,
+          marginLeft: "auto",
+          marginRight: "auto",
+          textAlign: "center",
+        }}
+        cancelText="No"
+        cancelButtonProps={{
+          style: {
+            border: "2px solid #203453",
+            color: "#203453",
+            height: "auto",
+            padding: "6px 35px",
+            borderRadius: "50px",
+            fontSize: "16px",
+            marginTop: "15px",
+          },
+        }}
+        okButtonProps={{
+          style: {
+            backgroundColor: "#203453",
+            color: "white",
+            marginTop: "15px",
+            height: "auto",
+            padding: "5px 35px",
+            borderRadius: "50px",
+            fontSize: "16px",
+            border: "2px solid #203453",
+          },
+        }}
+      >
+        
+        <Typography.Title level={4} style={{ fontSize: "25px" }}>
+          Reschedule Session
+        </Typography.Title>
+        <Typography.Text style={{ fontSize: 16 }}>
+          Are You Sure You Want To Reschedule This Session ?
+        </Typography.Text>
+      </Modal>
+
+      
     </Layout>
   );
 }

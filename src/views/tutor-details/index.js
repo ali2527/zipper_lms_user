@@ -555,7 +555,7 @@ preview={false}
                       marginTop: 0,
                     }}
                   >
-                    Ratings and Reviews
+                    Ratings & Reviews
                   </Typography.Title>
 
                   <Row

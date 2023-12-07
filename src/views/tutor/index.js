@@ -283,7 +283,7 @@ const handleClear = () => {
                     marginBottom: 10,
                   }}
                 >
-                  Avalibility
+                  Availability
                 </Typography.Text>
 
                 <Checkbox.Group

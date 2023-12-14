@@ -1,11 +1,7 @@
-// export const BASE_URL = "https://secure.demo243.webhostlabs.net:3002/api/"
-// export const UPLOADS_URL = "https://secure.demo243.webhostlabs.net:3002/Uploads/"
 
-// import ChangePassword from "../../views/change-password"
-
-// export const BASE_URL = "http://localhost:3002/api"
-// export const UPLOADS_URL = "http://localhost:3002/Uploads"
-// export const SOCKET_URL = "http://localhost:3002"
+// export const BASE_URL = "http://localhost:3008/api"
+// export const UPLOADS_URL = "http://localhost:3008/Uploads"
+// export const SOCKET_URL = "http://localhost:3008"
 
 export const BASE_URL = "https://api.zipperlearning.com/api"
 export const UPLOADS_URL = "https://api.zipperlearning.com/Uploads"
@@ -24,7 +20,7 @@ export const CATEGORIES = {
     getAllcategories: "/category/getAllcategories",
     addCategory: "/category/addCategory",
     updateCategory: "/category/updateCategory/",
-    toggleStatus: "/category/toggleStatus/",
+    toggleStatus: "/category/toggleStatus/",   
     edit:"/category/edit/",
   };
 
@@ -109,6 +105,8 @@ export const LESSON={
     getCompletedLessons:"/lesson/getAllCompletedLessons",
     getLiveLessons:"/lesson/getAllLiveLessons",
     getLessonById:"/lesson/getLessonById/",
+    rescheduleLesson:"/lesson/rescheduleLesson/",
+    cancelLesson:"/lesson/cancelLesson/",
 }
 
 export const PAYMENT={

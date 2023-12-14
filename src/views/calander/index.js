@@ -92,21 +92,23 @@ function BookingCalander() {
     try {
       setLoading(true);
 
-      let data = 
+
+
+      if(state.type == "RESCHEDULE"){
+
+        let data = 
         {
           subject:selectedSubject,
-          lessonType:state.type,
+          rescheduler:"STUDENT",
           lessonDate:selectedDate,
-          coachId:id,
-          studentId:user._id,
           slots:selectedTimeSlots.map(item => {return({
             lessonStartTime:item.startTime,
             lessonEndTime:item.endTime
         });})     
       };
 
-      console.log("HHHH",data);
-      Post(LESSON.bookLesson, data,token)
+
+        Post(LESSON.rescheduleLesson + state.lesson, data,token)
         .then((response) => {
           setLoading(false);
           console.log("response",response);
@@ -121,6 +123,38 @@ function BookingCalander() {
             swal("Oops!", response?.data?.message || response?.response?.data?.message, "error");
           }
         })
+      }else{
+
+        let data = 
+        {
+          subject:selectedSubject,
+          lessonType:state.type,
+          lessonDate:selectedDate,
+          coachId:id,
+          studentId:user._id,
+          slots:selectedTimeSlots.map(item => {return({
+            lessonStartTime:item.startTime,
+            lessonEndTime:item.endTime
+        });})     
+      };
+        Post(LESSON.bookLesson, data,token)
+        .then((response) => {
+          setLoading(false);
+          console.log("response",response);
+          if (response?.data?.status) {
+              
+            swal("Success", response.data.message, "success");
+            navigate("/dashboard")
+           
+          } else {
+            
+            console.log("response", response);
+            swal("Oops!", response?.data?.message || response?.response?.data?.message, "error");
+          }
+        })
+      }
+
+    
     } catch (error) {
 
       console.log("error",error)
@@ -270,7 +304,7 @@ function BookingCalander() {
                   className="loginButton"
                   onClick={() => bookLesson()}
                 >
-                  Book Lesson
+                 {state.type == "RESCHEDULE" ? "Reschedule Lesson" : "Book Lesson"}
                 </Button>
               )}
             </Card>

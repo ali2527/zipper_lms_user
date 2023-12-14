@@ -84,24 +84,26 @@ function LessonDetail() {
 
   const cancelSession = () => {
     try {
-      Post(CHAT.createChat,{ student:user._id,
-      coach:lesson?.coach?._id},token)
+   
+      Post(LESSON.cancelLesson + id, {user:"STUDENT"},token)
       .then((response) => {
-        if (response?.data?.status) { 
-          navigate('/chat')
+        setLoading(false);
+        if (response?.data?.status) {
+            
+          swal("Success", response.data.message, "success");
+          navigate("/dashboard")
+         
         } else {
-          swal("Oops!", response.data.message, "error");
+          
+          console.log("response", response);
+          swal("Oops!", response?.data?.message || response?.response?.data?.message, "error");
         }
       })
-      .catch((e) => {
-        setLoading(false);
-      });
     
     } catch (err) {
       console.log(err);
     }
   }
-
   
 
   const addReview = () => {
@@ -181,9 +183,31 @@ function LessonDetail() {
           className="fontFamily1"
           style={{ fontSize: "30px", color: "white" }}
         >
-          {<> Lesson Detail</>}
+          {<>Lesson Details</>}
         </Typography.Title>
+        <Button
+          style={{
+            width: "40px",
+            height: "40px",
+            background: "#7cc059",
+            display: "flex",
+            justifyContent: "center",
+            alignItems: "center",
+            color: "white",
+            position: "absolute",
+            left: 150,
+            cursor: "pointer",
+            marginTop: 20,
+            padding: 10,
+            border: "none",
+            borderRadius: "100px",
+          }}
+          onClick={() => navigate(-1)}
+        >
+          <FaLongArrowAltLeft style={{ fontSize: "30px", color: "white" }} />
+        </Button>
       </Row>
+
 
       {/* section 2 */}
       <Row
@@ -341,7 +365,7 @@ function LessonDetail() {
                           textAlign: "left",
                         }}
                       >
-                        {dayjs(lesson?.LessonDate).format("DD/MM/YYYY")}
+                        {dayjs(lesson?.lessonDate).format("DD/MM/YYYY")}
                       </Typography.Text>
                     </Col>
 
@@ -643,7 +667,7 @@ onChange={(e)=> handleChange("comment",e.target.value)}
 
       <Modal
         visible={isModal3Open}
-        onOk={() => navigate("/calander/" + lesson.coach._id)}
+        onOk={() => navigate("/calander/" + lesson.coach._id,{state:{type:"RESCHEDULE",lesson:lesson._id}})}
         onCancel={() => setIsModal3Open(false)}
         okText="Yes"
         className="StyledModal"

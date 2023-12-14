@@ -5,7 +5,7 @@ import ClientFooter from './ClientFooter';
 import { SITE_NAME } from '../../config/constants';
 import { Get } from '../../config/api';
 import { POPUP, UPLOADS_URL } from "../../config/constants/api"
-
+import {useLocation} from "react-router-dom"
 
 
 
@@ -13,6 +13,12 @@ const ClientLayout = ({ children, head, footer= true }) => {
     const [isModalVisible, setIsModalVisible] = useState(false);
     const [isModalClosed, setIsModalClosed] = useState(false);
     const [popupData, setPopupData] = useState({})
+
+    const { pathname } = useLocation();
+
+    useEffect(() => {
+      window.scrollTo(0, 0);
+    }, [pathname]);
 
     // const getCanonical = (path) => {
     //     const fullURL = new URL(path, CURRENT_URL)

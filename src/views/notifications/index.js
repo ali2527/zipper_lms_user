@@ -393,7 +393,7 @@ function Notifications() {
                                       <BsFillCalendarFill />
                                       &nbsp;&nbsp;
                                       {dayjs(item.createdAt).format(
-                                        "DD / MM / YYYY"
+                                        "MM / DD / YYYY"
                                       )}
                                     </Row>
                                   </Col>

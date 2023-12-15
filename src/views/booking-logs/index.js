@@ -302,7 +302,7 @@ function BookingLogs() {
       title: "Lesson Date",
       dataIndex: "lessonDate",
       key: "lessonDate",
-      render: (item) => <span>{dayjs(item).format("M/D/YYYY")}</span>,
+      render: (item) => <span>{dayjs(item).format("MM/DD/YYYY")}</span>,
     },
     {
       title: "Lesson Charge",

@@ -121,7 +121,7 @@ function ForgetPassword2() {
                   className="fontFamily1"
                   style={{ fontSize: "14px", color: "white" }}
                 >
-                 An email has been sent to you with a verification code. Please enter it here.
+                 Please enter the verification code that was sent to your registered email.
                 </Typography.Text>
                 <br /> <br />
               

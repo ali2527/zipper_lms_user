@@ -299,7 +299,7 @@ preview={false}
                   type="primary"
                   htmlType="submit"
                   className="loginButton"
-                  onClick={() => navigate("/calander/" + coach?.coach?._id , {state:{type:"COACHING"}})}
+                  onClick={() => navigate("/calendar/" + coach?.coach?._id , {state:{type:"COACHING"}})}
                 >
                   Book Lesson
                 </Button>}

@@ -25,8 +25,8 @@ import BookingLogs from "../../views/booking-logs";
 import PaymentLogs from "../../views/payment-logs";
 import LessonDetail from "../../views/lesson-detail"
 import Chat from "../../views/chat"
-import Calander from "../../views/calander"
-import MyCalander from "../../views/myCalander"
+import Calendar from "../../views/calendar"
+import MyCalendar from "../../views/myCalendar"
 import Profile from "../../views/profile"
 import ChangePassword from "../../views/change-password";
 import Payment from "../../views/payment"
@@ -470,27 +470,27 @@ const MyRouter = () => {
         />
 
 <Route
-          path="/calander/:id"
+          path="/calendar/:id"
           
           element={
             <ClientLayout
               head={{ title: "chat", description: "Some Description." }}
               headerStyle={{ height: { base: "40px", md: 14 } }}
             >
-              <Calander/>
+              <Calendar/>
             </ClientLayout>
           }
         />
 
 <Route
-          path="/my-calander"
+          path="/my-calendar"
           
           element={
             <ClientLayout
               head={{ title: "chat", description: "Some Description." }}
               headerStyle={{ height: { base: "40px", md: 14 } }}
             >
-              <MyCalander/>
+              <MyCalendar/>
             </ClientLayout>
           }
         />

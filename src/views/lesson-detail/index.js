@@ -185,7 +185,7 @@ function LessonDetail() {
         >
           {<>Lesson Details</>}
         </Typography.Title>
-        <Button
+        {/* <Button
           style={{
             width: "40px",
             height: "40px",
@@ -205,7 +205,7 @@ function LessonDetail() {
           onClick={() => navigate(-1)}
         >
           <FaLongArrowAltLeft style={{ fontSize: "30px", color: "white" }} />
-        </Button>
+        </Button> */}
       </Row>
 
 
@@ -326,7 +326,7 @@ function LessonDetail() {
                           marginTop: 0,
                         }}
                       >
-                        Service Name
+                        Subject
                       </Typography.Title>
                       <Typography.Text
                         className="fontFamily1"
@@ -365,7 +365,7 @@ function LessonDetail() {
                           textAlign: "left",
                         }}
                       >
-                        {dayjs(lesson?.lessonDate).format("DD/MM/YYYY")}
+                        {dayjs(lesson?.lessonDate).format("MM/DD/YYYY")}
                       </Typography.Text>
                     </Col>
 
@@ -441,7 +441,7 @@ function LessonDetail() {
                         textAlign: "left",
                       }}
                     >
-                      Coach/ Tutor General Information
+                      Tutor/ Coach General Information
                     </Typography.Text>
                   </Row>
                   <br />
@@ -458,7 +458,7 @@ function LessonDetail() {
                           marginTop: 0,
                         }}
                       >
-                        Coach/ Tutor Name
+                        Tutor/ Coach Name
                       </Typography.Title>
                       <Typography.Text
                         className="fontFamily1"
@@ -523,7 +523,7 @@ function LessonDetail() {
                         type="primary"
                         htmlType="submit"
                         className="loginButton"
-                        onClick={() => navigate("/payment/"+id)}
+                        onClick={() => navigate("/payment/"+id,{state:{type:"LESSON"}})}
                       >
                         Make Payment
                       </Button>
@@ -667,7 +667,7 @@ onChange={(e)=> handleChange("comment",e.target.value)}
 
       <Modal
         visible={isModal3Open}
-        onOk={() => navigate("/calander/" + lesson.coach._id,{state:{type:"RESCHEDULE",lesson:lesson._id}})}
+        onOk={() => navigate("/calendar/" + lesson.coach._id,{state:{type:"RESCHEDULE",lesson:lesson._id}})}
         onCancel={() => setIsModal3Open(false)}
         okText="Yes"
         className="StyledModal"

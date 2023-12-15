@@ -233,6 +233,17 @@ preview={false}
                 >
                   Buy this course
                 </Button>}
+
+                {!token && <Button
+                  type="primary"
+                  htmlType="submit"
+                  className="loginButton"
+                  style={{backgroundColor:"#213759"}}
+                  onClick={() => navigate("/signin")}
+                >
+                  Buy this course
+                </Button>}
+
               </Row>}
             </Card>
           </div>

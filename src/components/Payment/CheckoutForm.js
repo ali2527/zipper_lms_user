@@ -58,7 +58,7 @@ const CheckoutForm = ({type}) => {
         // Handle the error (e.g., display an error message to the user).
       } else {
 
-        if(type == "COURSE") {
+        if(type && type == "COURSE") {
           let data={course:id,stripeToken:token}
         
           Post(PAYMENT.coursePayment, data,authToken)
@@ -71,8 +71,10 @@ const CheckoutForm = ({type}) => {
              swal("Success!", response?.data?.message ||  response?.response?.data?.message, "success");
              navigate("/dashboard")
             } else {
+              
               swal("Oops!", response?.data?.message ||  response?.response?.data?.message, "error");
             }
+            setIsLoading(false);
           })
           .catch((e) => {
             console.log(":::;", e);
@@ -92,6 +94,7 @@ const CheckoutForm = ({type}) => {
             } else {
               swal("Oops!", response?.data?.message ||  response?.response?.data?.message, "error");
             }
+            setIsLoading(false);
           })
           .catch((e) => {
             console.log(":::;", e);
@@ -166,6 +169,11 @@ const CheckoutForm = ({type}) => {
           <CardCvcElement />
         </label>
             </Col>
+            <Col xs={24} md={12} style={{display:'flex', justifyContent:'flex-start', alignItems:'flex-end'}}>
+              <Image src="/images/cards1.png" preview={false} height={58} /><Image src="/images/cards2.png" preview={false} height={58} />
+
+            </Col>
+
            
         </Row>
         <br/>

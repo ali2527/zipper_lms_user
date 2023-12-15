@@ -488,7 +488,7 @@ const ClientHeader = () => {
                   Coaches
                 </Menu.Item>
                 <Menu.Item key="courses" className="hover fontFamily1"    onClick={()=> {navigate("/course"); setVisible(false)}}>
-                  Course
+                  Courses
                 </Menu.Item>
                 <Menu.Item key="contact_us" className="hover fontFamily1"    onClick={()=> {navigate("/contact-us"); setVisible(false)}}>
                   Contact Us

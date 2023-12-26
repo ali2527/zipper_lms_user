@@ -244,7 +244,7 @@ const handleClear = () => {
                     marginBottom: 10,
                   }}
                 >
-                  Session Rates:
+                  Session Rates
                 </Typography.Text>
 
                 <Typography.Text
@@ -509,7 +509,7 @@ const handleClear = () => {
                                   marginTop: 20,
                                 }}
                               >
-                                ${item.hourlyRate} / session
+                                ${item.hourlyRate} per session
                               </Typography.Text>
                             </Row>
                           </Col>

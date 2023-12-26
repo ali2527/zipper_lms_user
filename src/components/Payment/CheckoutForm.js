@@ -142,7 +142,7 @@ const CheckoutForm = ({type}) => {
             marginTop: 0,
           }}
           >
-          Card Expiry
+          Expiration Date
           </Typography.Title>
             <label>
           <CardExpiryElement />

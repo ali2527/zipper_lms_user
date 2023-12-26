@@ -684,7 +684,7 @@ function Profile() {
                           marginTop: 0,
                         }}
                       >
-                        Zip Codes
+                        Zip code
                       </Typography.Title>
                       <Typography.Text
                         className="fontFamily1"

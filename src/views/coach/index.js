@@ -247,7 +247,7 @@ const handleClear = () => {
                     marginBottom: 10,
                   }}
                 >
-                  Session Rates:
+                  Session Rates
                 </Typography.Text>
 
                 <Typography.Text
@@ -322,14 +322,14 @@ const handleClear = () => {
                     marginBottom: 10,
                   }}
                 >
-                  Subjects
+                  Services
                 </Typography.Text>
 
                 <Select
                     onChange={(e)=>setSearchFilter({...searchFilter,subjects:e})}
                     value={searchFilter.subjects ? searchFilter.subjects : [] }
                   mode="multiple"
-                  placeholder="Select Subjects"
+                  placeholder="Select services"
                   maxTagCount= 'responsive'
                   style={{
                     width: "100%",
@@ -512,7 +512,7 @@ const handleClear = () => {
                                   marginTop: 20,
                                 }}
                               >
-                                ${item.hourlyRate} / session
+                                ${item.hourlyRate} per session
                               </Typography.Text>
                             </Row>
                           </Col>

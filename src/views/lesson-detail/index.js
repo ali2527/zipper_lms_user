@@ -431,7 +431,7 @@ function LessonDetail() {
                     </Col>
                   </Row>
 
-                  <Row style={{ marginTop: 40 }}>
+                  {/* <Row style={{ marginTop: 40 }}>
                     <Typography.Text
                       className="fontFamily1"
                       style={{
@@ -444,7 +444,7 @@ function LessonDetail() {
                       Tutor/ Coach General Information
                     </Typography.Text>
                   </Row>
-                  <br />
+                  <br /> */}
                   <Row>
                     <Col>
                       {" "}

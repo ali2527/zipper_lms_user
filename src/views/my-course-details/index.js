@@ -186,18 +186,34 @@ function MyCourseDetails() {
 preview={false}
                   style={{ borderRadius: "10px", objectFit: "cover" }}
                 />
-                <Typography.Title
+               <Typography.Title
                   className="fontFamily1"
                   style={{
-                    fontSize: "20px",
+                    fontSize: "28px",
                     fontWeight: 800,
                     color: "black",
                     textAlign: "left",
                     marginTop: 30,
+                    marginBottom:0,
                   }}
                 >
                   {course?.course?.title}
                 </Typography.Title>
+                <Typography.Text
+                                className="fontFamily1"
+                                style={{
+                                  fontSize: "14px",
+                                  // fontWeight: "bold",
+                                  color: "black",
+                                  textAlign: "left",
+                                  marginTop: 0,
+                    marginBottom:20,
+                                 
+                                }}
+                              >
+                                {course?.course?.hours + " hours " + course?.course?.minutes + " minutes"  }
+                              </Typography.Text>
+
                 <Typography.Text
                   className="fontFamily1"
                   style={{
@@ -210,7 +226,7 @@ preview={false}
                 >
                  {course?.course?.description}
                 </Typography.Text>
-                <Typography.Title
+                {/* <Typography.Title
                   className="fontFamily1"
                   style={{
                     fontSize: "20px",
@@ -238,7 +254,7 @@ preview={false}
                 >
                  <BsDot style={{fontSize:"30px",margin:0}}/>{item}
                 </Typography.Text>)})}
-               
+                */}
 
               
               </Row>}

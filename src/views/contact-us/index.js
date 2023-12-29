@@ -69,7 +69,7 @@ function ContactUs() {
           className="fontFamily1"
           style={{ fontSize: "18px", color: "white",margin:10 }}
         >
-                {<> We'd love to hear from you</>}
+                {<> We'd love to hear from you.</>}
         </Typography.Text>
       </Row>
 

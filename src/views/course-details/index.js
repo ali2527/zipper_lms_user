@@ -175,10 +175,27 @@ preview={false}
                     color: "black",
                     textAlign: "left",
                     marginTop: 30,
+                    marginBottom:0,
                   }}
                 >
                   {course?.course?.title}
                 </Typography.Title>
+                <Typography.Text
+                                className="fontFamily1"
+                                style={{
+                                  fontSize: "14px",
+                                  // fontWeight: "bold",
+                                  color: "black",
+                                  textAlign: "left",
+                                  marginTop: 0,
+                    marginBottom:20,
+                                 
+                                }}
+                              >
+                                {course?.course?.hours + " hours " + course?.course?.minutes + " minutes"  }
+                              </Typography.Text>
+
+
                 <Typography.Text
                   className="fontFamily1"
                   style={{

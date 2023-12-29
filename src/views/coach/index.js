@@ -50,9 +50,9 @@ function Coach() {
     totalPages: 0,
   });
 
-  const [searchFilter,setSearchFilter]=useState({
-    keyword:"",
-    subjects:null,
+  const [searchFilter, setSearchFilter] = useState({
+    keyword: "",
+    subjects: null,
     days: [
       "Sunday",
       "Monday",
@@ -61,35 +61,11 @@ function Coach() {
       "Thursday",
       "Friday",
       "Saturday",
-    ]
-    })
+    ],
+  });
 
-
-
-
-    
-const handleFilter = () =>{
-  let _days = [
-    "Sunday",
-    "Monday",
-    "Tuesday",
-    "Wednesday",
-    "Thursday",
-    "Friday",
-    "Saturday",
-  ];
-
-  let days = searchFilter?.days?.map(item => _days.indexOf(item)).join(",") || null
-  let _subjects =searchFilter?.subjects ? searchFilter?.subjects.join(",") : null
-
-  getAllCoaches(1,searchFilter.keyword,range[1],range[0],_subjects,days)
-}
-
-const handleClear = () => {
-  setSearchFilter({
-    keyword:"",
-    subjects:null,
-    days: [
+  const handleFilter = () => {
+    let _days = [
       "Sunday",
       "Monday",
       "Tuesday",
@@ -97,25 +73,47 @@ const handleClear = () => {
       "Thursday",
       "Friday",
       "Saturday",
-    ]
+    ];
+
+    let days =
+      searchFilter?.days?.map((item) => _days.indexOf(item)).join(",") || null;
+    let _subjects = searchFilter?.subjects
+      ? searchFilter?.subjects.join(",")
+      : null;
+
+    getAllCoaches(1, searchFilter.keyword, range[1], range[0], _subjects, days);
+  };
+
+  const handleClear = () => {
+    setSearchFilter({
+      keyword: "",
+      subjects: null,
+      days: [
+        "Sunday",
+        "Monday",
+        "Tuesday",
+        "Wednesday",
+        "Thursday",
+        "Friday",
+        "Saturday",
+      ],
     });
-    setRange([0,200]);
-    getAllCoaches(1)
-}
+    setRange([0, 200]);
+    getAllCoaches(1);
+  };
   const onSearch = (value) => {
-    setSearchFilter({...searchFilter,keyword:value})
-    getAllCoaches(1,value)
+    setSearchFilter({ ...searchFilter, keyword: value });
+    getAllCoaches(1, value);
   };
 
   useEffect(() => {
-
     getAllCoaches();
   }, []);
 
   const getAllCoaches = async (pageNumber, keyword, max, min, sbj, days) => {
     setLoading(true);
     try {
-      const response = await Get(USERS.getAllCoaches,null, {
+      const response = await Get(USERS.getAllCoaches, null, {
         page: pageNumber
           ? pageNumber.toString()
           : paginationConfig.pageNumber.toString(),
@@ -147,7 +145,6 @@ const handleClear = () => {
     }
   };
 
-
   const handlePageChange = (e) => {
     setPaginationConfig({
       ...paginationConfig,
@@ -156,7 +153,6 @@ const handleClear = () => {
 
     getAllCoaches(Number(e.selected) + 1);
   };
-
 
   console.log("coaches", coaches);
 
@@ -290,9 +286,10 @@ const handleClear = () => {
                 </Typography.Text>
 
                 <Checkbox.Group
-                
                   className="avaliblityGroup"
-                  onChange={(e)=>setSearchFilter({...searchFilter,days:e})}
+                  onChange={(e) =>
+                    setSearchFilter({ ...searchFilter, days: e })
+                  }
                   options={[
                     "Monday",
                     "Tuesday",
@@ -326,46 +323,50 @@ const handleClear = () => {
                 </Typography.Text>
 
                 <Select
-                    onChange={(e)=>setSearchFilter({...searchFilter,subjects:e})}
-                    value={searchFilter.subjects ? searchFilter.subjects : [] }
+                  onChange={(e) =>
+                    setSearchFilter({ ...searchFilter, subjects: e })
+                  }
+                  value={searchFilter.subjects ? searchFilter.subjects : []}
                   mode="multiple"
                   placeholder="Select services"
-                  maxTagCount= 'responsive'
+                  maxTagCount="responsive"
                   style={{
                     width: "100%",
                     fontSize: "14px",
                   }}
                   size="large"
                   //   onChange={handleChange}
-                  options={COACHINGSUBJECTS.map(item => { return({
-                    value:item,
-                    label:item[0].toUpperCase() + item.slice(1)
-                  })} )}
+                  options={COACHINGSUBJECTS.map((item) => {
+                    return {
+                      value: item,
+                      label: item[0].toUpperCase() + item.slice(1),
+                    };
+                  })}
                 />
               </Row>
               <Row gutter={10}>
                 <Col xs={24} md={12}>
-                <Button
-                  type="primary"
-                  size="large"
-                  block
-                  style={{backgroundColor:"#7ec25d"}}
-                  onClick={()=>handleFilter()}
+                  <Button
+                    type="primary"
+                    size="large"
+                    block
+                    style={{ backgroundColor: "#7ec25d" }}
+                    onClick={() => handleFilter()}
                   >
-                Filter
-                </Button>
+                    Filter
+                  </Button>
                 </Col>
                 <Col xs={24} md={12}>
-                <Button
-                onClick={()=>handleClear()}
-                  type="primary"
-                  size="large"
-                  block
-                  ghost
-                  style={{borderColor:"#7ec25d",color:"#7ec25d"}}
+                  <Button
+                    onClick={() => handleClear()}
+                    type="primary"
+                    size="large"
+                    block
+                    ghost
+                    style={{ borderColor: "#7ec25d", color: "#7ec25d" }}
                   >
-                Clear
-                </Button>
+                    Clear
+                  </Button>
                 </Col>
               </Row>
             </Card>
@@ -381,24 +382,30 @@ const handleClear = () => {
             }}
           >
             <Row gutter={[30, 30]}>
-
-            {coaches.length == 0 && <div style={{width:"100%",minHeight:"400px",display:'flex',justifyContent:'center',alignItems:"center"}}>
-              
-            <Typography.Title
-                                className="fontFamily1"
-                                style={{
-                                  fontSize: "25px",
-                                  fontWeight: "bold",
-                                  color: "black",
-                                  textAlign: "left",
-                                  marginTop: 0,
-                                }}
-                              >
-                              No Coaches Found
-                              </Typography.Title>
-                              </div>}
-
-
+              {coaches.length == 0 && (
+                <div
+                  style={{
+                    width: "100%",
+                    minHeight: "400px",
+                    display: "flex",
+                    justifyContent: "center",
+                    alignItems: "center",
+                  }}
+                >
+                  <Typography.Title
+                    className="fontFamily1"
+                    style={{
+                      fontSize: "25px",
+                      fontWeight: "bold",
+                      color: "black",
+                      textAlign: "left",
+                      marginTop: 0,
+                    }}
+                  >
+                    No Coaches Found
+                  </Typography.Title>
+                </div>
+              )}
 
               {coaches.length > 0 &&
                 coaches.map((item, index) => {
@@ -530,7 +537,9 @@ const handleClear = () => {
                                 justifyContent: "center",
                                 alignItems: "center",
                               }}
-                              onClick={() => navigate("/coach-details/"+item._id)}
+                              onClick={() =>
+                                navigate("/coach-details/" + item._id)
+                              }
                               icon={<FaArrowRight style={{ color: "white" }} />}
                             />
                           </Col>
@@ -542,27 +551,29 @@ const handleClear = () => {
             </Row>
             <br />
 
-          {coaches.length > 0 &&   <ReactPaginate
-              breakLabel="..."
-              nextLabel={<FaArrowRight style={{ color: "grey" }} />}
-              pageRangeDisplayed={window.innerWidth > 500 ? 4 : 1}
-              marginPagesDisplayed={window.innerWidth > 500 ? 4 : 1} //handle Pa
-              onPageChange={handlePageChange}
-              pageCount={paginationConfig?.totalPages}
-              forcePage={paginationConfig?.pageNumber - 1}
-              previousLabel={<FaArrowLeft style={{ color: "grey" }} />}
-              renderOnZeroPageCount={null}
-              pageClassName="page-item" //m
-              pageLinkClassName="page-link"
-              previousClassName="page-item"
-              previousLinkClassName="page-link"
-              nextClassName="page-item"
-              nextLinkClassName="page-link"
-              breakClassName="page-item"
-              breakLinkClassName="page-link"
-              containerClassName="paginationContainer"
-              activeClassName="active"
-            />}
+            {coaches.length > 0 && (
+              <ReactPaginate
+                breakLabel="..."
+                nextLabel={<FaArrowRight style={{ color: "grey" }} />}
+                pageRangeDisplayed={window.innerWidth > 500 ? 4 : 1}
+                marginPagesDisplayed={window.innerWidth > 500 ? 4 : 1} //handle Pa
+                onPageChange={handlePageChange}
+                pageCount={paginationConfig?.totalPages}
+                forcePage={paginationConfig?.pageNumber - 1}
+                previousLabel={<FaArrowLeft style={{ color: "grey" }} />}
+                renderOnZeroPageCount={null}
+                pageClassName="page-item" //m
+                pageLinkClassName="page-link"
+                previousClassName="page-item"
+                previousLinkClassName="page-link"
+                nextClassName="page-item"
+                nextLinkClassName="page-link"
+                breakClassName="page-item"
+                breakLinkClassName="page-link"
+                containerClassName="paginationContainer"
+                activeClassName="active"
+              />
+            )}
           </div>
         </Col>
       </Row>

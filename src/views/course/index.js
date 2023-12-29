@@ -319,6 +319,19 @@ function Course() {
                                ({item?.category?.title})
                               </Typography.Text>
                             </Row>
+                            <Typography.Text
+                                className="fontFamily1"
+                                style={{
+                                  fontSize: "14px",
+                                  // fontWeight: "bold",
+                                  color: "black",
+                                  textAlign: "left",
+                                  margin:0
+                                 
+                                }}
+                              >
+                                {item?.hours + " hours " + item?.minutes + " minutes"  }
+                              </Typography.Text>
                             <br/>
 
                             <Row>

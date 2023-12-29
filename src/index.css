@@ -716,6 +716,17 @@ background-position: center;
 border-radius: 26px!important;
 }
 
+.consulting{
+  background: url(/public/images/consulting.webp);
+background-size: cover;
+background-position: center center;
+border-radius: 26px!important;
+}
+
+
+consulting
+
+
 .contactCard1{
   border-radius: 8px;
   background: #FFF;

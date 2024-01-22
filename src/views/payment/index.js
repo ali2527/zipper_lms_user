@@ -56,9 +56,9 @@ function Payment() {
   const {state} = useLocation();
 
 
-  useEffect(() => {
-    getLessonDetails();
-  }, []);
+  // useEffect(() => {
+  //   getLessonDetails();
+  // }, []);
 
 
   console.log("LLLL",state)

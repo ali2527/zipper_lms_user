@@ -519,7 +519,7 @@ function Coach() {
                                   marginTop: 20,
                                 }}
                               >
-                                ${item.hourlyRate} per session
+                              ${Math.floor((item.tutoringRate + item.coachingRate)/2) } per session
                               </Typography.Text>
                             </Row>
                           </Col>

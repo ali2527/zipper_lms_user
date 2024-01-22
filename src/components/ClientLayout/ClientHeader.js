@@ -199,8 +199,10 @@ const ClientHeader = () => {
                       className="fontFamily1"
                       style={{ fontSize: "12px", color: "black", margin: 0 }}
                     >
-                      {item?.content?.slice(0, 100)}{" "}
-                      {item.content.length > 100 && "..."}
+                      {item.content.split(">")[0].slice(0, 100)}{" "}
+                      {item.content.split(">")[0].length > 100 && "..."}
+
+                      {item.title == "Lesson Started" && <a href={item.content.split(">")[1]} target="blank">{item.content.split(">")[1]}</a>}
                     </Typography.Text>
                   </Col>
                 </Row>
@@ -375,7 +377,7 @@ const ClientHeader = () => {
                   className="hover"
                   onClick={() => navigate("/tutor")}
                 >
-                  Tutors
+                  Tutoring
                 </Menu.Item>
 
                 <Menu.Item
@@ -383,7 +385,7 @@ const ClientHeader = () => {
                   className="hover"
                   onClick={() => navigate("/coach")}
                 >
-                  Coaches
+                  Coaching
                 </Menu.Item>
 
                 <Menu.Item
@@ -391,7 +393,7 @@ const ClientHeader = () => {
                   className="hover"
                   onClick={() => navigate("/consulting")}
                 >
-                  Educational Consulting
+                  Consulting
                 </Menu.Item>
 
 
@@ -596,7 +598,7 @@ const ClientHeader = () => {
               setVisible(false);
             }}
           >
-            Tutors
+            Tutoring
           </Menu.Item>
           <Menu.Item
             key="coaches"
@@ -606,7 +608,17 @@ const ClientHeader = () => {
               setVisible(false);
             }}
           >
-            Coaches
+            Coaching
+          </Menu.Item>
+          <Menu.Item
+            key="consulting"
+            className="hover fontFamily1"
+            onClick={() => {
+              navigate("/consulting");
+              setVisible(false);
+            }}
+          >
+                              Consulting
           </Menu.Item>
           <Menu.Item
             key="courses"
@@ -719,7 +731,7 @@ const ClientHeader = () => {
           Logout
         </Typography.Title>
         <Typography.Text style={{ fontSize: 16 }}>
-          Are You Sure You Want To Logout ?
+        Are you sure you want to log out?
         </Typography.Text>
       </Modal>
     </Header>

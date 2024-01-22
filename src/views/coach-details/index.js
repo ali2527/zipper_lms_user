@@ -834,7 +834,7 @@ preview={false}
                         marginBottom: 0,
                       }}
                     >
-                      {dayjs(item?.createdAt).format("DD MMMM, YYYY")}
+                      {dayjs(item?.createdAt).format("MMMM DD, YYYY")}
                     </Typography.Title>
   
                       </Col>

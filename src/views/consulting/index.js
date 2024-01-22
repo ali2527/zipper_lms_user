@@ -18,7 +18,7 @@ function AboutUs() {
           className="fontFamily1"
           style={{ fontSize: "30px", color: "white" }}
         >
-          {<> Educational Consulting</>}
+          {<> Consulting</>}
         </Typography.Title>
       </Row>
 
@@ -45,17 +45,6 @@ function AboutUs() {
                 padding: "20px",
               }}
             >
-
-<Row style={{marginBottom:"10px"}}>
-              <Typography.Text
-                className="fontFamily1"
-                style={{ fontSize: "16px", color: "grey", textAlign: "left" }}
-              >
-
-We offer consulting services to help reduce teacher turnover rates and improve teacher and student performance in K-12 schools. 
-              </Typography.Text>
-              </Row>
-<br/>
               <Row>
               <Typography.Title
                 className="fontFamily1"
@@ -88,7 +77,7 @@ We offer consulting services to help reduce teacher turnover rates and improve t
               >
                 {
                   <>
-                   Novice Teacher Survival (Two-Year Program)
+                   Novice Teacher Survival
                   </>
                 }
               </Typography.Title>
@@ -99,7 +88,7 @@ We offer consulting services to help reduce teacher turnover rates and improve t
                 style={{ fontSize: "16px", color: "grey", textAlign: "left" }}
               >
 
-Our educational consultants advise and support novice teachers during their first and second years teaching in the classroom. Consultants' responsibilities are conducting weekly classroom observations and providing helpful feedback, collaborating with teachers and administrators to create improvement action plans, and facilitating professional development training in targeted areas.
+Our educational consultants advise and support novice teachers during their first year of teaching. Consultants conduct weekly classroom observations and collaborate with teachers and administrators to create performance improvement plans to help teachers acquire the essential skills to become effective classroom teachers.
               </Typography.Text>
               </Row>
               <br/>
@@ -116,11 +105,12 @@ Our educational consultants advise and support novice teachers during their firs
               >
                 {
                   <>
-                   Professional Development Training
-                  </>
+Consulting for K-12 Schools                  </>
                 }
               </Typography.Title>
               </Row>
+
+
 
 
               <Row style={{marginBottom:"10px"}}>
@@ -129,13 +119,77 @@ Our educational consultants advise and support novice teachers during their firs
                 style={{ fontSize: "16px", color: "grey", textAlign: "left" }}
               >
 
-Importance of Relationship-Building & Family Engagement <br/>
-Effective Lesson Planning & Classroom Management<br/>
-Curricula Implementation <br/>
-Diversity, Equity, and Inclusion<br/>
-Team Collaboration 
+We train and advise faculty. <br/>
+We collaborate with administrators to help improve school learning environments and overall school performance.<br/>
               </Typography.Text>
               </Row>
+
+
+
+              <br/>
+              <Row>
+              <Typography.Title
+                className="fontFamily1"
+                style={{
+                  fontSize: "20px",
+                  fontWeight: 600,
+                  color: "black",
+                  textAlign: "left",
+                  marginTop: 0,
+                }}
+              >
+                {
+                  <>
+Consulting for families                 </>
+                }
+              </Typography.Title>
+              </Row>
+
+
+
+
+              <Row style={{marginBottom:"10px"}}>
+              <Typography.Text
+                className="fontFamily1"
+                style={{ fontSize: "16px", color: "grey", textAlign: "left" }}
+              >
+
+We partner with families to help prepare students for admission processes at different colleges and universities.<br/>
+              </Typography.Text>
+              </Row>
+
+
+              <br/>
+              <Row>
+              <Typography.Title
+                className="fontFamily1"
+                style={{
+                  fontSize: "20px",
+                  fontWeight: 600,
+                  color: "black",
+                  textAlign: "left",
+                  marginTop: 0,
+                }}
+              >
+                {
+                  <>
+Consulting for Education Companies               </>
+                }
+              </Typography.Title>
+              </Row>
+
+
+
+
+              <Row style={{marginBottom:"10px"}}>
+              <Typography.Text
+                className="fontFamily1"
+                style={{ fontSize: "16px", color: "grey", textAlign: "left" }}
+              >
+
+We partner with education companies to help develop learning products and educational software for K-12 and adult learners.              </Typography.Text>
+              </Row>
+
 
               <br/>
 
@@ -145,7 +199,7 @@ Team Collaboration 
                 style={{ fontSize: "16px", color: "grey", textAlign: "left" }}
               >
 
- Contact us at info@zipperlearning.com to request a meeting if you are interested in our consulting services.
+ Contact us at info@zipperlearning.com if you are interested in our consulting services.
               </Typography.Text>
               </Row>
 

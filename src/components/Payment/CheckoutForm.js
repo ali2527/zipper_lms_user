@@ -1,5 +1,5 @@
 import React, { useState,useEffect } from "react";
-import { useStripe, useElements, CardElement, CardNumberElement, CardExpiryElement, CardCvcElement } from "@stripe/react-stripe-js";
+import { useStripe, useElements,   PaymentElement, CardNumberElement, CardExpiryElement, CardCvcElement } from "@stripe/react-stripe-js";
 import {
     Col,
     Button,
@@ -146,6 +146,8 @@ const CheckoutForm = ({type}) => {
           </Typography.Title>
             <label>
           <CardExpiryElement />
+
+          {/* <PaymentElement/> */}
         </label>
             </Col>
         </Row>

@@ -233,10 +233,13 @@ const ClientFooter = () => {
                     About
                   </List.Item>
                   <List.Item key="services" className="footerLink" onClick={() => navigate("/tutor")}>
-                    Tutors
+                    Tutoring
                   </List.Item>
                   <List.Item key="book_online" className="footerLink" onClick={() => navigate("/coach")}>
-                    Coaches
+                    Coaching
+                  </List.Item>
+                  <List.Item key="book_online" className="footerLink" onClick={() => navigate("/consulting")}>
+                  Consulting
                   </List.Item>
                   <List.Item key="contact_us" className="footerLink" onClick={() => navigate("/course")}>
                     Courses

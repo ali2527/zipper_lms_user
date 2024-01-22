@@ -573,7 +573,7 @@ const birthday = new Date(year, month, day);
                    <Input.Password
                       size="large"
                     
-                      placeholder="Enter Confirm Password"
+                      placeholder="Re-enter Password"
                       className="signupFormInput"
                     
                     />

@@ -178,7 +178,7 @@ function Calendar({schedule,selectedDate,setSelectedDate,handleSelect}) {
                             marginTop: 0,
                           }}
                         >
-                          {date.format("DD MMMM, YYYY")}
+                          {date.format("MMMM DD, YYYY")}
                         </Typography.Text>
                       </div>
                     ))}

@@ -372,7 +372,7 @@ function Homepage() {
                     >
                       {
                         <>
-                          Our experts will help you gain the knowledge, skills and confidence to tackle any challenge and achieve your goals.
+                          Our experts will help you gain the knowledge, skills and confidence to tackle any challenge and achieve your goals.Tutors and coaches will empower and prepare you to succeed now and in the future.
                         </>
                       }
                     </Typography.Text>
@@ -431,7 +431,7 @@ function Homepage() {
                     >
                       {
                         <>
-                          We design our lessons to accommodate the specific needs of our learners.
+                          We tailor our lessons to accommodate the specific needs of our learners. We meet learners where they are and help them develop and master the skills required for personal or educational success.
                         </>
                       }
                     </Typography.Text>

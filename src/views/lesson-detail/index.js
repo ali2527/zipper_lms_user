@@ -429,6 +429,33 @@ function LessonDetail() {
                         ${lesson.charges}
                       </Typography.Text>
                     </Col>
+
+
+                  {lesson.status == "LIVE" &&   <Col xs={12} sm={5}>
+                      <Typography.Title
+                        className="fontFamily1"
+                        style={{
+                          fontSize: "16px",
+                          fontWeight: 600,
+                          color: "black",
+                          textAlign: "left",
+                          marginTop: 0,
+                        }}
+                      >
+                        Lesson Link
+                      </Typography.Title>
+                      <Typography.Text
+                        className="fontFamily1"
+                        style={{
+                          fontSize: "14px",
+                          color: "grey",
+                          textAlign: "left",
+                        }}
+                      >
+                       <a href={lesson.zoomUrl} target="blank"> {lesson.zoomUrl} </a>
+                      </Typography.Text>
+                    </Col>}
+                    
                   </Row>
 
                   {/* <Row style={{ marginTop: 40 }}>
@@ -445,6 +472,7 @@ function LessonDetail() {
                     </Typography.Text>
                   </Row>
                   <br /> */}
+                  <br/>  <br/>
                   <Row>
                     <Col>
                       {" "}
@@ -628,7 +656,7 @@ onChange={(e)=> handleChange("comment",e.target.value)}
           left: 0,
           right: 0,
           marginLeft: "auto",
-          marginRight: "auto",
+          marginRight: "auto",  
           textAlign: "center",
         }}
         cancelText="No"
@@ -661,7 +689,7 @@ onChange={(e)=> handleChange("comment",e.target.value)}
           Cancel Session
         </Typography.Title>
         <Typography.Text style={{ fontSize: 16 }}>
-          Are You Sure You Want To Cancel This Session ?
+        Are you sure you want to cancel this session? 
         </Typography.Text>
       </Modal>
 
@@ -708,7 +736,7 @@ onChange={(e)=> handleChange("comment",e.target.value)}
           Reschedule Session
         </Typography.Title>
         <Typography.Text style={{ fontSize: 16 }}>
-          Are You Sure You Want To Reschedule This Session ?
+        Are you sure you want to reschedule this session? 
         </Typography.Text>
       </Modal>
 

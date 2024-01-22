@@ -185,7 +185,7 @@ const MyRouter = () => {
           
           element={
             <ClientLayout
-              head={{ title: "Educational Consulting", description: "Some Description." }}
+              head={{ title: "Consulting", description: "Some Description." }}
               headerStyle={{ height: { base: "40px", md: 14 } }}
             >
               <EducationalConsulting />

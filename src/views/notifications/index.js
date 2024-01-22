@@ -373,7 +373,10 @@ function Notifications() {
                                         fontSize: "12px",
                                       }}
                                     >
-                                      {item.content}
+                                      
+                                      {item.content.split(">")[0]}
+
+                      {item.title == "Lesson Started" && <a href={item.content.split(">")[1]} target="blank">{item.content.split(">")[1]}</a>}
                                     </Typography.Text>
 
                                     <Row

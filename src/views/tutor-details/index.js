@@ -289,7 +289,7 @@ preview={false}
                     fill="#FFFFFF"
                     font-size="14"
                   >
-                    Session Rates : ${coach?.rate?.hourlyRate}
+                    Session Rates : ${Math.floor((coach?.rate?.tutoringRate + coach?.rate?.coachingRate)/2) }
                   </text>
                 </svg>
 
@@ -836,7 +836,7 @@ preview={false}
                         marginBottom: 0,
                       }}
                     >
-                      {dayjs(item?.createdAt).format("DD MMMM, YYYY")}
+                      {dayjs(item?.createdAt).format("MMMM DD, YYYY")}
                     </Typography.Title>
   
                       </Col>

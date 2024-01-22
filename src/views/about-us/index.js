@@ -69,7 +69,7 @@ function AboutUs() {
                 style={{ fontSize: "16px", color: "grey", textAlign: "left" }}
               >
 
-Our Mission is to provide exceptional online tutoring and coaching services for K-12 and adult
+Our mission is to provide exceptional online tutoring and coaching services for K-12 and adult
 learners, empowering them to thrive in a rapidly evolving world.
               </Typography.Text>
               </Row>

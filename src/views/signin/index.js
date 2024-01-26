@@ -170,7 +170,7 @@ function Signin() {
                     <Input.Password
                       size="large"
                       prefix={<FiLock />}
-                      placeholder="Enter Password"
+                      placeholder="Enter password"
                       className="AuthFormInput"
                     />
                   </Form.Item>

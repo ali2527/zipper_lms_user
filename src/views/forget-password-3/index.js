@@ -146,7 +146,7 @@ function ForgotPassword3() {
                     <Input.Password
                       size="large"
                       prefix={<FiLock />}
-                      placeholder="Enter Password"
+                      placeholder="Enter password"
                       className="AuthFormInput"
                     />
                   </Form.Item>
@@ -163,7 +163,7 @@ function ForgotPassword3() {
                     <Input.Password
                       size="large"
                       prefix={<FiLock />}
-                      placeholder="Confirm Password"
+                      placeholder="Re-enter password"
                       className="AuthFormInput"
                     />
                   </Form.Item>

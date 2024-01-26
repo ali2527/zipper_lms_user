@@ -328,7 +328,7 @@ function Coach() {
                   }
                   value={searchFilter.subjects ? searchFilter.subjects : []}
                   mode="multiple"
-                  placeholder="Select services"
+                  placeholder="Select Services"
                   maxTagCount="responsive"
                   style={{
                     width: "100%",

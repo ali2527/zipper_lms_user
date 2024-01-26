@@ -167,7 +167,8 @@ function Profile() {
                           setImageNew( URL.createObjectURL(file))                    
                           return false;
                       }}
-                      > <div style={{padding:"8px",position:"absolute",right:-10,zIndex:2, bottom:40,backgroundColor:"#243D62",display:'flex',maxWidth:"fit-content",color:'white',borderRadius:"20px"}}><TbCameraPlus/></div> <Avatar
+                      > 
+                      <div style={{padding:"8px",position:"absolute",right:-10,zIndex:2, bottom:40,backgroundColor:"#243D62",display:'flex',maxWidth:"fit-content",color:'white',borderRadius:"20px"}}><TbCameraPlus/></div> <Avatar
                       size={180}
                       src={
                         imageNew ? imageNew  :

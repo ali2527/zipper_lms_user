@@ -63,6 +63,7 @@ function AboutUs() {
                 }
               </Typography.Title>
               </Row>
+              <br/>
 
               <Row>
               <Typography.Title
@@ -199,7 +200,7 @@ We partner with education companies to help develop learning products and educat
                 style={{ fontSize: "16px", color: "grey", textAlign: "left" }}
               >
 
- Contact us at info@zipperlearning.com if you are interested in our consulting services.
+ Contact us at<b style={{color:'black'}}> info@zipperlearning.com </b>if you are interested in our consulting services.
               </Typography.Text>
               </Row>
 

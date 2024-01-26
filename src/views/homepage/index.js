@@ -372,7 +372,7 @@ function Homepage() {
                     >
                       {
                         <>
-                          Our experts will help you gain the knowledge, skills and confidence to tackle any challenge and achieve your goals.Tutors and coaches will empower and prepare you to succeed now and in the future.
+                          Our experts will help you gain the knowledge, skills and confidence to tackle any challenge and achieve your goals. Tutors and coaches will empower and prepare you to succeed now and in the future.
                         </>
                       }
                     </Typography.Text>

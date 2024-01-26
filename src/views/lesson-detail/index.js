@@ -530,7 +530,7 @@ function LessonDetail() {
                         className="loginButton"
                         onClick={() => showModal()}
                       >
-                        Review Coach Lesson
+                        Rate & Review Lesson
                       </Button>
                  }
 

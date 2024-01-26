@@ -265,7 +265,7 @@ const ClientFooter = () => {
           <Row>
             <Col xs={24} md={14}>
               <p className="footerLink">
-              © 2020 - 2023 Zipper Learning. All rights reserved
+              © 2020 - 2024 Zipper Learning. All Rights Reserved
                
               </p>
             </Col>

@@ -553,7 +553,7 @@ const birthday = new Date(year, month, day);
                     <Input.Password
                       size="large"
                     
-                      placeholder="Enter Password"
+                      placeholder="Enter password"
                       className="signupFormInput"
                     
                     />
@@ -573,7 +573,7 @@ const birthday = new Date(year, month, day);
                    <Input.Password
                       size="large"
                     
-                      placeholder="Re-enter Password"
+                      placeholder="Re-enter password"
                       className="signupFormInput"
                     
                     />
